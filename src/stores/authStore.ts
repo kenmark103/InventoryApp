@@ -4,7 +4,7 @@ import { create } from 'zustand'
 const ACCESS_TOKEN = 'thisisjustarandomstring'
 
 interface AuthUser {
-  accountNo: string
+  name: string
   email: string
   role: string[]
   exp: number

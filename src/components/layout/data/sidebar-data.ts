@@ -1,25 +1,22 @@
 import {
-  IconBarrierBlock,
-  IconBrowserCheck,
-  IconBug,
+   IconBrowserCheck,
   IconChecklist,
-  IconError404,
+  IconFileDatabase,
+  IconGraph,
   IconHelp,
   IconLayoutDashboard,
-  IconLock,
   IconLockAccess,
-  IconMessages,
+  IconLogs,
+  IconMoneybag,
   IconNotification,
-  IconPackages,
   IconPalette,
-  IconServerOff,
+  IconReport,
   IconSettings,
   IconTool,
   IconUserCog,
-  IconUserOff,
-  IconUsers,
+ 
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
+import { AudioWaveform, Command, Edit2Icon, GalleryVerticalEnd, LockIcon, PanelsTopLeftIcon, ShoppingBagIcon, ShoppingCart, SquareDashedBottomIcon, StoreIcon, UserPlus2Icon, UsersIcon } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -54,91 +51,116 @@ export const sidebarData: SidebarData = {
           url: '/',
           icon: IconLayoutDashboard,
         },
-        {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: IconChecklist,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: IconPackages,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: IconMessages,
-        },
-        {
-          title: 'Users',
-          url: '/users',
-          icon: IconUsers,
-        },
       ],
     },
+
     {
-      title: 'Pages',
+      title: 'Shop',
+      items:[
+        {
+          title: 'Sales',
+          icon: ShoppingBagIcon,
+          items: [
+            {
+              title: 'New Sale',
+              url: '/401',
+              icon: ShoppingCart,
+            },
+            {
+              title: 'Sales Dashboard',
+              url: '/401',
+              icon: SquareDashedBottomIcon,
+            }
+          ],
+          },
+          {
+            title: 'Inventory',
+            icon: StoreIcon,
+            items: [
+              {
+                title: 'Products',
+                url: '/401',
+                icon: Edit2Icon,
+              },
+              {
+                title: 'Suppliers',
+                url: '/401',
+                icon: PanelsTopLeftIcon,
+              }
+            ],
+            },
+        {
+          title: 'Expenses',
+          icon: IconMoneybag,
+          badge: '3',
+          items:[
+            {
+              title: 'View Expenses',
+              url: '/tasks',
+              icon: IconChecklist,
+            },
+            {
+              title: 'Approve Expenses',
+              url: '/tasks',
+              icon: IconNotification,
+            },
+          ],
+        },
+        {
+          title: 'Customers',
+          url: '/chats',
+          icon: UsersIcon,
+        },
+      ],
+
+    },
+    
+    {
+      title: 'User Management',
       items: [
         {
-          title: 'Auth',
-          icon: IconLockAccess,
-          items: [
+          title: 'Users',
+          icon: UserPlus2Icon,
+          url: "/",
+        },
+        {
+          title: 'Roles and Permissions',
+          icon: LockIcon,
+          url: "/",
+        },      
+      ],
+      },
+    {
+      title: 'Reports',
+      items: [
+        {
+          title: 'View Reports',
+          icon: IconReport,
+          items:[
             {
-              title: 'Sign In',
-              url: '/sign-in',
+              title: 'Sales Reports',
+              icon: IconGraph,
+              url: "/tasks",
             },
             {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
+              title: 'Inventory Reports',
+              icon: IconFileDatabase,
+              url: "/tasks",
             },
           ],
         },
         {
-          title: 'Errors',
-          icon: IconBug,
-          items: [
-            {
-              title: 'Unauthorized',
-              url: '/401',
-              icon: IconLock,
-            },
-            {
-              title: 'Forbidden',
-              url: '/403',
-              icon: IconUserOff,
-            },
-            {
-              title: 'Not Found',
-              url: '/404',
-              icon: IconError404,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/500',
-              icon: IconServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/503',
-              icon: IconBarrierBlock,
-            },
-          ],
+          title: 'Financial Statements',
+          icon: IconLockAccess,
+          url: "/",
+        },
+        {
+          title:'logs',
+          icon: IconLogs,
+          url:'/',
         },
       ],
-    },
+      },
     {
       title: 'Other',
       items: [

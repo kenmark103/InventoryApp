@@ -16,6 +16,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { loginUser } from '@/services/authService'
+import { useAuthStore } from '@/stores/authStore'
+import { router } from '@/utils/router'
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
@@ -36,6 +39,7 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,12 +51,37 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    setErrorMessage(null) // Reset previous error
+    loginUser(data)
+      .then((res) => {
+        // Check if the token exists and then set auth details.
+        if (res.token) {
+          // Save token and user details in the zustand store.
+          useAuthStore.getState().auth.setAccessToken(res.token)
+          useAuthStore.getState().auth.setUser(res.user)
+          // Redirect to the dashboard ("/")
+          router.navigate({ to: '/' })
+        } else {
+          // If token is not present, display a generic error.
+          setErrorMessage('Authentication failed. Please try again.')
+        }
+      })
+      .catch((error) => {
+        // If error.response is defined, we can check status code.
+        if (error.response) {
+          if (error.response.status === 401) {
+            setErrorMessage('Invalid credentials. Please try again.')
+          } else {
+            setErrorMessage('Something went wrong. Please try again later.')
+          }
+        } else {
+          // If no error.response, it may be a network error.
+          setErrorMessage('Server unreachable. Please check your connection.')
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -60,6 +89,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
+          {errorMessage && (
+              <p className='text-red-500 text-sm my-1 py-1'>{errorMessage}</p>
+            )}
             <FormField
               control={form.control}
               name='email'
@@ -94,6 +126,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </FormItem>
               )}
             />
+           
             <Button className='mt-2' disabled={isLoading}>
               Login
             </Button>

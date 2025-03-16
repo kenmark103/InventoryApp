@@ -1,0 +1,8 @@
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\bin\Debug\net9.0\.msCoverageSourceRootsMapping_InventoryProject.Tests
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\bin\Debug\net9.0\CoverletSourceRootsMapping_InventoryProject.Tests
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\obj\Debug\net9.0\InventoryProject.Tests.csproj.AssemblyReference.cache
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\obj\Debug\net9.0\MvcTestingAppManifest.json
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\obj\Debug\net9.0\InventoryProject.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\obj\Debug\net9.0\InventoryProject.Tests.AssemblyInfoInputs.cache
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\obj\Debug\net9.0\InventoryProject.Tests.AssemblyInfo.cs
+C:\Users\user\documents\dotnetprojects\inventoryapp\InventoryProject.Tests\obj\Debug\net9.0\InventoryProject.Tests.csproj.CoreCompileInputs.cache

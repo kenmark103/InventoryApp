@@ -121,7 +121,7 @@ export const sidebarData: SidebarData = {
         {
           title: 'Users',
           icon: UserPlus2Icon,
-          url: "/",
+          url: "/users",
         },
         {
           title: 'Roles and Permissions',

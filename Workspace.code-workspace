@@ -1,7 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "shadcn-admin"
+			"path": "ReactAdmin"
+		},
+		{
+			"path": "Backend"
 		}
 	],
 	"settings": {}

@@ -51,7 +51,7 @@ public class UsersController : ControllerBase
 
     // Login and generate JWT
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login(UserLoginDto request)
+    public async Task<ActionResult> Login(UserLoginDto request)
     {
         // Find user
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
@@ -64,7 +64,19 @@ public class UsersController : ControllerBase
 
         // Generate JWT token
         var token = GenerateJwtToken(user);
-        return Ok(new { Token = token });
+        var response = new
+            {
+                Token = token,
+                User = new
+                {
+                    user.Name,
+                    user.Email,
+                    user.Role // Assuming 'Roles' is a collection of user's roles
+                }
+            };
+
+        return Ok(response);
+    
     }
 
     // Get all users (Admin only)

@@ -19,6 +19,7 @@ interface AuthState {
     resetAccessToken: () => void
     reset: () => void
   }
+  
 }
 
 export const useAuthStore = create<AuthState>()((set) => {
@@ -52,4 +53,4 @@ export const useAuthStore = create<AuthState>()((set) => {
   }
 })
 
-// export const useAuth = () => useAuthStore((state) => state.auth)
+export const useAuth = () => useAuthStore((state) => state.auth)

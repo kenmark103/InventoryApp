@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/authStore'
 import api from '../lib/api'
 
 interface LoginResponse {
@@ -13,4 +14,9 @@ interface LoginResponse {
 export async function loginUser(credentials: { email: string; password: string }): Promise<LoginResponse> {
   const response = await api.post<LoginResponse>('users/login', credentials)
   return response.data
+}
+
+export function logoutUser() {
+  useAuthStore.getState().auth.reset()
+  window.location.href = '/sign-in';
 }

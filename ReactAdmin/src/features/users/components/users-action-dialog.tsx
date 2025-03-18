@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { z } from 'zod'
@@ -27,6 +28,7 @@ import { PasswordInput } from '@/components/password-input'
 import { SelectDropdown } from '@/components/select-dropdown'
 import { userTypes } from '../data/data'
 import { User } from '../data/schema'
+import userService from '@/services/userService'
 
 const formSchema = z
   .object({
@@ -118,17 +120,31 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
         },
   })
 
-  const onSubmit = (values: UserForm) => {
-    form.reset()
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-    })
-    onOpenChange(false)
+  const onSubmit = async (values: UserForm) => {
+    try {
+      if (isEdit) {
+        // Update existing user (PUT request)
+        await userService.updateUser(currentRow!.id, values)
+        toast({
+          title: 'User updated successfully',
+          description: 'The user details have been updated.',
+        })
+      } else {
+        // Create a new user (POST request)
+        await userService.createUser(values) // This method needs to be added in your service
+        toast({
+          title: 'User created successfully',
+          description: 'A new user has been added.',
+        })
+      }
+      form.reset()
+      onOpenChange(false)
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Something went wrong.',
+      })
+    }
   }
 
   const isPasswordTouched = !!form.formState.dirtyFields.password

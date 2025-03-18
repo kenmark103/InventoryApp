@@ -80,6 +80,10 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.HttpsPort = 5001; //HTTPS port
+});
 
 
 var app = builder.Build();
@@ -93,8 +97,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
-app.UseCors("AllowReactApp");
+
 
 // Your existing weather endpoint (keep or remove)
 var summaries = new[] { "Freezing", "Bracing", "Chilly" /*...*/ };
@@ -102,6 +105,8 @@ app.MapGet("/weatherforecast", () => { /*...*/ })
    .WithName("GetWeatherForecast")
    .WithOpenApi();
 
+
+app.UseCors("AllowReactApp");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

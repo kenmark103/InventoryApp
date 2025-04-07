@@ -1,11 +1,12 @@
+namespace Backend.Models{
 public class Sale
 {
     public int Id { get; set; }
     public string InvoiceNumber { get; set; } = string.Empty; // Auto-generated (e.g., INV-2024-001)
     public DateTime SaleDate { get; set; } = DateTime.UtcNow;
     public DateTime? DueDate { get; set; } // For credit terms
-    public SaleStatus Status { get; set; } = SaleStatus.Draft;
-    public string PaymentMethod { get; set; } = "Cash"; // Cash/Credit Card/Bank Transfer
+    public SaleStatus Status { get; set; } = SaleStatus.DRAFT;
+    public string PaymentMethod { get; set; } = "CASH"; // Cash/Credit Card/Bank Transfer
     public string? Notes { get; set; }
 
     // Financials (calculated fields)
@@ -20,4 +21,6 @@ public class Sale
     public int UserId { get; set; } // Employee who created the sale
     public User User { get; set; } = null!;
     public List<SaleItem> Items { get; set; } = new();
+    public PaymentDetails? PaymentDetails { get; set; }
+}
 }

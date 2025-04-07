@@ -1,23 +1,35 @@
 import {
-   IconBrowserCheck,
   IconChecklist,
-  IconFileDatabase,
   IconGraph,
   IconHelp,
   IconLayoutDashboard,
-  IconLockAccess,
+  IconLock,
   IconLogs,
   IconMoneybag,
   IconNotification,
   IconPalette,
   IconReport,
   IconSettings,
-  IconTool,
   IconUserCog,
- 
+  IconUsers,
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, Edit2Icon, GalleryVerticalEnd, LockIcon, PanelsTopLeftIcon, ShoppingBagIcon, ShoppingCart, SquareDashedBottomIcon, StoreIcon, UserPlus2Icon, UsersIcon } from 'lucide-react'
-import { type SidebarData } from '../types'
+import { 
+  Activity,
+  Bookmark,
+  Box,
+  Briefcase,
+  CheckCircle,
+  Command,
+  CreditCard,
+  FileText,
+  LayoutGrid,
+  List,
+  Package,
+  ShoppingCart,
+  Tag,
+  Users,
+  Warehouse
+} from 'lucide-react'
 
 export const sidebarData: SidebarData = {
   user: {
@@ -25,23 +37,11 @@ export const sidebarData: SidebarData = {
     email: 'satnaingdev@gmail.com',
     avatar: '/avatars/shadcn.jpg',
   },
-  teams: [
-    {
-      name: 'Shadcn Admin',
-      logo: Command,
-      plan: 'Vite + ShadcnUI',
-    },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-  ],
+  shopHeader: {
+    name: 'Inventory System',
+    logo: Command,
+    subtitle: 'Easy Sell',
+  },
   navGroups: [
     {
       title: 'General',
@@ -49,120 +49,139 @@ export const sidebarData: SidebarData = {
         {
           title: 'Dashboard',
           url: '/',
-          icon: IconLayoutDashboard,
+          icon: IconLayoutDashboard,  // Good choice
+          badge: '2',
         },
       ],
     },
-
     {
-      title: 'Shop',
-      items:[
+      title: 'Shop Management',
+      items: [
         {
           title: 'Sales',
-          icon: ShoppingBagIcon,
+          icon: ShoppingCart,  // More direct association
           items: [
             {
               title: 'New Sale',
-              url: '/401',
-              icon: ShoppingCart,
+              url: '/sales',
+              icon: CreditCard,  // Represents transactions
             },
             {
-              title: 'Sales Dashboard',
+              title: 'Sales Order',
               url: '/401',
-              icon: SquareDashedBottomIcon,
+              icon: Activity,  // Better for analytics
             }
           ],
-          },
-          {
-            title: 'Inventory',
-            icon: StoreIcon,
-            items: [
-              {
-                title: 'Products',
-                url: '/401',
-                icon: Edit2Icon,
-              },
-              {
-                title: 'Suppliers',
-                url: '/401',
-                icon: PanelsTopLeftIcon,
-              }
-            ],
+        },
+        {
+          title: 'Inventory',
+          icon: Warehouse,  // More accurate representation
+          items: [
+            {
+              title: 'Products',
+              url: '/products',
+              icon: Package,  // Direct product association
             },
+            {
+              title: 'Categories',
+              url: '/categories',
+              icon: Tag,  // Standard for categorization
+            },
+            {
+              title: 'Stock',
+              url: '/401',
+              icon: Box,  // Represents physical stock
+            },
+            {
+              title: 'Purchase Order',
+              url: '/401',
+              icon: Box,  // Represents physical stock
+            },
+          ],
+        },
         {
           title: 'Expenses',
-          icon: IconMoneybag,
-          badge: '3',
-          items:[
+          icon: IconMoneybag,  // Good choice
+          items: [
             {
               title: 'View Expenses',
-              url: '/tasks',
-              icon: IconChecklist,
+              url: '/expenses',
+              icon: FileText,  // Document view
             },
             {
               title: 'Approve Expenses',
-              url: '/tasks',
-              icon: IconNotification,
+              url: '/expenses',
+              icon: CheckCircle,  // Approval action
             },
           ],
         },
         {
           title: 'Customers',
-          url: '/chats',
-          icon: UsersIcon,
+          url: '/customers',
+          icon: Users,  // Lucide's users
+        },
+        {
+          title: 'Suppliers',
+          url: '/suppliers',
+          icon: Briefcase,  // Business relationship
         },
       ],
-
     },
-    
     {
-      title: 'User Management',
+      title: 'Administration',
       items: [
         {
           title: 'Users',
-          icon: UserPlus2Icon,
+          icon: IconUsers,  // Tabler's users
           url: "/users",
         },
         {
-          title: 'Roles and Permissions',
-          icon: LockIcon,
-          url: "/",
-        },      
-      ],
-      },
-    {
-      title: 'Reports',
-      items: [
-        {
-          title: 'View Reports',
-          icon: IconReport,
-          items:[
+          title: 'Roles',
+          icon: IconLock,  // Security focus
+          items: [
             {
-              title: 'Sales Reports',
-              icon: IconGraph,
-              url: "/tasks",
+              title: 'Permissions',
+              url: "/permissions",
+              icon: Bookmark,  // Access markers
             },
             {
-              title: 'Inventory Reports',
-              icon: IconFileDatabase,
-              url: "/tasks",
+              title: 'Audit Logs',
+              url: "/logs",
+              icon: List,  // List view
+            }
+          ]
+        },      
+      ],
+    },
+    {
+      title: 'Analytics',
+      items: [
+        {
+          title: 'Reports',
+          icon: IconReport,
+          items: [
+            {
+              title: 'Sales',
+              icon: IconGraph,
+              url: "/reports/sales",
+            },
+            {
+              title: 'Inventory',
+              icon: LayoutGrid,  // Grid visualization
+              url: "/reports/inventory",
             },
           ],
         },
         {
-          title: 'Financial Statements',
-          icon: IconLockAccess,
-          url: "/",
-        },
-        {
-          title:'logs',
-          icon: IconLogs,
-          url:'/',
+          title: 'Live Metrics',
+          icon: Activity,  // Better activity representation
+          url: '/metrics',
+          badge: 'Beta',
         },
       ],
-      },
+    },
     {
-      title: 'Other',
+      title: 'Preferences',
       items: [
         {
           title: 'Settings',
@@ -174,11 +193,6 @@ export const sidebarData: SidebarData = {
               icon: IconUserCog,
             },
             {
-              title: 'Account',
-              url: '/settings/account',
-              icon: IconTool,
-            },
-            {
               title: 'Appearance',
               url: '/settings/appearance',
               icon: IconPalette,
@@ -188,15 +202,10 @@ export const sidebarData: SidebarData = {
               url: '/settings/notifications',
               icon: IconNotification,
             },
-            {
-              title: 'Display',
-              url: '/settings/display',
-              icon: IconBrowserCheck,
-            },
           ],
         },
         {
-          title: 'Help Center',
+          title: 'Help',
           url: '/help-center',
           icon: IconHelp,
         },

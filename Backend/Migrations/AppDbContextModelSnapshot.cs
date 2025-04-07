@@ -22,7 +22,34 @@ namespace Backend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Customer", b =>
+            modelBuilder.Entity("Backend.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Backend.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +84,7 @@ namespace Backend.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Expense", b =>
+            modelBuilder.Entity("Backend.Models.Expense", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -95,7 +122,7 @@ namespace Backend.Migrations
                     b.ToTable("Expenses");
                 });
 
-            modelBuilder.Entity("Notification", b =>
+            modelBuilder.Entity("Backend.Models.Notification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +150,30 @@ namespace Backend.Migrations
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("Product", b =>
+            modelBuilder.Entity("Backend.Models.PaymentDetails", b =>
+                {
+                    b.Property<int>("SaleId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("AmountTendered")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("ChangeDue")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Method")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("text");
+
+                    b.HasKey("SaleId");
+
+                    b.ToTable("PaymentDetails");
+                });
+
+            modelBuilder.Entity("Backend.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,20 +184,34 @@ namespace Backend.Migrations
                     b.Property<decimal>("BuyingPrice")
                         .HasColumnType("numeric");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsService")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("SKU")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<decimal>("SellingPrice")
                         .HasColumnType("numeric");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("text");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("integer");
@@ -161,7 +225,12 @@ namespace Backend.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<decimal?>("Weight")
+                        .HasColumnType("numeric");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -173,7 +242,29 @@ namespace Backend.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Sale", b =>
+            modelBuilder.Entity("Backend.Models.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("Backend.Models.Sale", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,7 +316,7 @@ namespace Backend.Migrations
                     b.ToTable("Sales");
                 });
 
-            modelBuilder.Entity("SaleItem", b =>
+            modelBuilder.Entity("Backend.Models.SaleItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -257,7 +348,7 @@ namespace Backend.Migrations
                     b.ToTable("SaleItems");
                 });
 
-            modelBuilder.Entity("Supplier", b =>
+            modelBuilder.Entity("Backend.Models.Supplier", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -269,15 +360,22 @@ namespace Backend.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ContactInfo")
-                        .IsRequired()
+                    b.Property<string>("Company")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -287,7 +385,7 @@ namespace Backend.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("User", b =>
+            modelBuilder.Entity("Backend.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -302,10 +400,14 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsEmailVerified")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -313,7 +415,22 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -327,16 +444,21 @@ namespace Backend.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Email = "admin@example.com",
+                            FirstName = "Admin",
                             IsEmailVerified = true,
-                            Name = "",
+                            LastName = "User",
                             PasswordHash = "$2a$10$IuP/6aPlX.RzmEvcLN6MSefRrS1WV7EJUDB.4TN66FHYm6WeblH8q",
-                            Role = "Admin"
+                            PhoneNumber = "000-000-0000",
+                            Role = "Admin",
+                            Status = "Active",
+                            UpdatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Username = "admin"
                         });
                 });
 
-            modelBuilder.Entity("Expense", b =>
+            modelBuilder.Entity("Backend.Models.Expense", b =>
                 {
-                    b.HasOne("User", "User")
+                    b.HasOne("Backend.Models.User", "User")
                         .WithMany("Expenses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -345,9 +467,9 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Notification", b =>
+            modelBuilder.Entity("Backend.Models.Notification", b =>
                 {
-                    b.HasOne("Product", "Product")
+                    b.HasOne("Backend.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -356,34 +478,64 @@ namespace Backend.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Product", b =>
+            modelBuilder.Entity("Backend.Models.PaymentDetails", b =>
                 {
-                    b.HasOne("Supplier", "Supplier")
+                    b.HasOne("Backend.Models.Sale", "Sale")
+                        .WithOne("PaymentDetails")
+                        .HasForeignKey("Backend.Models.PaymentDetails", "SaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("Backend.Models.Product", b =>
+                {
+                    b.HasOne("Backend.Models.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Models.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("User", "User")
+                    b.HasOne("Backend.Models.User", "User")
                         .WithMany("Products")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Supplier");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Sale", b =>
+            modelBuilder.Entity("Backend.Models.ProductImage", b =>
                 {
-                    b.HasOne("Customer", "Customer")
+                    b.HasOne("Backend.Models.Product", "Product")
+                        .WithMany("GalleryImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Backend.Models.Sale", b =>
+                {
+                    b.HasOne("Backend.Models.Customer", "Customer")
                         .WithMany("Sales")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("User", "User")
+                    b.HasOne("Backend.Models.User", "User")
                         .WithMany("Sales")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -394,15 +546,15 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SaleItem", b =>
+            modelBuilder.Entity("Backend.Models.SaleItem", b =>
                 {
-                    b.HasOne("Product", "Product")
+                    b.HasOne("Backend.Models.Product", "Product")
                         .WithMany("SaleItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sale", "Sale")
+                    b.HasOne("Backend.Models.Sale", "Sale")
                         .WithMany("Items")
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -413,9 +565,9 @@ namespace Backend.Migrations
                     b.Navigation("Sale");
                 });
 
-            modelBuilder.Entity("Supplier", b =>
+            modelBuilder.Entity("Backend.Models.Supplier", b =>
                 {
-                    b.HasOne("User", "AddedByUser")
+                    b.HasOne("Backend.Models.User", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -424,27 +576,36 @@ namespace Backend.Migrations
                     b.Navigation("AddedByUser");
                 });
 
-            modelBuilder.Entity("Customer", b =>
-                {
-                    b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("Product", b =>
-                {
-                    b.Navigation("SaleItems");
-                });
-
-            modelBuilder.Entity("Sale", b =>
-                {
-                    b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("Supplier", b =>
+            modelBuilder.Entity("Backend.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("User", b =>
+            modelBuilder.Entity("Backend.Models.Customer", b =>
+                {
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("Backend.Models.Product", b =>
+                {
+                    b.Navigation("GalleryImages");
+
+                    b.Navigation("SaleItems");
+                });
+
+            modelBuilder.Entity("Backend.Models.Sale", b =>
+                {
+                    b.Navigation("Items");
+
+                    b.Navigation("PaymentDetails");
+                });
+
+            modelBuilder.Entity("Backend.Models.Supplier", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Backend.Models.User", b =>
                 {
                     b.Navigation("Expenses");
 

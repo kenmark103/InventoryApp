@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useState } from 'react'
@@ -8,6 +9,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { User } from '../data/schema'
+import { useUsers } from '../context/users-context'
+import userService from '@/services/userService'
 
 interface Props {
   open: boolean
@@ -17,21 +20,38 @@ interface Props {
 
 export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
   const [value, setValue] = useState('')
+  const { refreshUsers, setCurrentRow } = useUsers() // Get refresh function from context
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
+    // Check that the confirmation input matches the username
     if (value.trim() !== currentRow.username) return
 
-    onOpenChange(false)
-    toast({
-      title: 'The following user has been deleted:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>
-            {JSON.stringify(currentRow, null, 2)}
-          </code>
-        </pre>
-      ),
-    })
+    try {
+      // Call delete API
+      await userService.deleteUser(currentRow.id)
+      // Refresh the users list after deletion
+      await refreshUsers()
+      
+      // Clear currentRow in context if needed
+      setCurrentRow(null)
+      
+      onOpenChange(false)
+      toast({
+        title: 'User deleted successfully',
+        description: (
+          <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
+            <code className='text-white'>
+              {JSON.stringify(currentRow, null, 2)}
+            </code>
+          </pre>
+        ),
+      })
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Deletion failed. Please try again.',
+      })
+    }
   }
 
   return (
@@ -74,7 +94,7 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
           <Alert variant='destructive'>
             <AlertTitle>Warning!</AlertTitle>
             <AlertDescription>
-              Please be carefull, this operation can not be rolled back.
+              Please be careful, this operation cannot be rolled back.
             </AlertDescription>
           </Alert>
         </div>

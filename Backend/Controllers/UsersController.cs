@@ -8,6 +8,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 namespace Backend.Controllers;
+using System.Text.Json;
+using Backend.Models;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -40,7 +42,13 @@ public class UsersController : ControllerBase
             Email = request.Email,
             PasswordHash = passwordHash,
             Role = request.Role,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            FirstName = request.FirstName ?? string.Empty,  // If the request provides a first name, use it; otherwise, default to an empty string.
+            LastName = request.LastName ?? string.Empty,    
+            Username = request.Username ?? string.Empty,   
+            PhoneNumber = request.PhoneNumber ?? string.Empty, // Optional phone number
+            Status = request.Status ?? "Active"
         };
 
         _context.Users.Add(user);
@@ -69,7 +77,7 @@ public class UsersController : ControllerBase
                 Token = token,
                 User = new
                 {
-                    user.Name,
+                    user.Username,
                     user.Email,
                     user.Role // Assuming 'Roles' is a collection of user's roles
                 }
@@ -103,6 +111,45 @@ public class UsersController : ControllerBase
             return Ok(user);
 
         return Unauthorized();
+    }
+
+    //update user 
+
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<IActionResult> UpdateUser(int id, UserUpdateDto updateDto)
+    {
+
+        var currentUserEmail = User.FindFirstValue(ClaimTypes.Email);
+        
+        var user = await _context.Users.FindAsync(id);
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        // Allow update if the user is an Admin or updating their own data.
+        if (!User.IsInRole("Admin") && user.Email != currentUserEmail)
+        {
+            return Unauthorized("You do not have permission to update this user.");
+        }
+
+        // Update user fields if new values are provided.
+        user.FirstName = updateDto.FirstName ?? user.FirstName;
+        user.LastName = updateDto.LastName ?? user.LastName;
+        user.Username = updateDto.Username ?? user.Username;
+        user.PhoneNumber = updateDto.PhoneNumber ?? user.PhoneNumber;
+        
+        // Optionally update additional fields here.
+        
+        // Update the 'UpdatedAt' timestamp.
+        user.UpdatedAt = DateTime.UtcNow;
+
+        // Save changes.
+        _context.Entry(user).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return NoContent(); // 204 No Content is a common response for successful PUT updates.
     }
 
     // Delete user (Admin only)

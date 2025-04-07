@@ -1,6 +1,9 @@
 import { faker } from '@faker-js/faker'
+import userService from '@/services/userService'
 
-export const users = Array.from({ length: 20 }, () => {
+export const users = await userService.getAllUsers()
+
+export const usersFaked = Array.from({ length: 5 }, () => {
   const firstName = faker.person.firstName()
   const lastName = faker.person.lastName()
   return {
@@ -13,16 +16,16 @@ export const users = Array.from({ length: 20 }, () => {
     email: faker.internet.email({ firstName }).toLocaleLowerCase(),
     phoneNumber: faker.phone.number({ style: 'international' }),
     status: faker.helpers.arrayElement([
-      'active',
-      'inactive',
-      'invited',
-      'suspended',
+      'Active',
+      'Inactive',
+      'Invited',
+      'Suspended',
     ]),
     role: faker.helpers.arrayElement([
-      'superadmin',
-      'admin',
-      'cashier',
-      'manager',
+      'Superadmin',
+      'Admin',
+      'Cashier',
+      'Manager',
     ]),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),

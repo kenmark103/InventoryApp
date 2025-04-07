@@ -1,0 +1,20 @@
+graph LR
+A[ProductSelection] --> B[SalesContext]
+C[CustomerSelector] --> B
+D[SalesTable] --> B
+E[SalesFloatingToolbar] --> B
+B --> F[saleService]
+F --> G[(Backend)]
+
+
+5. Component Integration Map
+Component	Location	Status
+ProductSelectionPanel	Left sidebar	Implemented
+SalesTable	Main content area	Updated
+CustomerSelector	Top-right toolbar	Implemented
+SalesFloatingToolbar	Top-right toolbar	Implemented
+PaymentDialog	Shown on complete action	Implemented
+ReceiptPrint	Automatic print flow	Implemented
+QuantityStepper	SalesTable quantity column	Implemented
+TaxChip	SalesTable tax column	Implemented
+DiscountInput	SalesTable discount column	Implemented

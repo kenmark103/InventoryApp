@@ -1,13 +1,12 @@
 namespace Backend.Controllers;
 using System.Security.Claims;
 using Backend.Data;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ClosedXML.Excel;
 using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
+using Backend.Models;
 
 [ApiController]
 [Route("api/[controller]")]

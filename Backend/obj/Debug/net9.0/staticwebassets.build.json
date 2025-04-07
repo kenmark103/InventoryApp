@@ -1,12 +1,3421 @@
 {
   "Version": 1,
-  "Hash": "+8gz7rjoDcLSTM7Kwf5qkbapKXDd97xhyAb9pxhYrew=",
+  "Hash": "dQUMN0VNBVezavjme9PBLiTzJvXNzCAbBeJHIxxNo/Y=",
   "Source": "Backend",
   "BasePath": "_content/Backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Backend\\wwwroot",
+      "Source": "Backend",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/01c96136-d0f7-4b25-a197-23183320dc98_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\07296d10-c599-472e-a851-71275388deee_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/07296d10-c599-472e-a851-71275388deee_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\07296d10-c599-472e-a851-71275388deee_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qagt4ibwtu",
+      "Integrity": "wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1ekbz838j0",
+      "Integrity": "+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cz3c46e3mb",
+      "Integrity": "2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ie2p58t5g4",
+      "Integrity": "ai3z2GlrPm1sHtbc37NeBut7vTeeYgj09TV1e+FzE2A=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\3b868ba0-27f9-400b-89d3-4775002d7dad_bread.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/3b868ba0-27f9-400b-89d3-4775002d7dad_bread#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cz3c46e3mb",
+      "Integrity": "2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\3b868ba0-27f9-400b-89d3-4775002d7dad_bread.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\41955993-1a8f-4074-84dd-69976510dec1_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/41955993-1a8f-4074-84dd-69976510dec1_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\41955993-1a8f-4074-84dd-69976510dec1_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1ekbz838j0",
+      "Integrity": "+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cz3c46e3mb",
+      "Integrity": "2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\6e69d303-50ee-4123-8445-351797ada69f_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/6e69d303-50ee-4123-8445-351797ada69f_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\6e69d303-50ee-4123-8445-351797ada69f_Jameson 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cz3c46e3mb",
+      "Integrity": "2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qagt4ibwtu",
+      "Integrity": "wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eyow9u8uxo",
+      "Integrity": "qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n6ec73jgat",
+      "Integrity": "MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2.jpg",
+      "SourceId": "Backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\",
+      "BasePath": "_content/Backend",
+      "RelativePath": "uploads/fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qrp4ijwvmt",
+      "Integrity": "imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "uploads/01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/01c96136-d0f7-4b25-a197-23183320dc98_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/07296d10-c599-472e-a851-71275388deee_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\07296d10-c599-472e-a851-71275388deee_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/07296d10-c599-472e-a851-71275388deee_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/07296d10-c599-472e-a851-71275388deee_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\07296d10-c599-472e-a851-71275388deee_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:17:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\07f38156-539b-4fd1-b894-dba1faca07bd_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:17:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/0892b243-b3dc-4b5e-b554-d71708fc1b53_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16982"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:52:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2.qagt4ibwtu.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16982"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:52:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qagt4ibwtu"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/134d20cc-a4eb-42ef-a6b5-f7097d513b0f_bread 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma.1ekbz838j0.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41561"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 07:55:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1ekbz838j0"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\155286f7-63b5-424a-979e-0e84dec0f5c1_Nyama Choma.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41561"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 07:55:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread.cz3c46e3mb.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:39:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cz3c46e3mb"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\26bc1447-8cc3-48c8-b34a-6994b2ed87a1_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:39:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini.ie2p58t5g4.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30233"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ai3z2GlrPm1sHtbc37NeBut7vTeeYgj09TV1e+FzE2A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 07:16:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ie2p58t5g4"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ai3z2GlrPm1sHtbc37NeBut7vTeeYgj09TV1e+FzE2A="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\30a89db7-efbe-4ac6-9a68-77f0230e1dbb_martini.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30233"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ai3z2GlrPm1sHtbc37NeBut7vTeeYgj09TV1e+FzE2A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 07:16:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ai3z2GlrPm1sHtbc37NeBut7vTeeYgj09TV1e+FzE2A="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:15:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:15:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/3117cc42-3f1f-472f-a2f4-ec971ee65b22_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:21:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\32da70d0-efc4-47b9-8ac4-abecbb876b28_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:21:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:18:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:18:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/39bc2b14-bc78-4a91-9638-9d8aa155ae33_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/3b868ba0-27f9-400b-89d3-4775002d7dad_bread.cz3c46e3mb.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\3b868ba0-27f9-400b-89d3-4775002d7dad_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:39:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cz3c46e3mb"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/3b868ba0-27f9-400b-89d3-4775002d7dad_bread.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/3b868ba0-27f9-400b-89d3-4775002d7dad_bread.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\3b868ba0-27f9-400b-89d3-4775002d7dad_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:39:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/41955993-1a8f-4074-84dd-69976510dec1_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\41955993-1a8f-4074-84dd-69976510dec1_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/41955993-1a8f-4074-84dd-69976510dec1_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\41955993-1a8f-4074-84dd-69976510dec1_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/41955993-1a8f-4074-84dd-69976510dec1_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:17:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:17:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.1ekbz838j0.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41561"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 07:55:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1ekbz838j0"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41561"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 07:55:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+Y4AWn1ykTIBWkycoXv3W3zA1ZrxR6ThTP924UQbUb0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread.cz3c46e3mb.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:52:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cz3c46e3mb"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5ea3d0ee-db7a-48c7-bdbe-3ad2a5242c05_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:52:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:22:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:22:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/6cea57ab-53d1-4c2b-ac2d-7a4351acf429_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/6e69d303-50ee-4123-8445-351797ada69f_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\6e69d303-50ee-4123-8445-351797ada69f_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:17:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/6e69d303-50ee-4123-8445-351797ada69f_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\6e69d303-50ee-4123-8445-351797ada69f_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:17:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/6e69d303-50ee-4123-8445-351797ada69f_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:22:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:22:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:22:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\8d1e913f-8b25-438f-be79-523c4d2bc34e_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:22:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\952b4f98-7526-4c6a-b6f4-52d1e01e3fac_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.cz3c46e3mb.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:52:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cz3c46e3mb"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15512"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:52:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2GSx4hawvYG/GkQGazKHG5UrruosJsYF24j9QgrjgZw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:10:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:14:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:18:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:18:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:15:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:15:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/c538bb2f-13b8-42cc-bbcf-2078ec703189_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:15:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\d0102203-df3a-4cc1-a083-9d35c8422da0_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:15:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16982"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:39:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2.qagt4ibwtu.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16982"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 11:39:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qagt4ibwtu"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/dc47c702-805c-48f5-8dda-718526e1b1f1_bread 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wrOd/SFmd71mTFf/wEYxBTHxFAAGFmdO4v1XfX7nrbo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro.eyow9u8uxo.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:18:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eyow9u8uxo"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\e5af69a7-2dac-4b06-b541-1d98243c83e3_jameson-1-litro.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:18:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qtgtMCK6uK/kBOAT+qjVOjqfjtX03Y+A4qVFOwDQT4Q="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:21:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson.n6ec73jgat.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39299"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:21:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n6ec73jgat"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/f0ccd294-6cf4-4647-be9c-4c88fc6f9244_Jameson.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MaojDA1GRLy6q7uk5IadppUsY+AsekvxqSnhVCQaSi0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:21:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2.qrp4ijwvmt.jpg",
+      "AssetFile": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 28 Mar 2025 13:21:05 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qrp4ijwvmt"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/fc956bce-2571-4c88-9c1b-5fae08c67c7d_Jameson 2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imbvljR+xo6+eX1KOOXXxXIGHaAdxTpvpoBt9xWtMiI="
+        }
+      ]
+    }
+  ]
 }

@@ -5545,19 +5545,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\v-kenmakudha\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\v-kenmakudha\\Documents\\Dotnet Solutions\\InventoryApp\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\v-kenmakudha\\Documents\\Dotnet Solutions\\InventoryApp\\Backend\\Backend.csproj",
-      "packagesPath": "C:\\Users\\v-kenmakudha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\v-kenmakudha\\Documents\\Dotnet Solutions\\InventoryApp\\Backend\\obj\\",
+      "projectPath": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\Backend.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\v-kenmakudha\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -5657,7 +5657,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

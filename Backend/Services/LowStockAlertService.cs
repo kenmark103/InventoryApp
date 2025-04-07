@@ -1,5 +1,6 @@
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
+using Backend.Models;
 
 public class LowStockAlertService : BackgroundService
 {

@@ -37,6 +37,12 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+  --sidebar-text: hsl(0 0% 98%);
+  --sidebar-accent: hsl(263.4 70% 50.4%);
+  --sidebar-hover: hsl(240 5.9% 10%);
+
+
   }
   .dark {
     --background: 222.2 84% 4.9%;
@@ -139,5 +145,86 @@
   }
   body {
     @apply min-h-svh w-full bg-background text-foreground;
+  }
+}
+
+.sidebar {
+  @apply w-64 fixed h-screen overflow-y-auto;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border-right: 1px solid var(--sidebar-border);
+}
+
+.shop-header {
+  @apply p-6 border-b border-border;
+}
+
+.nav-group {
+  @apply px-4 py-2;
+}
+
+.nav-item {
+  @apply flex items-center px-3 py-2 rounded-lg transition-colors;
+  gap: 0.75rem;
+}
+
+.nav-item:hover {
+  background: var(--sidebar-hover);
+}
+
+.nav-item.active {
+  background: var(--sidebar-accent);
+  color: white;
+}
+
+.sub-item {
+  @apply pl-10 text-sm;
+}
+
+.badge {
+  @apply ml-auto px-2 py-1 text-xs rounded-full;
+  background: var(--sidebar-accent);
+  color: white;
+}
+
+.icon {
+  @apply w-5 h-5;
+}
+
+
+.mainimg-object-cover {
+  object-fit: cover;
+}
+
+.mainimg-transition-opacity {
+  transition: opacity 150ms ease;
+}
+
+.mainimg-hover\:opacity-100:hover {
+  opacity: 1;
+}
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  #receipt-print, #receipt-print * {
+    visibility: visible;
+  }
+
+  #receipt-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .no-print {
+    display: none !important;
   }
 }

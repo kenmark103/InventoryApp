@@ -7,7 +7,7 @@ const getAllUsers = async () => {
 };
 
 const createUser = async (newUserData: any) => {
-    const response = await api.post('/users', newUserData);
+    const response = await api.post('/users/register', newUserData);
     return response.data;
   };
 

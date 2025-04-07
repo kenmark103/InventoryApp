@@ -29,6 +29,8 @@ import { SelectDropdown } from '@/components/select-dropdown'
 import { userTypes } from '../data/data'
 import { User } from '../data/schema'
 import userService from '@/services/userService'
+import { useUsers } from '../context/users-context'
+
 
 const formSchema = z
   .object({
@@ -120,23 +122,26 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
         },
   })
 
+  const { refreshUsers } = useUsers()
+  
   const onSubmit = async (values: UserForm) => {
     try {
       if (isEdit) {
-        // Update existing user (PUT request)
         await userService.updateUser(currentRow!.id, values)
         toast({
           title: 'User updated successfully',
           description: 'The user details have been updated.',
         })
       } else {
-        // Create a new user (POST request)
-        await userService.createUser(values) // This method needs to be added in your service
+        await userService.createUser(values)
         toast({
           title: 'User created successfully',
           description: 'A new user has been added.',
         })
       }
+      // Refresh the user list after mutation
+      await refreshUsers()
+  
       form.reset()
       onOpenChange(false)
     } catch (error: any) {
@@ -146,6 +151,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       })
     }
   }
+  
 
   const isPasswordTouched = !!form.formState.dirtyFields.password
 

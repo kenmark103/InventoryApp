@@ -4,6 +4,7 @@ using Backend.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Backend.Models;
 
 [ApiController]
 [Route("api/[controller]")]

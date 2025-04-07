@@ -1,8 +1,14 @@
+namespace Backend.Models{
+
+
 public enum SaleStatus
 {
-    Draft,      // Initial state
-    Paid,       // Payment confirmed
-    Shipped,    // Items dispatched
-    Delivered,  // Customer received
-    Refunded    // Order reversed
+    DRAFT,      // Initial state
+    PAID,
+    COMPLETED,
+    HOLD,
+    CANCELLED,
+    REFUNDED
+}
+
 }

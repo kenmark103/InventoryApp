@@ -1,8 +1,14 @@
 // contexts/sales-context.tsx
-import React, { createContext, useContext, useState, useEffect , useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import saleService from '@/services/saleService';
 import { Sale, SaleCreateDto, SaleResponseDto } from '@/data/saleSchema';
 import { mapSaleToSaleCreateDto } from '../utils/saleMappers';
+import { 
+  PaymentMethod, 
+  PaymentDetails,
+  ProcessCardPayment,
+  ProcessMpesaPayment
+} from '../data/payments'
 
 type SalesDialogType = 'add' | 'edit' | 'delete' | 'view' | null;
 
@@ -19,6 +25,8 @@ interface SalesContextType {
   currentSale: Sale | null;
   paymentError: string | null;
   isProcessingPayment: boolean;
+  handleCardPayment: ProcessCardPayment;
+  handleMpesaPayment: ProcessMpesaPayment;
   paymentDetails: PaymentDetails | null;
   saveDraft: () => Promise<void>;
   holdSale: () => void;
@@ -34,48 +42,47 @@ const SalesContext = createContext<SalesContextType | undefined>(undefined);
 export function SalesProvider({ children }: { children: React.ReactNode }) {
   const [sales, setSales] = useState<SaleResponseDto[]>([]);
   const [currentSale, setCurrentSale] = useState<Sale | null>(null);
+  const [heldSales, setHeldSales] = useState<SaleResponseDto[]>([]);
   const [open, setOpen] = useState<SalesDialogType>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  
-const isMounted = useRef(true);
-
-useEffect(() => {
-  return () => {
-    isMounted.current = false;
-  };
-}, []);
-
-const refreshSales = useCallback(async () => {
-  try {
-    setLoading(true);
-    const data = await saleService.getSales();
+  // Stable abortable refresh function
+  const refreshSales = useCallback(async () => {
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = new AbortController();
     
-    if (isMounted.current) {
+    try {
+      setLoading(true);
+      const data = await saleService.getSales({ 
+        signal: abortControllerRef.current.signal 
+      });
       setSales(data);
+      setError(null);
+    } catch (err) {
+      if (!abortControllerRef.current.signal.aborted) {
+        setError('Failed to fetch sales');
+        console.error('Sales fetch error:', err);
+      }
+    } finally {
+      if (!abortControllerRef.current.signal.aborted) {
+        setLoading(false);
+      }
     }
-    
-  } catch (err) {
-    if (isMounted.current) {
-      setError('Failed to fetch sales');
-    }
-  } finally {
-    if (isMounted.current) {
-      setLoading(false);
-    }
-  }
-}, []);
+  }, []);
 
-useEffect(() => {
-  refreshSales();
-}, [refreshSales]); 
+  // Initial load with cleanup
+  useEffect(() => {
+    refreshSales();
+    return () => abortControllerRef.current?.abort();
+  }, [refreshSales]);
 
-
-  const createSale = async (dto: SaleCreateDto) => {
+ 
+  const createSale = useCallback(async (dto: SaleCreateDto) => {
     setLoading(true);
     try {
       const newSale = await saleService.createSale(dto);
@@ -88,128 +95,154 @@ useEffect(() => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const saveDraft = async () => {
+  const saveDraft = useCallback(async () => {
     if (!currentSale) return;
     
     try {
-
       const savedSale = await saleService.createSale({
         ...currentSale,
         status: 'DRAFT'
       });
       
-     
       setCurrentSale(savedSale);
       setSales(prev => [savedSale, ...prev]);
-      
-      
       toast.success('Draft saved successfully');
-      
     } catch (error) {
       toast.error('Failed to save draft');
       console.error('Save draft error:', error);
     }
-  };
+  }, [currentSale]);
 
-  const holdSale = () => {
+  const holdSale = useCallback(() => {
     if (currentSale) {
-      // Add to held sales list
       setHeldSales(prev => [...prev, currentSale]);
-      // Clear current sale
       setCurrentSale(null);
       toast.success('Sale held successfully');
     }
-  };
+  }, [currentSale]);
 
-
-
-const completeSale = async (details: PaymentDetails) => {
+  // Payment handling with cleanup
+  const completeSale = useCallback(async (details: PaymentDetails) => {
   if (!currentSale) return;
 
+  const controller = new AbortController();
   setIsProcessingPayment(true);
   setPaymentError(null);
 
   try {
     let saleId = currentSale.id;
 
-   
     if (!saleId) {
       const draftDto = mapSaleToSaleCreateDto(currentSale);
-      const draft = await saleService.createSale(draftDto);
+      const draft = await saleService.createSale(draftDto, { signal: controller.signal });
       saleId = draft.id;
-      setCurrentSale(prev => ({ ...prev, id: draft.id }));
+      setCurrentSale(prev => ({ ...prev, id: saleId }));
       setSales(prev => [draft, ...prev]);
     }
 
-    // Process payment based on method
+    await handlePaymentMethod(saleId, details, controller.signal);
+
+    const updatedSale = await saleService.completeSale(
+      saleId,
+      details,
+      { signal: controller.signal }
+    );
+
+    setSales(prev =>
+      prev.map(sale => (sale.id === updatedSale.id ? updatedSale : sale))
+    );
+
+    await refreshSales();
+    setCurrentSale(null);
+    toast.success('Payment processed successfully');
+
+  } catch (error: any) {
+    if (error.name === 'CanceledError' || error.message === 'Payment was aborted') {
+      console.log('Payment was aborted by user');
+    } else {
+      setPaymentError(error.message);
+      toast.error('Payment processing failed');
+    }
+  } finally {
+    setIsProcessingPayment(false);
+  }
+}, [currentSale, refreshSales]);
+
+
+
+const handlePaymentMethod = async (
+  saleId: number,
+  details: PaymentDetails,
+  signal?: AbortSignal
+) => {
+  try {
     switch (details.method) {
       case PaymentMethod.CASH:
-        await handleCashPayment(saleId, details);
+        await handleCashPayment(saleId, details, signal);
         break;
       case PaymentMethod.CREDIT_CARD:
-        await handleCardPayment(saleId, details);
+        await handleCardPayment(saleId, details, signal);
         break;
       case PaymentMethod.MPESA:
-        await handleMpesaPayment(saleId, details);
+        await handleMpesaPayment(saleId, details, signal);
         break;
       default:
         throw new Error('Unsupported payment method');
     }
-
-    // Refresh sales list
-    await refreshSales();
-    setCurrentSale(null);
-  } catch (err) {
-    setPaymentError(err.message || 'Payment processing failed');
-  } finally {
-    setIsProcessingPayment(false);
+  } catch (error) {
+    console.error('Payment processing failed:', error);
+    throw error;
   }
 };
 
-// Example payment handlers
-const handleCashPayment = async (saleId: number, details: PaymentDetails) => {
-  await saleService.completeSale(saleId, {
-    ...details,
-    transactionId: `CASH-${Date.now()}`
-  });
-};
-
-const handleCardPayment = async (saleId: number, details: PaymentDetails) => {
-  // Process card payment through your payment gateway
-  const paymentResult = await processCardPayment(details);
-  
-  await saleService.completeSale(saleId, {
-    ...details,
-    transactionId: paymentResult.transactionId
-  });
-};
-
-const handleMpesaPayment = async (saleId: number, details: PaymentDetails) => {
-  // Process MPESA payment
-  const paymentResult = await processMpesaPayment(details.mpesaPhone!, details.amountTendered);
-  
-  await saleService.completeSale(saleId, {
-    ...details,
-    transactionId: paymentResult.transactionId
-  });
-};
-
-const updateItem = useCallback((itemId: number, update: Partial<SaleItem>) => {
-  setCurrentSale(prev => {
-    if (!prev) return prev;
-    return {
-      ...prev,
-      items: prev.items.map(item => 
-        item.id === itemId ? {...item, ...update} : item
-      )
+    const handleCashPayment = async (
+      saleId: number,
+      details: PaymentDetails,
+      signal?: AbortSignal
+    ) => {
+      await saleService.completeSale(saleId, {
+        ...details,
+        transactionId: `CASH-${Date.now()}`
+      }, { signal });
     };
-  });
-}, []);
 
-const addItemToSale = useCallback((product: Product) => {
-  setCurrentSale(prev => {
+    const handleCardPayment = async (
+      saleId: number,
+      details: PaymentDetails,
+      signal?: AbortSignal
+    ) => {
+      const paymentResult = await processCardPayment(details, { signal });
+      await saleService.completeSale(saleId, {
+        ...details,
+        transactionId: paymentResult.transactionId
+      }, { signal });
+    };
+
+    const handleMpesaPayment = async (
+      saleId: number,
+      details: PaymentDetails,
+      signal?: AbortSignal
+    ) => {
+      if (!details.mpesaPhone) {
+        throw new Error('MPESA phone number is required');
+      }
+
+      const paymentResult = await processMpesaPayment(
+        details.mpesaPhone,
+        details.amountTendered,
+        { signal }
+      );
+      
+      await saleService.completeSale(saleId, {
+        ...details,
+        transactionId: paymentResult.transactionId
+      }, { signal });
+    };
+
+  const addItemToSale = useCallback((product: Product) => {
+    setCurrentSale(prev => {
     
     if (product.stock <= 0) {
       toast.error(`${product.name} is out of stock`);
@@ -298,10 +331,22 @@ const addItemToSale = useCallback((product: Product) => {
       }
     };
   });
-}, []);
+  }, []);
 
-const removeItem = useCallback((id: number) => {
-  setCurrentSale(prev => {
+  const updateItem = useCallback((itemId: number, update: Partial<SaleItem>) => {
+    setCurrentSale(prev => {
+    if (!prev) return prev;
+    return {
+      ...prev,
+      items: prev.items.map(item => 
+        item.id === itemId ? {...item, ...update} : item
+      )
+    };
+  });
+  }, []);
+
+  const removeItem = useCallback((id: number) => {
+    setCurrentSale(prev => {
     if (!prev) return prev;
     
     const newItems = prev.items.filter(item => item.id !== id);
@@ -325,10 +370,10 @@ const removeItem = useCallback((id: number) => {
       }
     };
   });
-}, []);
+  }, []);
 
-
-  const value: SalesContextType = {
+  // Memoized context value
+  const contextValue = useMemo(() => ({
     sales,
     currentSale,
     setCurrentSale,
@@ -345,16 +390,34 @@ const removeItem = useCallback((id: number) => {
     paymentDetails,
     saveDraft,
     holdSale,
-    customers: [], 
-    heldSales: [],
+    customers: [],
+    heldSales,
     updateItem,
     removeItem,
-  };
-
-  
+    handleCardPayment,
+    handleMpesaPayment
+  }), [
+    sales,
+    currentSale,
+    open,
+    loading,
+    error,
+    paymentError,
+    isProcessingPayment,
+    paymentDetails,
+    heldSales,
+    refreshSales,
+    createSale,
+    addItemToSale,
+    completeSale,
+    saveDraft,
+    holdSale,
+    updateItem,
+    removeItem
+  ]);
 
   return (
-    <SalesContext.Provider value={value}>
+    <SalesContext.Provider value={contextValue}>
       {children}
     </SalesContext.Provider>
   );

@@ -68,7 +68,7 @@ export const sidebarData: SidebarData = {
             },
             {
               title: 'Sales Order',
-              url: '/401',
+              url: '/sales/salesorders',
               icon: Activity,  // Better for analytics
             }
           ],

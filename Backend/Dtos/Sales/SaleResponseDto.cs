@@ -23,4 +23,7 @@ public class SaleResponseDto
     public string ProcessedBy { get; set; } = string.Empty; // User email
     
     public List<SaleItemResponseDto> Items { get; set; } = new();
+
+    public CompletedSaleDto? CompletedSale { get; set; } 
+
 }

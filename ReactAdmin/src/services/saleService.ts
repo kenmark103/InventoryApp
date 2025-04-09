@@ -1,4 +1,5 @@
 import api from '../lib/api';
+import axios, { AxiosRequestConfig } from 'axios';
 import type { SaleResponseDto, SaleCreateDto, SaleUpdateDto } from '../types';
 
 const saleService = {
@@ -29,6 +30,33 @@ const saleService = {
     }
   },
 
+
+   completeSale: async (    id: number, paymentDetails: PaymentDetails,  config?: AxiosRequestConfig  ): Promise<SaleResponseDto> => {
+    try {
+      const res = await api.post(
+        `/sales/${id}/complete`,
+        { paymentDetails },
+        config
+      );
+      return res.data;
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        console.error('Complete sale error:', {
+          status: error.response?.status,
+          data: error.response?.data,
+          headers: error.response?.headers
+        });
+        throw new Error(error.response?.data || 'Payment processing failed');
+      }
+      console.error('Unexpected error:', error);
+      throw new Error('Failed to complete sale');
+    }
+  },
+
+  getPaymentStatus: async (transactionId: string): Promise<{ status: string }> => {
+    return api.get(`/payments/status/${transactionId}`).then(res => res.data);
+  },
+
   updateSale: async (id: number, dto: SaleUpdateDto): Promise<SaleResponseDto> =>
     api.put(`/sales/${id}`, dto).then(res => res.data),
 
@@ -46,7 +74,7 @@ const saleService = {
     });
   },
 
-  // Recommended alternatives to deletion
+
   cancelSale: async (id: number): Promise<SaleResponseDto> =>
     api.patch(`/sales/${id}/cancel`).then(res => res.data),
 

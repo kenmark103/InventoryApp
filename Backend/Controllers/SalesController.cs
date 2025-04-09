@@ -14,11 +14,13 @@ namespace Backend.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
+        private readonly ILogger<SalesController> _logger;
 
-        public SalesController(AppDbContext context, IConfiguration config)
+        public SalesController(AppDbContext context, IConfiguration config, ILogger<SalesController> logger)
         {
             _context = context;
             _config = config;
+            _logger = logger;
         }
 
         // POST: api/sales (Create a new sale with line items)
@@ -98,41 +100,33 @@ namespace Backend.Controllers
         [HttpPost("{id}/complete")]
         public async Task<ActionResult<SaleResponseDto>> CompleteSale(
             int id, 
-            [FromBody] SaleCompleteDto dto)
+            [FromBody] SaleCompleteRequestDto dto)
         {
             var sale = await _context.Sales
-                .Include(s => s.Items)
-                    .ThenInclude(i => i.Product)
+                .Include(s => s.CompletedSale) // Include completed sale if exists
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             if (sale == null) return NotFound();
             if (sale.Status != SaleStatus.DRAFT) 
                 return BadRequest("Only draft sales can be completed");
 
-            // Validate payment details
-            if (dto.PaymentDetails == null)
-                return BadRequest("Payment details required");
+            // Process payment
+            var (success, transactionId) = MockProcessPayment(dto.PaymentDetails);
+            if (!success) return BadRequest("Payment failed");
 
-           var (success, transactionId) = MockProcessPayment(dto.PaymentDetails);
-            if (!success) return BadRequest("Mock payment failed");
-
-
-            // Update sale status and payment details
-            sale.Status = SaleStatus.COMPLETED;
-            sale.PaymentDetails = new PaymentDetails
+            // Create CompletedSale
+            var completedSale = new CompletedSale
             {
-                Method = dto.PaymentDetails.Method,
-                TransactionId = dto.PaymentDetails.TransactionId,
+                SaleId = sale.Id,
+                PaymentMethod = dto.PaymentDetails.Method,
+                TransactionId = transactionId,
                 AmountTendered = dto.PaymentDetails.AmountTendered,
                 ChangeDue = dto.PaymentDetails.ChangeDue
             };
 
-            // Deduct stock only now
-            foreach (var item in sale.Items)
-            {
-                if (!item.Product.IsService)
-                    item.Product.StockQuantity -= item.Quantity;
-            }
+            // Update sale status
+            sale.Status = SaleStatus.COMPLETED;
+            sale.CompletedSale = completedSale;
 
             await _context.SaveChangesAsync();
             return Ok(MapToResponseDto(sale));
@@ -214,43 +208,47 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        // SalesController.cs
+        //Get receipt
         [HttpGet("{id}/receipt")]
-        [Authorize(Roles = "Accounting,Manager")] // Restrict access
+        [Authorize(Roles = "Accounting,Manager")]
         public async Task<ActionResult<SaleReceiptDto>> GetSaleReceipt(int id)
         {
             var sale = await _context.Sales
-                .Include(s => s.PaymentDetails) // Explicitly load payment details
+                .Include(s => s.CompletedSale)  // Now pointing to the CompletedSale entity
                 .Include(s => s.Customer)
                 .Include(s => s.Items)
                     .ThenInclude(i => i.Product)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
-            if (sale?.PaymentDetails == null)
-                return NotFound();
+            if (sale?.CompletedSale == null)
+                return NotFound("Receipt not available for incomplete sales");
 
             return Ok(MapToReceiptDto(sale));
         }
 
-        private SaleReceiptDto MapToReceiptDto(Sale sale)
+
+            private SaleReceiptDto MapToReceiptDto(Sale sale)
         {
+            var baseDto = MapToResponseDto(sale); // Reuse base mapping
+            
             return new SaleReceiptDto
             {
-                // Reuse base mapping
-                Id = sale.Id,
-                InvoiceNumber = sale.InvoiceNumber,
-                // ... other SaleResponseDto properties ...
-                
-                // Add payment details
-                PaymentDetails = new PaymentDetailsDto
+                // Base properties
+                Id = baseDto.Id,
+                InvoiceNumber = baseDto.InvoiceNumber,
+                Status = baseDto.Status,
+                // ... other inherited properties ...
+
+                // Receipt-specific properties
+                PaymentInfo = new CompletedSaleDto
                 {
-                    Method = sale.PaymentDetails.Method,
-                    TransactionId = sale.PaymentDetails.TransactionId,
-                    AmountTendered = sale.PaymentDetails.AmountTendered,
-                    ChangeDue = sale.PaymentDetails.ChangeDue
+                    PaymentMethod = sale.CompletedSale.PaymentMethod,
+                    TransactionId = sale.CompletedSale.TransactionId ?? "CASH",
+                    AmountTendered = sale.CompletedSale.AmountTendered,
+                    ChangeDue = sale.CompletedSale.ChangeDue
                 },
                 ReceiptNumber = $"RCPT-{sale.InvoiceNumber}",
-                PaymentDate = sale.SaleDate
+                PaymentDate = sale.CompletedSale.CompletedDate // Add this field to CompletedSale
             };
         }
 
@@ -277,7 +275,15 @@ namespace Backend.Controllers
                     UnitPrice = i.UnitPrice,
                     TaxRate = i.TaxRate
                 }).ToList(),
-            };
+        
+                CompletedSale = sale.CompletedSale != null ? new CompletedSaleDto
+                {
+                    PaymentMethod = sale.CompletedSale.PaymentMethod,
+                    TransactionId = sale.CompletedSale.TransactionId ?? "n/a",
+                    AmountTendered = sale.CompletedSale.AmountTendered,
+                    ChangeDue = sale.CompletedSale.ChangeDue
+                } : null
+             };
 
         }
 

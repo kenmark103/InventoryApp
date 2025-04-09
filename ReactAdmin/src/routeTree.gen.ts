@@ -19,6 +19,8 @@ import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as auth500Import } from './routes/(auth)/500'
 import { Route as AuthenticatedSuppliersSupplierIdImport } from './routes/_authenticated/suppliers/$supplierId'
+import { Route as AuthenticatedSalesSalesordersImport } from './routes/_authenticated/sales/salesorders'
+import { Route as AuthenticatedSalesIdImport } from './routes/_authenticated/sales/$id'
 import { Route as AuthenticatedCustomersCustomerIdImport } from './routes/_authenticated/customers/$customerId'
 
 // Create Virtual Routes
@@ -343,6 +345,19 @@ const AuthenticatedSuppliersSupplierIdRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
+const AuthenticatedSalesSalesordersRoute =
+  AuthenticatedSalesSalesordersImport.update({
+    id: '/sales/salesorders',
+    path: '/sales/salesorders',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedSalesIdRoute = AuthenticatedSalesIdImport.update({
+  id: '/sales/$id',
+  path: '/sales/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
 const AuthenticatedCustomersCustomerIdRoute =
   AuthenticatedCustomersCustomerIdImport.update({
     id: '/customers/$customerId',
@@ -457,6 +472,20 @@ declare module '@tanstack/react-router' {
       path: '/customers/$customerId'
       fullPath: '/customers/$customerId'
       preLoaderRoute: typeof AuthenticatedCustomersCustomerIdImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/sales/$id': {
+      id: '/_authenticated/sales/$id'
+      path: '/sales/$id'
+      fullPath: '/sales/$id'
+      preLoaderRoute: typeof AuthenticatedSalesIdImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/sales/salesorders': {
+      id: '/_authenticated/sales/salesorders'
+      path: '/sales/salesorders'
+      fullPath: '/sales/salesorders'
+      preLoaderRoute: typeof AuthenticatedSalesSalesordersImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/suppliers/$supplierId': {
@@ -606,6 +635,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedCustomersCustomerIdRoute: typeof AuthenticatedCustomersCustomerIdRoute
+  AuthenticatedSalesIdRoute: typeof AuthenticatedSalesIdRoute
+  AuthenticatedSalesSalesordersRoute: typeof AuthenticatedSalesSalesordersRoute
   AuthenticatedSuppliersSupplierIdRoute: typeof AuthenticatedSuppliersSupplierIdRoute
   AuthenticatedAppsIndexLazyRoute: typeof AuthenticatedAppsIndexLazyRoute
   AuthenticatedCategoriesIndexLazyRoute: typeof AuthenticatedCategoriesIndexLazyRoute
@@ -624,6 +655,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedSettingsRouteLazyRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedCustomersCustomerIdRoute: AuthenticatedCustomersCustomerIdRoute,
+  AuthenticatedSalesIdRoute: AuthenticatedSalesIdRoute,
+  AuthenticatedSalesSalesordersRoute: AuthenticatedSalesSalesordersRoute,
   AuthenticatedSuppliersSupplierIdRoute: AuthenticatedSuppliersSupplierIdRoute,
   AuthenticatedAppsIndexLazyRoute: AuthenticatedAppsIndexLazyRoute,
   AuthenticatedCategoriesIndexLazyRoute: AuthenticatedCategoriesIndexLazyRoute,
@@ -655,6 +688,8 @@ export interface FileRoutesByFullPath {
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
   '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
+  '/sales/$id': typeof AuthenticatedSalesIdRoute
+  '/sales/salesorders': typeof AuthenticatedSalesSalesordersRoute
   '/suppliers/$supplierId': typeof AuthenticatedSuppliersSupplierIdRoute
   '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
@@ -686,6 +721,8 @@ export interface FileRoutesByTo {
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
   '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
+  '/sales/$id': typeof AuthenticatedSalesIdRoute
+  '/sales/salesorders': typeof AuthenticatedSalesSalesordersRoute
   '/suppliers/$supplierId': typeof AuthenticatedSuppliersSupplierIdRoute
   '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
@@ -721,6 +758,8 @@ export interface FileRoutesById {
   '/(errors)/503': typeof errors503LazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
+  '/_authenticated/sales/$id': typeof AuthenticatedSalesIdRoute
+  '/_authenticated/sales/salesorders': typeof AuthenticatedSalesSalesordersRoute
   '/_authenticated/suppliers/$supplierId': typeof AuthenticatedSuppliersSupplierIdRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
@@ -756,6 +795,8 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/customers/$customerId'
+    | '/sales/$id'
+    | '/sales/salesorders'
     | '/suppliers/$supplierId'
     | '/settings/account'
     | '/settings/appearance'
@@ -786,6 +827,8 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/customers/$customerId'
+    | '/sales/$id'
+    | '/sales/salesorders'
     | '/suppliers/$supplierId'
     | '/settings/account'
     | '/settings/appearance'
@@ -819,6 +862,8 @@ export interface FileRouteTypes {
     | '/(errors)/503'
     | '/_authenticated/'
     | '/_authenticated/customers/$customerId'
+    | '/_authenticated/sales/$id'
+    | '/_authenticated/sales/salesorders'
     | '/_authenticated/suppliers/$supplierId'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
@@ -898,6 +943,8 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/",
         "/_authenticated/customers/$customerId",
+        "/_authenticated/sales/$id",
+        "/_authenticated/sales/salesorders",
         "/_authenticated/suppliers/$supplierId",
         "/_authenticated/apps/",
         "/_authenticated/categories/",
@@ -961,6 +1008,14 @@ export const routeTree = rootRoute
     },
     "/_authenticated/customers/$customerId": {
       "filePath": "_authenticated/customers/$customerId.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/sales/$id": {
+      "filePath": "_authenticated/sales/$id.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/sales/salesorders": {
+      "filePath": "_authenticated/sales/salesorders.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/suppliers/$supplierId": {

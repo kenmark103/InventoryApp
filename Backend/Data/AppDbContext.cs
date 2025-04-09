@@ -61,24 +61,21 @@ namespace Backend.Data
                 .HasForeignKey(s => s.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Pyment Details ↔ Sale (Completed Sales contains payment details)
-
-           modelBuilder.Entity<PaymentDetails>(entity =>
-            {
-                entity.HasKey(p => p.SaleId);  // ← Fixed casing
-                
-                entity.HasOne(p => p.Sale)
-                      .WithOne(s => s.PaymentDetails)
-                      .HasForeignKey<PaymentDetails>(p => p.SaleId)  // ← Fixed casing
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
+          modelBuilder.Entity<Sale>()
+                .HasOne(s => s.CompletedSale)
+                .WithOne(cs => cs.Sale)
+                .HasForeignKey<CompletedSale>(cs => cs.SaleId);
             
             // Sale ↔ Customer (Customer's sales)
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Customer)
                 .WithMany(c => c.Sales)
                 .HasForeignKey(s => s.CustomerId);
-    
+
+            modelBuilder.Entity<Sale>()
+                .Property(s => s.Status)
+                .HasConversion<string>();
+            
             // SaleItem ↔ Sale
             modelBuilder.Entity<SaleItem>()
                 .HasOne(si => si.Sale)

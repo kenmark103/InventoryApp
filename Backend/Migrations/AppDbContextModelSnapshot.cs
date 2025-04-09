@@ -49,6 +49,41 @@ namespace Backend.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Backend.Models.CompletedSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("AmountTendered")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("ChangeDue")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("CompletedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("SaleId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SaleId")
+                        .IsUnique();
+
+                    b.ToTable("CompletedSale");
+                });
+
             modelBuilder.Entity("Backend.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -148,29 +183,6 @@ namespace Backend.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Notifications");
-                });
-
-            modelBuilder.Entity("Backend.Models.PaymentDetails", b =>
-                {
-                    b.Property<int>("SaleId")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("AmountTendered")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("ChangeDue")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Method")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TransactionId")
-                        .HasColumnType("text");
-
-                    b.HasKey("SaleId");
-
-                    b.ToTable("PaymentDetails");
                 });
 
             modelBuilder.Entity("Backend.Models.Product", b =>
@@ -295,8 +307,9 @@ namespace Backend.Migrations
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Subtotal")
                         .HasColumnType("numeric");
@@ -456,6 +469,17 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Backend.Models.CompletedSale", b =>
+                {
+                    b.HasOne("Backend.Models.Sale", "Sale")
+                        .WithOne("CompletedSale")
+                        .HasForeignKey("Backend.Models.CompletedSale", "SaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sale");
+                });
+
             modelBuilder.Entity("Backend.Models.Expense", b =>
                 {
                     b.HasOne("Backend.Models.User", "User")
@@ -476,17 +500,6 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Backend.Models.PaymentDetails", b =>
-                {
-                    b.HasOne("Backend.Models.Sale", "Sale")
-                        .WithOne("PaymentDetails")
-                        .HasForeignKey("Backend.Models.PaymentDetails", "SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("Backend.Models.Product", b =>
@@ -595,9 +608,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Sale", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("CompletedSale");
 
-                    b.Navigation("PaymentDetails");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Backend.Models.Supplier", b =>

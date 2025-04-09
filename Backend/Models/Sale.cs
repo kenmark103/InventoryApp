@@ -21,6 +21,6 @@ public class Sale
     public int UserId { get; set; } // Employee who created the sale
     public User User { get; set; } = null!;
     public List<SaleItem> Items { get; set; } = new();
-    public PaymentDetails? PaymentDetails { get; set; }
+    public CompletedSale? CompletedSale { get; set; }
 }
 }

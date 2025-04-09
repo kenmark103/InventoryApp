@@ -3,7 +3,7 @@ namespace Backend.Models{
 
 public enum SaleStatus
 {
-    DRAFT,      // Initial state
+    DRAFT,      
     PAID,
     COMPLETED,
     HOLD,

@@ -12,7 +12,6 @@ import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
 
 export default function CategoryDetail() {
-  // Assume useParams or similar hook to extract categoryId from route
   const { categoryId } = /* your hook here */ { categoryId: '1' };
   const navigate = useNavigate();
   const [category, setCategory] = useState<Category | null>(null);

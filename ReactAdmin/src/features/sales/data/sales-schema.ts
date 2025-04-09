@@ -1,3 +1,10 @@
+import { 
+  PaymentMethod, 
+  PaymentDetails,
+  ProcessCardPayment,
+  ProcessMpesaPayment
+} from './payments'
+
 
 export interface SaleItem {
   id: number;
@@ -82,24 +89,12 @@ export interface SaleItemResponseDto {
 }
 
 
-export interface PaymentDetails {
-  method: PaymentMethod;
-  transactionId?: string;
-  amountTendered: number;
-  changeDue: number;
-  mpesaPhone?: string; 
-}
 export interface Sale extends SaleResponseDto {
   paymentDetails?: PaymentDetails;
   status: 'DRAFT' | 'COMPLETED' | 'CANCELLED';
 }
 
 
-export enum PaymentMethod {
-  CASH = "CASH",
-  CREDIT_CARD = "CREDIT_CARD",
-  MPESA = "MPESA"
-}
 
 export enum SaleStatus {
   DRAFT = "DRAFT",
@@ -108,3 +103,4 @@ export enum SaleStatus {
   PAID = "PAID",
   CANCELLED = "CANCELLED"
 }
+

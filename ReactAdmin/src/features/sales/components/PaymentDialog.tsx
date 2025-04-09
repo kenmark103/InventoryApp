@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from 'sonner';
-import { PaymentMethod, PaymentDetails } from '../data/sales-schema';
+import { PaymentMethod, PaymentDetails } from '../data/payments';
 
 
 export function PaymentDialog({ open, onOpenChange }) {

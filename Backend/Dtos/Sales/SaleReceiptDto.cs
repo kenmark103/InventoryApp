@@ -2,7 +2,7 @@ using Backend.Models;
 
 public class SaleReceiptDto : SaleResponseDto 
 {
-    public PaymentDetailsDto PaymentDetails { get; set; } = null!;
+    public CompletedSaleDto? PaymentInfo { get; set; }
     public string? ReceiptNumber { get; set; }
-    public DateTime? PaymentDate { get; set; }
+    public DateTime PaymentDate { get; set; }
 }

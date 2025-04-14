@@ -89,12 +89,12 @@ export const sidebarData: SidebarData = {
             },
             {
               title: 'Stock',
-              url: '/401',
+              url: '/products/stock-management',
               icon: Box,  // Represents physical stock
             },
             {
               title: 'Purchase Order',
-              url: '/401',
+              url: '/purchase',
               icon: Box,  // Represents physical stock
             },
           ],

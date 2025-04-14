@@ -17,6 +17,7 @@ namespace Backend.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<SaleItem> SaleItems { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
     
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -100,7 +101,7 @@ namespace Backend.Data
             // Supplier ↔ User (Who added the supplier)
             modelBuilder.Entity<Supplier>()
                 .HasOne(s => s.AddedByUser)
-                .WithMany() // A user can add multiple suppliers
+                .WithMany()
                 .HasForeignKey(s => s.AddedByUserId)
                 .OnDelete(DeleteBehavior.Restrict);
     
@@ -110,6 +111,24 @@ namespace Backend.Data
                 .WithMany()
                 .HasForeignKey(n => n.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Purchase>()
+                .HasOne(p => p.Product)
+                .WithMany()
+                .HasForeignKey(p => p.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Purchase>()
+                .HasOne(p => p.Supplier)
+                .WithMany()
+                .HasForeignKey(p => p.SupplierId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Purchase>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
     
             // Seed initial user data
             modelBuilder.Entity<User>().HasData(

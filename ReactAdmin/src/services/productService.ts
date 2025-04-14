@@ -117,10 +117,24 @@ const deleteProduct = async (id: number): Promise<void> => {
   await api.delete(`/products/${id}`);
 };
 
+const updateQuantity = async (productId: number, quantity: number) => {
+  const response = await fetch(`/api/products/${productId}/quantity`, {
+    method: 'PUT',
+    body: JSON.stringify({ quantity }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  
+  if (!response.ok) throw new Error('Update failed');
+  return response.json();
+};
+
 export default {
   getAllProducts,
   getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
+  updateQuantity,
 };

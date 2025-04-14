@@ -1131,17 +1131,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SaleCompleteDto"
+                "$ref": "#/components/schemas/SaleCompleteRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SaleCompleteDto"
+                "$ref": "#/components/schemas/SaleCompleteRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SaleCompleteDto"
+                "$ref": "#/components/schemas/SaleCompleteRequestDto"
               }
             }
           }
@@ -1859,6 +1859,65 @@
         },
         "additionalProperties": false
       },
+      "CompletedSale": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "completedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "saleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sale": {
+            "$ref": "#/components/schemas/Sale"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "amountTendered": {
+            "type": "number",
+            "format": "double"
+          },
+          "changeDue": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompletedSaleDto": {
+        "type": "object",
+        "properties": {
+          "paymentMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "amountTendered": {
+            "type": "number",
+            "format": "double"
+          },
+          "changeDue": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "Customer": {
         "type": "object",
         "properties": {
@@ -2109,35 +2168,6 @@
           },
           "product": {
             "$ref": "#/components/schemas/Product"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentDetails": {
-        "type": "object",
-        "properties": {
-          "method": {
-            "type": "string",
-            "nullable": true
-          },
-          "transactionId": {
-            "type": "string",
-            "nullable": true
-          },
-          "amountTendered": {
-            "type": "number",
-            "format": "double"
-          },
-          "changeDue": {
-            "type": "number",
-            "format": "double"
-          },
-          "saleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "sale": {
-            "$ref": "#/components/schemas/Sale"
           }
         },
         "additionalProperties": false
@@ -2642,13 +2672,13 @@
             },
             "nullable": true
           },
-          "paymentDetails": {
-            "$ref": "#/components/schemas/PaymentDetails"
+          "completedSale": {
+            "$ref": "#/components/schemas/CompletedSale"
           }
         },
         "additionalProperties": false
       },
-      "SaleCompleteDto": {
+      "SaleCompleteRequestDto": {
         "type": "object",
         "properties": {
           "paymentDetails": {
@@ -2841,8 +2871,11 @@
             },
             "nullable": true
           },
-          "paymentDetails": {
-            "$ref": "#/components/schemas/PaymentDetailsDto"
+          "completedSale": {
+            "$ref": "#/components/schemas/CompletedSaleDto"
+          },
+          "paymentInfo": {
+            "$ref": "#/components/schemas/CompletedSaleDto"
           },
           "receiptNumber": {
             "type": "string",
@@ -2850,8 +2883,7 @@
           },
           "paymentDate": {
             "type": "string",
-            "format": "date-time",
-            "nullable": true
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -2909,6 +2941,9 @@
               "$ref": "#/components/schemas/SaleItemResponseDto"
             },
             "nullable": true
+          },
+          "completedSale": {
+            "$ref": "#/components/schemas/CompletedSaleDto"
           }
         },
         "additionalProperties": false

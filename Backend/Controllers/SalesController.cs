@@ -103,12 +103,20 @@ namespace Backend.Controllers
             [FromBody] SaleCompleteRequestDto dto)
         {
             var sale = await _context.Sales
-                .Include(s => s.CompletedSale) // Include completed sale if exists
+                .Include(s => s.Customer)                    
+                .Include(s => s.User)                        
+                .Include(s => s.Items)                       
+                    .ThenInclude(i => i.Product)             
+                .Include(s => s.CompletedSale)               
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             if (sale == null) return NotFound();
-            if (sale.Status != SaleStatus.DRAFT) 
-                return BadRequest("Only draft sales can be completed");
+
+            
+        _logger.LogInformation("Attempting to complete sale {SaleId}. Current status: {Status}", sale.Id, sale.Status);
+
+            if (sale.Status == SaleStatus.COMPLETED) 
+                return BadRequest("Sale is already completed");
 
             // Process payment
             var (success, transactionId) = MockProcessPayment(dto.PaymentDetails);

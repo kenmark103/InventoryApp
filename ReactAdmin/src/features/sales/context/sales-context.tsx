@@ -24,6 +24,7 @@ interface SalesContextType {
   completeSale: (details: PaymentDetails) => Promise<void>;
   currentSale: Sale | null;
   paymentError: string | null;
+  setPaymentError: string | null;
   isProcessingPayment: boolean;
   handleCardPayment: ProcessCardPayment;
   handleMpesaPayment: ProcessMpesaPayment;
@@ -127,6 +128,8 @@ export function SalesProvider({ children }: { children: React.ReactNode }) {
   const completeSale = useCallback(async (details: PaymentDetails) => {
   if (!currentSale) return;
 
+  console.log(`[SalesContext] completeSale called for saleId=${currentSale.id}`, details);
+
   const controller = new AbortController();
   setIsProcessingPayment(true);
   setPaymentError(null);
@@ -177,6 +180,8 @@ const handlePaymentMethod = async (
   details: PaymentDetails,
   signal?: AbortSignal
 ) => {
+
+
   try {
     switch (details.method) {
       case PaymentMethod.CASH:
@@ -229,17 +234,20 @@ const handlePaymentMethod = async (
         throw new Error('MPESA phone number is required');
       }
 
-      const paymentResult = await processMpesaPayment(
+      // Use our mock implementation
+      const paymentResult = await ProcessMpesaPayment(
         details.mpesaPhone,
         details.amountTendered,
         { signal }
       );
-      
+
+      // Forward to your backend
       await saleService.completeSale(saleId, {
         ...details,
         transactionId: paymentResult.transactionId
       }, { signal });
     };
+
 
   const addItemToSale = useCallback((product: Product) => {
     setCurrentSale(prev => {
@@ -386,6 +394,7 @@ const handlePaymentMethod = async (
     addItemToSale,
     completeSale,
     paymentError,
+    setPaymentError,
     isProcessingPayment,
     paymentDetails,
     saveDraft,

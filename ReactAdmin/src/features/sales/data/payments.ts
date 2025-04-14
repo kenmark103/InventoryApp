@@ -1,3 +1,5 @@
+import { toast } from 'sonner';
+
 export enum PaymentMethod {
   CASH = "CASH",
   CREDIT_CARD = "CREDIT_CARD",
@@ -21,8 +23,22 @@ export type ProcessCardPayment = (
   options?: PaymentProcessorOptions
 ) => Promise<{ transactionId: string }>;
 
-export type ProcessMpesaPayment = (
+export type fakeProcessMpesaPayment = (
   phone: string,
   amount: number,
   options?: PaymentProcessorOptions
 ) => Promise<{ transactionId: string }>;
+
+
+
+export const ProcessMpesaPayment: ProcessMpesaPayment = async (
+  phone,
+  amount,
+  options
+) => {
+  toast.info(`[MockMpesa] Simulating payment for ${phone}, amount=${amount}`);
+  await new Promise((res) => setTimeout(res, 500));
+  return {
+    transactionId: `MOCK-MPESA-${Date.now()}`
+  };
+};

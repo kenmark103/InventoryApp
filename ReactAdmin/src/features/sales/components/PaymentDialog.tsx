@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSales } from '../context/sales-context';
 import {
   Dialog,
@@ -22,15 +22,38 @@ import { PaymentMethod, PaymentDetails } from '../data/payments';
 
 
 export function PaymentDialog({ open, onOpenChange }) {
+
   const { currentSale, completeSale, isProcessingPayment, paymentError } = useSales();
-  const totalDue = currentSale?.total || 0;
-  
-  const [paymentState, setPaymentState] = useState<PaymentDetails>({
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const totalDue = isMounted 
+    ? currentSale?.items?.reduce(
+        (sum, item) => sum + (item.sellingPrice * item.quantity), 
+        0
+      ) || 0
+    : 0;
+
+
+    const [paymentState, setPaymentState] = useState<PaymentDetails>({
     method: PaymentMethod.CASH,
-    amountTendered: totalDue, // Initialize with total due
+    amountTendered: totalDue,
     changeDue: 0,
     mpesaPhone: ''
   });
+ 
+   useEffect(() => {
+    setPaymentState(prev => ({
+      ...prev,
+      amountTendered: totalDue,
+      changeDue: Math.max(prev.amountTendered - totalDue, 0)
+    }));
+  }, [totalDue]);
+
+  
 
   const handleSubmit = async () => {
     if (paymentState.method === PaymentMethod.MPESA && !paymentState.mpesaPhone) {

@@ -9,7 +9,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin,InventoryManager")] // Restrict to Admins & Inventory Managers
+    [Authorize(Roles = "Admin,Manager,Cashier")] // Restrict to Admins & Inventory Managers
     public class SuppliersController : ControllerBase
     {
         private readonly AppDbContext _context;

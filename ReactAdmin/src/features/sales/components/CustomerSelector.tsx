@@ -1,45 +1,53 @@
 import { useSales } from '../context/sales-context';;
 import { useEffect, useState } from 'react';
 import customerService from '@/services/customerService';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export function CustomerSelector() {
-  const { currentSale, setCurrentSale } = useSales();
+   const { currentSale, setCurrentSale } = useSales();
   const [customers, setCustomers] = useState<Customer[]>([]);
 
-
   useEffect(() => {
-  let isMounted = true;
-  
-  const loadCustomers = async () => {
-    try {
-      const data = await customerService.getAllCustomers();
-      if (isMounted) setCustomers(data);
-    } catch (error) {
-      if (isMounted) console.error('Failed to load customers:', error);
-    }
-  };
+    const loadCustomers = async () => {
+      try {
+        const data = await customerService.getAllCustomers();
+        setCustomers(data);
+        // Set default customer ID 4 if not already set
+        if (!currentSale?.customerId) {
+          setCurrentSale(prev => ({ ...prev, customerId: 4 }));
+        }
+      } catch (error) {
+        console.error('Failed to load customers:', error);
+      }
+    };
 
-  loadCustomers();
-  return () => { isMounted = false };
-}, []);
+    loadCustomers();
+  }, []);
 
-
-  
   return (
-    <select
-      value={currentSale?.customerId || ''}
-      onChange={(e) => setCurrentSale(prev => ({
+    <Select
+      value={currentSale?.customerId?.toString() || '4'}
+      onValueChange={value => setCurrentSale(prev => ({
         ...prev,
-        customerId: Number(e.target.value)
+        customerId: Number(value)
       }))}
-      className="p-2 border rounded-lg bg-white dark:bg-gray-800"
     >
-      <option value="">Select Customer</option>
-      {customers.map(customer => (
-        <option key={customer.id} value={customer.id}>
-          {customer.name}
-        </option>
-      ))}
-    </select>
+      <SelectTrigger className="w-[240px] bg-background">
+        <SelectValue placeholder="Select customer" />
+      </SelectTrigger>
+      <SelectContent>
+        {customers.map(customer => (
+          <SelectItem key={customer.id} value={customer.id.toString()}>
+            {customer.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }

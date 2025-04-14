@@ -9,7 +9,11 @@ export function PaymentSection() {
   const { currentSale } = useSales();
   const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
 
-  if (!currentSale) return null;
+
+  const getSaleValue = (key: keyof typeof currentSale) => 
+    currentSale?.[key] || 0;
+
+  const itemsCount = currentSale?.items?.length || 0;
 
   return (
     <div className="space-y-4">
@@ -19,7 +23,7 @@ export function PaymentSection() {
           <div className="flex justify-between">
             <span className="font-medium">Subtotal:</span>
             <NumericFormat
-              value={currentSale.subtotal}
+              value={getSaleValue('subtotal')}
               displayType="text"
               thousandSeparator
               prefix="$"
@@ -29,7 +33,7 @@ export function PaymentSection() {
           <div className="flex justify-between">
             <span className="font-medium">Tax:</span>
             <NumericFormat
-              value={currentSale.taxAmount}
+              value={getSaleValue('taxAmount')}
               displayType="text"
               thousandSeparator
               prefix="$"
@@ -39,7 +43,7 @@ export function PaymentSection() {
           <div className="flex justify-between">
             <span className="font-medium">Discount:</span>
             <NumericFormat
-              value={-currentSale.discount}
+              value={-(getSaleValue('discount'))}
               displayType="text"
               thousandSeparator
               prefix="$"
@@ -52,7 +56,7 @@ export function PaymentSection() {
           <div className="flex justify-between font-bold text-lg border-t pt-2">
             <span>Total:</span>
             <NumericFormat
-              value={currentSale.total}
+              value={getSaleValue('total')}
               displayType="text"
               thousandSeparator
               prefix="$"
@@ -63,12 +67,12 @@ export function PaymentSection() {
       </div>
 
       {/* Payment Action */}
-      <Button
+       <Button
         onClick={() => setIsPaymentDialogOpen(true)}
         className="w-full py-4 text-lg"
-        disabled={currentSale.items.length === 0}
+        disabled={itemsCount === 0}
       >
-        Process Payment
+        {itemsCount > 0 ? 'Process Payment' : 'Add Items First'}
       </Button>
 
       {/* Payment Dialog */}

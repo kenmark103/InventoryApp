@@ -7,5 +7,7 @@ public class ExpenseResponseDto
     public DateTime Date { get; set; }
     public string Status { get; set; } = string.Empty;
     public string? ReceiptUrl { get; set; }
-    public string SubmittedBy { get; set; } = string.Empty; // User email
+    public string? Description { get; set; }
+    public string? Vendor {get; set;}
+    public string SubmittedBy { get; set; } = string.Empty;
 }

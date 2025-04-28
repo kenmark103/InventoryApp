@@ -6,12 +6,14 @@ namespace Backend.Models
             public string Type { get; set; } = string.Empty; // Rent, Salaries, Utilities, etc.
             public decimal Amount { get; set; }
             public DateTime Date { get; set; } = DateTime.UtcNow;
-            public string Status { get; set; } = "Pending"; // Pending/Approved/Rejected
-            public string? ReceiptUrl { get; set; } // Path to uploaded receipt
-            public decimal TaxAmount { get; set; } // Auto-calculated tax (e.g., VAT)
+            public string Status { get; set; } = "Pending";
+            public string? ReceiptUrl { get; set; } 
+            public decimal TaxAmount { get; set; }
+            public string? Description { get; set; }
+            public string? Vendor {get; set;}
 
             // Relationships
-            public int UserId { get; set; } // Submitted by
+            public int UserId { get; set; }
             public User User { get; set; } = null!;
         }
 }

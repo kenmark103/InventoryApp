@@ -4,28 +4,29 @@ import { Main } from '@/components/layout/main';
 import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
-
-import {ProductsProvider} from '../context/products-context';
-import StockManagementPage from './stock-management';
+import { ProductsProvider } from '../context/products-context';
+import StockManagementPage from './stock-management-page';
 
 export default function StockManagement() {
   return (
     <ProductsProvider>
       <Header fixed>
         <Search />
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="ml-auto flex items-center gap-4">
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
       </Header>
+
       <Main>
-        <div className="mb-2 flex flex-wrap items-center justify-between space-y-2">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight">View Search Update Stock</h2>
-            <p className="text-muted-foreground">Manage your products here.</p>
-          </div>
+        <div className="mb-4 space-y-1">
+          <h2 className="text-2xl font-bold tracking-tight">Stock Management</h2>
+          <p className="text-muted-foreground">
+            View, search, and update product stock levels
+          </p>
         </div>
-        <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
+
+        <div className="h-[calc(100vh-140px)] overflow-auto py-2">
           <StockManagementPage />
         </div>
       </Main>

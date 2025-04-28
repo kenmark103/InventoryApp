@@ -22,6 +22,52 @@ namespace Backend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Backend.Models.AccountTransaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Account")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Credit")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("Debit")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("ExpenseId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PurchaseId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("SaleId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpenseId");
+
+                    b.HasIndex("PurchaseId");
+
+                    b.HasIndex("SaleId");
+
+                    b.HasIndex("Date", "Account");
+
+                    b.ToTable("AccountTransactions");
+                });
+
             modelBuilder.Entity("Backend.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -133,6 +179,9 @@ namespace Backend.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<string>("ReceiptUrl")
                         .HasColumnType("text");
 
@@ -150,11 +199,76 @@ namespace Backend.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Vendor")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Expenses");
+                });
+
+            modelBuilder.Entity("Backend.Models.Investment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Investments");
+                });
+
+            modelBuilder.Entity("Backend.Models.Loan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Loans");
                 });
 
             modelBuilder.Entity("Backend.Models.Notification", b =>
@@ -183,6 +297,23 @@ namespace Backend.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("Backend.Models.Permission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("Backend.Models.Product", b =>
@@ -325,6 +456,38 @@ namespace Backend.Migrations
                     b.ToTable("Purchases");
                 });
 
+            modelBuilder.Entity("Backend.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Backend.Models.RolePermission", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("RolePermission");
+                });
+
             modelBuilder.Entity("Backend.Models.Sale", b =>
                 {
                     b.Property<int>("Id")
@@ -408,6 +571,42 @@ namespace Backend.Migrations
                     b.HasIndex("SaleId");
 
                     b.ToTable("SaleItems");
+                });
+
+            modelBuilder.Entity("Backend.Models.StockAdjustment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AdjustedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("AdjustedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("AdjustmentAmount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("StockAdjustments");
                 });
 
             modelBuilder.Entity("Backend.Models.Supplier", b =>
@@ -518,6 +717,27 @@ namespace Backend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Backend.Models.AccountTransaction", b =>
+                {
+                    b.HasOne("Backend.Models.Expense", "Expense")
+                        .WithMany()
+                        .HasForeignKey("ExpenseId");
+
+                    b.HasOne("Backend.Models.Purchase", "Purchase")
+                        .WithMany()
+                        .HasForeignKey("PurchaseId");
+
+                    b.HasOne("Backend.Models.Sale", "Sale")
+                        .WithMany()
+                        .HasForeignKey("SaleId");
+
+                    b.Navigation("Expense");
+
+                    b.Navigation("Purchase");
+
+                    b.Navigation("Sale");
+                });
+
             modelBuilder.Entity("Backend.Models.CompletedSale", b =>
                 {
                     b.HasOne("Backend.Models.Sale", "Sale")
@@ -616,6 +836,25 @@ namespace Backend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Backend.Models.RolePermission", b =>
+                {
+                    b.HasOne("Backend.Models.Permission", "Permission")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Models.Role", "Role")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("Backend.Models.Sale", b =>
                 {
                     b.HasOne("Backend.Models.Customer", "Customer")
@@ -654,6 +893,17 @@ namespace Backend.Migrations
                     b.Navigation("Sale");
                 });
 
+            modelBuilder.Entity("Backend.Models.StockAdjustment", b =>
+                {
+                    b.HasOne("Backend.Models.Product", "Product")
+                        .WithMany("StockAdjustments")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Backend.Models.Supplier", b =>
                 {
                     b.HasOne("Backend.Models.User", "AddedByUser")
@@ -675,11 +925,23 @@ namespace Backend.Migrations
                     b.Navigation("Sales");
                 });
 
+            modelBuilder.Entity("Backend.Models.Permission", b =>
+                {
+                    b.Navigation("RolePermissions");
+                });
+
             modelBuilder.Entity("Backend.Models.Product", b =>
                 {
                     b.Navigation("GalleryImages");
 
                     b.Navigation("SaleItems");
+
+                    b.Navigation("StockAdjustments");
+                });
+
+            modelBuilder.Entity("Backend.Models.Role", b =>
+                {
+                    b.Navigation("RolePermissions");
                 });
 
             modelBuilder.Entity("Backend.Models.Sale", b =>

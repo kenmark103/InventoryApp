@@ -1,171 +1,40 @@
-
-import { useReactTable, createColumnHelper, flexRender, getCoreRowModel } from '@tanstack/react-table';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { 
+  useReactTable, 
+  getCoreRowModel, 
+  flexRender 
+} from '@tanstack/react-table';
 import { useSales } from '../context/sales-context';
-import { useState, useMemo } from 'react';
-import { NumericFormat } from 'react-number-format';
-import { getImageUrl } from '@/utils/apiHelpers'; 
+import { useMemo, useState } from 'react';
+import { createSalesColumns } from './SalesColumns';
+import React, { useEffect } from 'react';
 
-
-type SaleItem = {
-  id: number;
-  name: string;
-  sku: string;
-  sellingPrice: number;
-  buyingPrice: number;
-  taxRate: number;
-  quantity: number;
-  imageUrl?: string;
-  stock: number;
-  discount?: number;
-};
-
-type SalesTableProps = {
-  items: SaleItem[];
-  subtotal: number;
-  taxAmount: number;
-  grandTotal: number;
-};
-
-const columnHelper = createColumnHelper<SaleItem>();
 
 export function SalesTable() {
-
   const { currentSale, updateItem, removeItem } = useSales();
   const [editingId, setEditingId] = useState<number | null>(null);
 
-  // Always use safe array access
-  const saleItems = currentSale?.items || [];
+    useEffect(() => {
+    if (!currentSale) {
+      setEditingId(null);
+    }
+  }, [currentSale]);
 
-
-  const columns = useMemo(() => [
-    columnHelper.accessor('imageUrl', {
-      header: 'image',
-      cell: ({ getValue }) => (
-        <div className="w-12 h-12">
-          <img
-            src={getImageUrl(getValue()) || '/placeholder-product.jpg'}
-            alt="Product"
-            className="w-full h-full object-contain rounded-md"
-          />
-        </div>
-      ),
-      size: 70,
-    }),
-    columnHelper.accessor('name', {
-      header: 'Product',
-      cell: ({ row, getValue }) => {
-        const item = row.original;
-        return (
-          <div className="flex flex-col">
-            <span className="font-medium">{getValue()}</span>
-            <span className="text-xs text-gray-500">{item.sku}</span>
-          </div>
-        );
-      },
-    }),
-
-    columnHelper.accessor('quantity', {
-      header: 'Qty',
-      cell: ({ row, getValue }) => {
-        const item = row.original;
-        return editingId === item.id ? (
-          <input
-            type="number"
-            value={getValue()}
-            onChange={(e) => {
-              const newQty = Math.min(Math.max(parseInt(e.target.value), 1), item.stock);
-              handleQuantityChange(item.id, newQty);
-            }}
-            className="w-20 px-2 py-1 border rounded"
-            min="1"
-            max={item.stock}
-            autoFocus
-          />
-        ) : (
-          <button
-            onClick={() => setEditingId(item.id)}
-            className="hover:bg-gray-100 px-3 py-1 rounded"
-          >
-            {getValue()}
-          </button>
-        );
-      },
-    }),
-    columnHelper.accessor('sellingPrice', {
-      header: 'Unit Price',
-      cell: ({ getValue }) => (
-        <NumericFormat
-          value={getValue()}
-          displayType="text"
-          thousandSeparator
-          prefix="$"
-          decimalScale={2}
-        />
-      ),
-    }),
-    columnHelper.accessor('taxRate', {
-      header: 'Tax',
-      cell: ({ getValue }) => `${(getValue() * 100).toFixed(1)}%`,
-    }),
-    columnHelper.accessor('discount', {
-      header: 'Discount',
-      cell: ({ row }) => (
-        <NumericFormat
-          value={row.original.discount || 0}
-          onValueChange={(values) => 
-            handleDiscountChange(row.original.id, values.floatValue || 0)
-          }
-          prefix="$"
-          decimalScale={2}
-          className="w-24 px-2 py-1 border rounded"
-        />
-      ),
-    }),
-    columnHelper.display({
-      id: 'total',
-      header: 'Total',
-      cell: ({ row }) => {
-        const item = row.original;
-        const total = item.sellingPrice * item.quantity * (1 + item.taxRate) - (item.discount || 0);
-        return (
-          <NumericFormat
-            value={total}
-            displayType="text"
-            thousandSeparator
-            prefix="$"
-            decimalScale={2}
-            className="font-semibold"
-          />
-        );
-      },
-    }),
-    columnHelper.display({
-      id: 'actions',
-      cell: ({ row }) => (
-        <button
-          onClick={() => removeItem(row.original.id)}
-          className="text-red-600 hover:text-red-800"
-        >
-          Remove
-        </button>
-      ),
-    }),
-  ], [editingId, updateItem, removeItem]);
+  const columns = useMemo(
+    () => createSalesColumns(updateItem, removeItem, setEditingId, editingId),
+    [updateItem, removeItem, editingId]
+  );
 
   const table = useReactTable({
     data: currentSale?.items || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getRowId: (row) => row.id?.toString() || Math.random().toString(),
   });
 
-  const handleQuantityChange = (id: number, quantity: number) => {
-    updateItem(id, { quantity });
-    setEditingId(null);
-  };
 
-  const handleDiscountChange = (id: number, discount: number) => {
-    updateItem(id, { discount });
-  };
+
+
 
   return (
     <div className="rounded-lg border dark:border-gray-700 overflow-hidden">

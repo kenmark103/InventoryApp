@@ -1,69 +1,84 @@
 // app/sales-orders/components/sales-order.tsx
 'use client';
+import React, { useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
-import { Printer, Download, Share2, ArrowLeft } from 'lucide-react';
-import { useNavigate } from '@tanstack/react-router';
-
-const dummySale: SaleResponseDto = {
-  id: 1,
-  invoiceNumber: "INV-2024-001",
-  saleDate: "2024-03-15T10:30:00Z",
-  status: "PAID",
-  paymentMethod: "MPESA",
-  subtotal: 24500,
-  taxAmount: 3920,
-  discount: 1000,
-  total: 27420,
-  customerName: "Nairobi Tech Hub",
-  processedBy: "sales@example.com",
-  items: [
-    {
-      productName: "Wireless Keyboard",
-      quantity: 5,
-      unitPrice: 3500,
-      taxRate: 0.16,
-      lineTotal: 20300
-    },
-    {
-      productName: "Gaming Mouse",
-      quantity: 3,
-      unitPrice: 2500,
-      taxRate: 0.16,
-      lineTotal: 8700
-    }
-  ]
-};
+import { Printer, Download, Share2, ArrowLeft, Wallet, RefreshCw } from 'lucide-react';
+import { useNavigate, useParams } from '@tanstack/react-router';
+import { useQuery } from '@tanstack/react-query';
+import type { SaleResponseDto } from '../data/sales-schema';
+import saleService from '@/services/saleService';
 
 export function SalesOrder() {
+  const { id } = useParams({ strict: false });
+  const navigate = useNavigate();
+  
+  const { data: sale, isLoading, isError } = useQuery({
+  queryKey: ['sales', id, 'receipt'],
+  queryFn: async () => {
+    const data = await saleService.getReceipt(Number(id));
+    return {
+      ...data,
+      saleDate: new Date(data.saleDate),
+      paymentDate: data.paymentDate ? new Date(data.paymentDate) : null
+    };
+  }
+});
 
-    const navigate = useNavigate();
-    
+  useEffect(() => {
+    if (sale) {
+      console.log('Sale Data:', {
+        subtotal: sale.subtotal,
+        taxAmount: sale.taxAmount,
+        discount: sale.discount,
+        total: sale.total,
+        items: sale.items,
+        rawData: sale
+      });
+    }
+  }, [sale]);
+
+  if (isLoading) return <div className="text-center p-8">Loading sale details...</div>;
+  if (!sale) return null;
+  if (isError) return (
+  <div className="text-center p-8">
+    <div className="text-red-600 mb-4">Error loading receipt</div>
+    <Button 
+      variant="outline"
+      onClick={() => navigate({ to: '/sales/salesorders' })}
+    >
+      <ArrowLeft className="mr-2 h-4 w-4" />
+      Back to Sales Orders
+    </Button>
+  </div>
+);
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm">
       {/* Header Section */}
       <div className="mb-8">
         <Button 
           variant="ghost" 
-          onClick={() => navigate({ to: '/sales-orders' })}
+          onClick={() => navigate({ to: '/sales/salesorders' })}
           className="gap-2 mb-6 text-sm text-gray-600 px-0 hover:bg-transparent"
         >
           <ArrowLeft className="h-4 w-4" /> 
           Back to Orders
-        </Button>        
+        </Button>
+        
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h1 className="text-2xl font-bold">Invoice #{dummySale.invoiceNumber}</h1>
+            <h1 className="text-2xl font-bold">Invoice #{sale.invoiceNumber}</h1>
             <p className="text-gray-500">
-              {format(new Date(dummySale.saleDate), 'PPpp')}
+              {format(new Date(sale.saleDate), 'PPpp')}
             </p>
           </div>
           <Badge 
-            variant={dummySale.status === 'PAID' ? 'default' : 'destructive'}
+            variant={sale.status === 'PAID' ? 'default' : 'destructive'}
             className="capitalize"
           >
-            {dummySale.status.toLowerCase()}
+            {sale.status.toLowerCase()}
           </Badge>
         </div>
       </div>
@@ -73,7 +88,7 @@ export function SalesOrder() {
         <div>
           <h3 className="font-semibold mb-2">From</h3>
           <p className="text-gray-600">
-            Your Business Name<br />
+            Inventory Sales System<br />
             123 Business Street<br />
             Nairobi, Kenya<br />
             VAT: KE123456789
@@ -83,7 +98,7 @@ export function SalesOrder() {
         <div>
           <h3 className="font-semibold mb-2">Bill To</h3>
           <p className="text-gray-600">
-            {dummySale.customerName}<br />
+            {sale.customerName}<br />
             456 Client Avenue<br />
             Nairobi, Kenya<br />
             Phone: +254 712 345 678
@@ -105,7 +120,7 @@ export function SalesOrder() {
               </tr>
             </thead>
             <tbody>
-              {dummySale.items.map((item, index) => (
+              {sale.items.map((item, index) => (
                 <tr key={index} className="border-t">
                   <td className="px-4 py-3">{item.productName}</td>
                   <td className="px-4 py-3 text-right">
@@ -126,24 +141,31 @@ export function SalesOrder() {
       </div>
 
       {/* Totals Section */}
-      <div className="grid grid-cols-2 gap-4 mb-8">
+       <div className="grid grid-cols-2 gap-4 mb-8">
         <div></div>
         <div className="space-y-2">
           <div className="flex justify-between">
             <span>Subtotal:</span>
-            <span>KES {dummySale.subtotal.toLocaleString()}</span>
+            <span>
+              KES {(sale.subtotal || 0).toLocaleString()}
+            </span>
           </div>
           <div className="flex justify-between">
-            <span>Tax ({((dummySale.taxAmount / dummySale.subtotal) * 100).toFixed(0)}%):</span>
-            <span>KES {dummySale.taxAmount.toLocaleString()}</span>
+            <span>Tax ({
+              (sale.taxAmount && sale.subtotal ? 
+                ((sale.taxAmount / sale.subtotal) * 100).toFixed(0) : 
+                '0'
+              )}%):
+            </span>
+            <span>KES {(sale.taxAmount || 0).toLocaleString()}</span>
           </div>
           <div className="flex justify-between">
             <span>Discount:</span>
-            <span>- KES {dummySale.discount.toLocaleString()}</span>
+            <span>- KES {(sale.discount || 0).toLocaleString()}</span>
           </div>
           <div className="flex justify-between font-semibold border-t pt-2">
             <span>Total:</span>
-            <span>KES {dummySale.total.toLocaleString()}</span>
+            <span>KES {(sale.total || 0).toLocaleString()}</span>
           </div>
         </div>
       </div>
@@ -153,18 +175,48 @@ export function SalesOrder() {
         <h3 className="font-semibold mb-2">Payment Information</h3>
         <div className="grid grid-cols-2 gap-4 text-gray-600">
           <div>
-            <p>Method: {dummySale.paymentMethod}</p>
-            <p>Transaction Date: {format(new Date(dummySale.saleDate), 'PPpp')}</p>
+            <p>Method: {sale.paymentInfo.paymentMethod}</p>
+            <p>Amount Tendered: KES {sale.paymentInfo.amountTendered.toLocaleString()}</p>
+            <p>Change Due: KES {sale.paymentInfo.changeDue.toLocaleString()}</p>
           </div>
           <div>
-            <p>Transaction ID: MPESA123456</p>
-            <p>Processed by: {dummySale.processedBy}</p>
+            <p>Transaction ID: {sale.paymentInfo.transactionId}</p>
+             <p>Payment Date: {
+                sale.paymentInfo.paymentDate instanceof Date && !isNaN(sale.paymentInfo.paymentDate.getTime()) 
+                  ? format(sale.paymentInfo.paymentDate, 'PPpp') 
+                  : 'N/A'
+              }</p>
+            <p>Receipt Number: {sale.receiptNumber}</p>
           </div>
         </div>
       </div>
 
       {/* Actions */}
       <div className="flex gap-4 border-t pt-6">
+        {sale.status === 'PAID' && (
+          <Button 
+            variant="outline"
+            onClick={() => navigate({ 
+              to: '/sales-orders/$id/returns',
+              params: { id }
+            })}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" /> Process Return
+          </Button>
+        )}
+        
+        {!['PAID', 'COMPLETED'].includes(sale.status) && (
+          <Button 
+            variant="default"
+            onClick={() => navigate({ 
+              to: '/sales-orders/$id/receive-payment',
+              params: { id }
+            })}
+          >
+            <Wallet className="mr-2 h-4 w-4" /> Receive Payment
+          </Button>
+        )}
+
         <Button variant="outline">
           <Printer className="mr-2 h-4 w-4" /> Print
         </Button>
@@ -178,8 +230,8 @@ export function SalesOrder() {
 
       {/* Footer Notes */}
       <div className="mt-8 pt-6 border-t text-sm text-gray-500">
-        <p>Notes: Thank you for your business!</p>
-        <p>Terms: Payment due within 30 days</p>
+        <p>Notes: {sale.notes || 'Thank you for your business!'}</p>
+        <p>Terms: {sale.terms || 'Payment due within 30 days'}</p>
       </div>
     </div>
   );

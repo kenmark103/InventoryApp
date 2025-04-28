@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Customer } from "@/features/customers/data/customerSchema";
 
 export function CustomerSelector() {
    const { currentSale, setCurrentSale } = useSales();
@@ -18,11 +19,12 @@ export function CustomerSelector() {
       try {
         const data = await customerService.getAllCustomers();
         setCustomers(data);
-        // Set default customer ID 4 if not already set
+        
         if (!currentSale?.customerId) {
           setCurrentSale(prev => ({ ...prev, customerId: 4 }));
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Failed to load customers:', error);
       }
     };

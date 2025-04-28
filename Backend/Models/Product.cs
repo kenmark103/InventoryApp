@@ -40,6 +40,8 @@ namespace Backend.Models
         
         // Collection for sale items in which this product is used
         public List<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
+
+        public List<StockAdjustment> StockAdjustments { get; set; }
         
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

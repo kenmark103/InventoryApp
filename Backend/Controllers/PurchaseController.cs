@@ -4,6 +4,7 @@ using Backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Backend.Helpers;
 
 namespace Backend.Controllers
 {
@@ -13,10 +14,12 @@ namespace Backend.Controllers
     public class PurchaseController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IAccountingService _acct;
 
-        public PurchaseController(AppDbContext context)
+        public PurchaseController(AppDbContext context, IAccountingService acct)
         {
             _context = context;
+            _acct = acct;
         }
 
         // GET: api/purchase (List all)
@@ -27,23 +30,9 @@ namespace Backend.Controllers
                 .Include(p => p.Product)
                 .Include(p => p.Supplier)
                 .Include(p => p.User)
-                .Select(p => new PurchaseResponseDto
-                {
-                    Id             = p.Id,
-                    ProductId      = p.ProductId,
-                    ProductName    = p.Product.Name,
-                    SupplierId     = p.SupplierId,
-                    SupplierName   = p.Supplier.Name,
-                    Quantity       = p.Quantity,
-                    UnitPrice      = p.UnitPrice,
-                    TotalPrice     = p.TotalPrice,
-                    PurchaseDate   = p.PurchaseDate,
-                    InvoiceNumber  = p.InvoiceNumber,
-                    Notes          = p.Notes,
-                    CreatedByEmail = p.User.Email,
-                    CreatedAt      = p.CreatedAt
-                })
+                .Select(p => p.ToDto())
                 .ToListAsync();
+               
         }
 
         // GET: api/purchase/5
@@ -58,22 +47,7 @@ namespace Backend.Controllers
 
             if (p == null) return NotFound();
 
-            return new PurchaseResponseDto
-            {
-                Id             = p.Id,
-                ProductId      = p.ProductId,
-                ProductName    = p.Product.Name,
-                SupplierId     = p.SupplierId,
-                SupplierName   = p.Supplier.Name,
-                Quantity       = p.Quantity,
-                UnitPrice      = p.UnitPrice,
-                TotalPrice     = p.TotalPrice,
-                PurchaseDate   = p.PurchaseDate,
-                InvoiceNumber  = p.InvoiceNumber,
-                Notes          = p.Notes,
-                CreatedByEmail = p.User.Email,
-                CreatedAt      = p.CreatedAt
-            };
+            return p.ToDto();
         }
 
         // POST: api/purchase
@@ -100,6 +74,10 @@ namespace Backend.Controllers
             _context.Purchases.Add(purchase);
             await _context.SaveChangesAsync();
 
+            //update quantity
+            var product = await _context.Products.FindAsync(purchase.ProductId);
+            product.StockQuantity += purchase.Quantity;
+
             // load navigation props
             await _context.Entry(purchase).Reference(x => x.Product).LoadAsync();
             await _context.Entry(purchase).Reference(x => x.Supplier).LoadAsync();
@@ -122,39 +100,90 @@ namespace Backend.Controllers
                 CreatedAt      = purchase.CreatedAt
             };
 
+            await _acct.RecordAsync(new AccountTransaction {
+                Date = purchase.PurchaseDate,
+                Description = $"Purchase #{purchase.Id}",
+                Debit = purchase.TotalPrice,
+                Credit = 0,
+                Account = AccountType.Inventory
+            });
+            await _acct.RecordAsync(new AccountTransaction {
+                Date = purchase.PurchaseDate,
+                Description = $"Purchase #{purchase.Id}",
+                Debit = 0,
+                Credit = purchase.TotalPrice,
+                Account = AccountType.AccountsPayable
+            });
+
             return CreatedAtAction(nameof(GetPurchase), new { id = purchase.Id }, result);
         }
 
-        // PUT: api/purchase/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePurchase(int id, PurchaseCreateDto dto)
         {
-            var purchase = await _context.Purchases.FindAsync(id);
-            if (purchase == null) return NotFound();
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var purchase = await _context.Purchases
+                    .Include(p => p.Product)
+                    .FirstOrDefaultAsync(p => p.Id == id);
+                if (purchase == null) return NotFound();
 
-            purchase.ProductId     = dto.ProductId;
-            purchase.SupplierId    = dto.SupplierId;
-            purchase.Quantity      = dto.Quantity;
-            purchase.UnitPrice     = dto.UnitPrice;
-            purchase.TotalPrice    = dto.TotalPrice;
-            purchase.PurchaseDate  = dto.PurchaseDate;
-            purchase.InvoiceNumber = dto.InvoiceNumber;
-            purchase.Notes         = dto.Notes;
+                var product = purchase.Product;
+                var oldQuantity = purchase.Quantity;
 
-            await _context.SaveChangesAsync();
-            return NoContent();
+                product.StockQuantity -= oldQuantity;
+
+                purchase.ProductId = dto.ProductId;
+                purchase.SupplierId = dto.SupplierId;
+                purchase.Quantity = dto.Quantity;
+                purchase.UnitPrice = dto.UnitPrice;
+                purchase.TotalPrice = dto.TotalPrice;
+                purchase.PurchaseDate = dto.PurchaseDate;
+                purchase.InvoiceNumber = dto.InvoiceNumber;
+                purchase.Notes = dto.Notes;
+
+                // Apply new stock
+                product.StockQuantity += dto.Quantity;
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return NoContent();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         // DELETE: api/purchase/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePurchase(int id)
         {
-            var purchase = await _context.Purchases.FindAsync(id);
-            if (purchase == null) return NotFound();
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var purchase = await _context.Purchases
+                    .Include(p => p.Product)
+                    .FirstOrDefaultAsync(p => p.Id == id);
+                if (purchase == null) return NotFound();
 
-            _context.Purchases.Remove(purchase);
-            await _context.SaveChangesAsync();
-            return NoContent();
+                // Revert stock
+                purchase.Product.StockQuantity -= purchase.Quantity;
+
+                _context.Purchases.Remove(purchase);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return NoContent();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
     }
 }

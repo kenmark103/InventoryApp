@@ -18,6 +18,13 @@ namespace Backend.Data
         public DbSet<SaleItem> SaleItems { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<AccountTransaction> AccountTransactions { get; set; }
+        public DbSet<Loan> Loans { get; set; }
+        public DbSet<Investment> Investments { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<StockAdjustment> StockAdjustments { get; set; }
+
     
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -129,7 +136,46 @@ namespace Backend.Data
                 .WithMany()
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
-    
+
+            // Role-Permission many-to-many
+            modelBuilder.Entity<RolePermission>()
+                .HasKey(rp => new { rp.RoleId, rp.PermissionId });
+            
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Role)
+                .WithMany(r => r.RolePermissions)
+                .HasForeignKey(rp => rp.RoleId);
+            
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Permission)
+                .WithMany(p => p.RolePermissions)
+                .HasForeignKey(rp => rp.PermissionId);
+
+            modelBuilder.Entity<AccountTransaction>()
+            .HasIndex(t => new { t.Date, t.Account });
+
+            modelBuilder.Entity<Loan>(entity =>
+            {
+                entity.Property(l => l.Amount)
+                    .HasColumnType("decimal(18,2)");
+            });
+
+            // Investment configuration 
+            modelBuilder.Entity<Investment>(entity =>
+            {
+                entity.Property(i => i.Amount)
+                    .HasColumnType("decimal(18,2)");
+            });
+
+
+            modelBuilder.Entity<StockAdjustment>()
+                .HasOne(sa => sa.Product)
+                .WithMany(p => p.StockAdjustments)
+                .HasForeignKey(sa => sa.ProductId);
+
+                   
+            
+            
             // Seed initial user data
             modelBuilder.Entity<User>().HasData(
                 new User

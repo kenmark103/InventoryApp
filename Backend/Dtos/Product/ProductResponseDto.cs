@@ -8,7 +8,6 @@ public class ProductResponseDto
     public decimal SellingPrice { get; set; }
     public decimal TaxRate { get; set; }
     public bool IsService { get; set; }
-    // Quantity represents the StockQuantity
     public int Quantity { get; set; }
     public int SupplierId { get; set; }
     public string SupplierName { get; set; } = string.Empty;

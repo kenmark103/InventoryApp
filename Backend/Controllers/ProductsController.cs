@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
+using Backend.Dtos;
 
 namespace Backend.Controllers
 {
@@ -92,16 +93,14 @@ namespace Backend.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductResponseDto>> CreateProduct(ProductCreateDto productDto)
         {
-            // Validate Supplier exists
+         
             var supplier = await _context.Suppliers.FindAsync(productDto.SupplierId);
             if (supplier == null)
                 return BadRequest("Invalid Supplier ID.");
     
-            // Check SKU uniqueness
             if (await _context.Products.AnyAsync(p => p.SKU == productDto.SKU))
                 return BadRequest("SKU already exists.");
-    
-            // Validate SellingPrice > BuyingPrice
+
             if (productDto.SellingPrice <= productDto.BuyingPrice)
                 return BadRequest("Selling price must be greater than buying price.");
     
@@ -125,8 +124,7 @@ namespace Backend.Controllers
                 UserId = user!.Id,
                 GalleryImages = new List<ProductImage>()
             };
-    
-            // Map gallery images if provided
+
             if (productDto.GalleryImages != null && productDto.GalleryImages.Any())
             {
                 product.GalleryImages = productDto.GalleryImages
@@ -189,9 +187,9 @@ namespace Backend.Controllers
             // Update gallery images if provided:
             if (productDto.GalleryImages != null)
             {
-                // Remove all existing gallery images
+ 
                 _context.RemoveRange(product.GalleryImages);
-                // Assign new gallery images
+
                 product.GalleryImages = productDto.GalleryImages
                     .Select(url => new ProductImage { ImageUrl = url, ProductId = product.Id })
                     .ToList();
@@ -221,7 +219,109 @@ namespace Backend.Controllers
     
             return NoContent();
         }
-    
+
+        // PUT: api/products/{productId}/quantity
+        [HttpPut("{productId}/quantity")]
+        public async Task<IActionResult> UpdateQuantity(int productId, [FromBody] QuantityUpdateDto quantityUpdateDto)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null) return NotFound();
+
+            if (quantityUpdateDto.Quantity < 0)
+                return BadRequest("Quantity cannot be negative.");
+
+            product.StockQuantity = quantityUpdateDto.Quantity;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPost("{productId}/adjust")]
+        public async Task<IActionResult> AdjustStock(int productId, [FromBody] StockAdjustmentCreateDto dto)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            
+            try
+            {
+                // Get product with adjustments
+                var product = await _context.Products
+                    .Include(p => p.StockAdjustments)
+                    .FirstOrDefaultAsync(p => p.Id == productId);
+
+                if (product == null) return NotFound();
+
+                // Validate adjustment
+                var newQuantity = product.StockQuantity + dto.AdjustmentAmount;
+                if (newQuantity < 0)
+                    return BadRequest("Resulting stock cannot be negative");
+
+                // Create adjustment record
+                var adjustment = new StockAdjustment
+                {
+                    ProductId = productId,
+                    AdjustmentAmount = dto.AdjustmentAmount,
+                    Reason = dto.Reason,
+                    Notes = dto.Notes,
+                    AdjustedBy = userEmail
+                };
+
+                // Update stock
+                product.StockQuantity = newQuantity;
+                product.StockAdjustments.Add(adjustment);
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return Ok(new StockAdjustmentResponseDto
+                {
+                    Id = adjustment.Id,
+                    ProductId = productId,
+                    ProductName = product.Name,
+                    AdjustmentAmount = adjustment.AdjustmentAmount,
+                    Reason = adjustment.Reason,
+                    Notes = adjustment.Notes,
+                    AdjustedAt = adjustment.AdjustedAt,
+                    AdjustedBy = adjustment.AdjustedBy
+                });
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                return StatusCode(500, "Error adjusting stock");
+            }
+        }
+
+
+        [HttpGet("{productId}/adjust/history")]
+        public async Task<ActionResult<List<StockAdjustmentResponseDto>>> GetAdjustmentHistory(int productId)
+        {
+            var product = await _context.Products
+                .Include(p => p.StockAdjustments)
+                .FirstOrDefaultAsync(p => p.Id == productId);
+
+            if (product == null) 
+                return NotFound();
+
+            var list = product.StockAdjustments
+                .OrderByDescending(adj => adj.AdjustedAt)
+                .Select(adj => new StockAdjustmentResponseDto
+                {
+                    Id = adj.Id,
+                    ProductId = adj.ProductId,
+                    ProductName = product.Name,
+                    AdjustmentAmount = adj.AdjustmentAmount,
+                    Reason = adj.Reason,
+                    Notes = adj.Notes,
+                    AdjustedAt = adj.AdjustedAt,
+                    AdjustedBy = adj.AdjustedBy
+                })
+                .ToList();
+
+            return Ok(list);
+        }
+
+            
         // GET: api/products/sku/{sku} (Barcode lookup)
         [HttpGet("sku/{sku}")]
         public async Task<ActionResult<ProductResponseDto>> GetProductBySku(string sku)

@@ -1,4 +1,8 @@
 import api from '../lib/api';
+import {
+  StockAdjustmentCreateDto,
+  StockAdjustmentResponseDto
+} from "@features/products/data/stock-adjustment-dtos";
 
 interface ProductData {
   name: string;
@@ -118,16 +122,25 @@ const deleteProduct = async (id: number): Promise<void> => {
 };
 
 const updateQuantity = async (productId: number, quantity: number) => {
-  const response = await fetch(`/api/products/${productId}/quantity`, {
-    method: 'PUT',
-    body: JSON.stringify({ quantity }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  
-  if (!response.ok) throw new Error('Update failed');
-  return response.json();
+  const response = await api.put(
+    `/products/${productId}/quantity`,        // URL
+    { Quantity: quantity },)
+  return response.data;
+};
+
+const adjustStock = async (productId: number, data: StockAdjustmentCreateDto): Promise<StockAdjustmentResponseDto> => {
+  const { data: dto } = await api.post<StockAdjustmentResponseDto>(
+    `/products/${productId}/adjust`,
+    data
+  );
+  return dto;
+};
+
+const getAdjustmentHistory = async (productId: number): Promise<StockAdjustmentResponseDto[]> => {
+  const { data } = await api.get<StockAdjustmentResponseDto[]>(
+    `/products/${productId}/adjust/history`
+  );
+  return data;
 };
 
 export default {
@@ -137,4 +150,6 @@ export default {
   updateProduct,
   deleteProduct,
   updateQuantity,
+  adjustStock,
+  getAdjustmentHistory,
 };

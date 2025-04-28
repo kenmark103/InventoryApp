@@ -19,7 +19,6 @@ export default function Sales() {
   return (
     <SalesProvider>
       <ProductsProvider>
-        <CategoriesProvider>
           {/* Global Header */}
           <Header fixed>
             <div className="flex items-center justify-between w-full">
@@ -51,8 +50,8 @@ export default function Sales() {
 
                   {/* Sales Controls */}
                   <div className="flex items-center gap-4">
-                    <CustomerSelector />
                     <SalesFloatingToolbar />
+                    <CustomerSelector />
                   </div>
                 </div>
               </div>
@@ -66,19 +65,19 @@ export default function Sales() {
               <ProductSelectionPanel className="w-1/3 border-r dark:border-gray-700 p-4" />
               
               {/* Sales Workspace */}
-              <div className="flex flex-col flex-1 w-2/3">
+              <div className="flex flex-col flex-1 w-2/3 justify-between">
                 <div className="flex-1 overflow-y-auto p-4">
                   <SalesTable />
                 </div>
-                
-                {/* Payment Section */}
-                <PaymentSection className="border-t dark:border-gray-700 p-4 bg-gray-50 dark:bg-gray-800" />
+
+                <PaymentSection
+                  className="border-t dark:border-gray-700 p-4 bg-gray-50 dark:bg-gray-800 sticky bottom-0"
+                />
               </div>
             </div>
           </Main>
 
           <ReceiptPrint />
-        </CategoriesProvider>
       </ProductsProvider>
     </SalesProvider>
   );

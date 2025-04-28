@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import api from '../lib/api'; // your Axios or fetch instance
+import api from '../lib/api'; 
+
 
 const getAllSuppliers = async () => {
   const response = await api.get('/suppliers');
@@ -12,8 +13,6 @@ const getSupplierById = async (id: number) => {
 };
 
 const createSupplier = async (newSupplierData: any) => {
-  // newSupplierData should include at least: { name, contactInfo, address }
-  // The backend may set AddedByUserId and initialize Products
   const response = await api.post('/suppliers', newSupplierData);
   return response.data;
 };

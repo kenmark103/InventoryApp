@@ -32,36 +32,39 @@ export const expenseTypes = [
   },
 ];
 
-// Expense Statuses
 export const expenseStatuses = [
   {
-    value: 'pending',
+    value: 'Pending',
     label: 'Pending',
     icon: IconExclamationCircle,
+    color: 'text-yellow-500',
   },
   {
-    value: 'submitted',
+    value: 'Submitted',
     label: 'Submitted',
     icon: IconCircle,
+    color: 'text-blue-500',
   },
   {
-    value: 'approved',
+    value: 'Approved',
     label: 'Approved',
     icon: IconCircleCheck,
+    color: 'text-green-600',
   },
   {
-    value: 'rejected',
+    value: 'Rejected',
     label: 'Rejected',
     icon: IconCircleX,
+    color: 'text-red-600',
   },
   {
-    value: 'paid',
+    value: 'Paid',
     label: 'Paid',
-    icon: IconArrowRight,
+    icon: IconCircleCheck,
+    color: 'text-purple-600',
   },
 ];
 
-// Expense Priorities
 export const expensePriorities = [
   {
     label: 'Low',
@@ -79,3 +82,18 @@ export const expensePriorities = [
     icon: IconArrowUp,
   },
 ];
+
+
+export const statusIcons = {
+    pending: IconExclamationCircle,
+    submitted: IconExclamationCircle,
+    approved: IconCircleCheck,
+    rejected: IconCircleX,
+    paid: IconCircleCheck
+  };
+
+export const priorityIcons = {
+    low: IconArrowDown,
+    medium: IconArrowRight,
+    high: IconArrowUp
+  };

@@ -14,7 +14,7 @@ export default function SalesOrderPage() {
     <SalesProvider>
       <Header fixed>
         <div className="flex items-center justify-between w-full">
-          <h1 className="text-lg font-semibold">Sales Orders</h1>
+          <h1 className="text-lg font-semibold">Sales Order</h1>
           <div className="flex items-center gap-4">
             <Button asChild 
                 onClick={() => {

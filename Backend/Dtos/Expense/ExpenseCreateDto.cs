@@ -9,5 +9,9 @@ public class ExpenseCreateDto
     public decimal Amount { get; set; }
 
     [Required]
-    public IFormFile? Receipt { get; set; } // For file upload (optional)
+    public IFormFile? Receipt { get; set; }
+
+    public string? Description { get; set; }
+    
+    public string? Vendor {get; set;}
 }

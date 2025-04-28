@@ -1,16 +1,21 @@
+import { Sale, SaleCreateDto } from "../data/sales-schema";
 
 export function mapSaleToSaleCreateDto(sale: Sale): SaleCreateDto {
-   return {
-    customerId: sale.customerId!, // Ensure non-null
+
+  return {
+    customerId: sale.customerId!,
     notes: sale.notes || '',
     dueDate: sale.dueDate,
-    discount: sale.discount || 0, // Required field
-    paymentMethod: sale.paymentMethod as PaymentMethod,
+    discount: sale.discount,
+    paymentMethod: sale.paymentMethod,
     items: sale.items.map(item => ({
-      productId: item.id,
+      productId: item.productId,
       quantity: item.quantity,
-      price: item.price 
+      price: item.price,
+      discount: item.discount || 0
     })),
     paymentDetails: sale.paymentDetails
+    ? {...sale.paymentDetails}
+    : undefined
   };
 }

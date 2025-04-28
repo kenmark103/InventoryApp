@@ -1,6 +1,22 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\receipts\\91cfdbdf-7918-406a-b3da-72d4c392ce8c_freetier.PNG",
+      "PackagePath": "staticwebassets\\receipts\\91cfdbdf-7918-406a-b3da-72d4c392ce8c_freetier.PNG"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\receipts\\a5cc6a57-2d78-4f4b-af86-4ce766bc6869_beef wet.jpg",
+      "PackagePath": "staticwebassets\\receipts\\a5cc6a57-2d78-4f4b-af86-4ce766bc6869_beef wet.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\receipts\\b3a26c27-f922-42e9-8509-0109325bf8bf_Capture.PNG",
+      "PackagePath": "staticwebassets\\receipts\\b3a26c27-f922-42e9-8509-0109325bf8bf_Capture.PNG"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\receipts\\d1b9bfe2-0c14-49bf-8138-8c7f62f7eba8_Azure deployment.PNG",
+      "PackagePath": "staticwebassets\\receipts\\d1b9bfe2-0c14-49bf-8138-8c7f62f7eba8_Azure deployment.PNG"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg",
       "PackagePath": "staticwebassets\\uploads\\01c96136-d0f7-4b25-a197-23183320dc98_Jameson.jpg"
     },
@@ -69,12 +85,24 @@
       "PackagePath": "staticwebassets\\uploads\\41955993-1a8f-4074-84dd-69976510dec1_Jameson.jpg"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\41b60010-0e24-481a-b756-cca0606c5b3a_goatmeat.jpg",
+      "PackagePath": "staticwebassets\\uploads\\41b60010-0e24-481a-b756-cca0606c5b3a_goatmeat.jpg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg",
       "PackagePath": "staticwebassets\\uploads\\44819cbc-0fa4-4ee4-94ee-f4f9c7dd0072_Jameson.jpg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\4c74c390-559c-48b5-8de0-4c71d0bbbc12_keg.jpg",
       "PackagePath": "staticwebassets\\uploads\\4c74c390-559c-48b5-8de0-4c71d0bbbc12_keg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5b51a671-a4cc-4946-973e-e6cc407132d3_goatmeat.jpg",
+      "PackagePath": "staticwebassets\\uploads\\5b51a671-a4cc-4946-973e-e6cc407132d3_goatmeat.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5c76a556-155e-44a5-a849-41bdae126bf0_fried goat.jpg",
+      "PackagePath": "staticwebassets\\uploads\\5c76a556-155e-44a5-a849-41bdae126bf0_fried goat.jpg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\5e589793-b092-4dda-b763-ada32d52bafa_Nyama Choma.jpg",
@@ -101,6 +129,10 @@
       "PackagePath": "staticwebassets\\uploads\\76186d4d-bf5c-4a98-86d5-ce5593281443_jameson-1-litro.jpg"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\77308035-b20e-4ee2-a76a-350adbcbba47_beef wet.jpg",
+      "PackagePath": "staticwebassets\\uploads\\77308035-b20e-4ee2-a76a-350adbcbba47_beef wet.jpg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg",
       "PackagePath": "staticwebassets\\uploads\\7778767a-bcf9-4556-bec2-eec941d4c336_Jameson 2.jpg"
     },
@@ -111,6 +143,10 @@
     {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg",
       "PackagePath": "staticwebassets\\uploads\\7a2cccc3-e755-46a2-a13d-94e563f9b032_Jameson 2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\8906cc1e-8988-4262-a9ea-95e6a8dbabf1_beef wet.jpg",
+      "PackagePath": "staticwebassets\\uploads\\8906cc1e-8988-4262-a9ea-95e6a8dbabf1_beef wet.jpg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\8b983501-7be3-4598-8e90-e62dfa4775fc_keg.jpg",
@@ -133,12 +169,28 @@
       "PackagePath": "staticwebassets\\uploads\\9d9f4f7d-5dc4-401c-9537-2bf04bd9989c_bread.jpg"
     },
     {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\ade67a26-a649-4159-8ad9-da4b1d0d4ca8_bryn.jpg",
+      "PackagePath": "staticwebassets\\uploads\\ade67a26-a649-4159-8ad9-da4b1d0d4ca8_bryn.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\aeb26eb8-df8f-4b65-bd3c-deb46d785204_fried goat.jpg",
+      "PackagePath": "staticwebassets\\uploads\\aeb26eb8-df8f-4b65-bd3c-deb46d785204_fried goat.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\af14a622-7555-4a15-9d8d-8d058d575fb5_biryani.jpg",
+      "PackagePath": "staticwebassets\\uploads\\af14a622-7555-4a15-9d8d-8d058d575fb5_biryani.jpg"
+    },
+    {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg",
       "PackagePath": "staticwebassets\\uploads\\b40a6d10-50fe-45a5-ac25-07e1988ed115_Jameson 2.jpg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg",
       "PackagePath": "staticwebassets\\uploads\\bd03b086-6b3a-4fb7-b61d-4653690f7c0b_Jameson.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bdefd88b-0e21-4bee-8320-b5b36f426c70_chickenb.jpg",
+      "PackagePath": "staticwebassets\\uploads\\bdefd88b-0e21-4bee-8320-b5b36f426c70_chickenb.jpg"
     },
     {
       "Id": "C:\\Users\\user\\Documents\\DotnetProjects\\InventoryApp\\Backend\\wwwroot\\uploads\\bf02b7e3-06ac-4329-b4af-f75dbe76292e_Jameson.jpg",

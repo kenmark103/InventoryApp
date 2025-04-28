@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useSales } from '../context/sales-context';
 import { useProducts } from "@/features/products/context/products-context";
+import { Product } from "@/features/products/data/products-schema";
 import { useCategories } from "@/features/categories/context/categories-context";
 import { ProductCard } from './ProductCard';
 import { ProductDetailPanel } from './ProductDetailPanel';
-import { XIcon } from "@/components/ui/x-icon";
+
 
 export function ProductSelectionPanel() {
   const { addItemToSale } = useSales();
@@ -21,15 +22,27 @@ export function ProductSelectionPanel() {
       : products,
   [products, selectedCategoryId]
 );
-  const handleBarcodeScan = (value: string) => {
-    if (value.length === 13) {
-      const product = products.find(p => p.barcode === value);
-      if (product) {
-        addItemToSale({ ...product, quantity: 1 });
-        setBarcodeInput('');
-      }
-    }
-  };
+
+const handleBarcodeScan = (value: string) => {
+  const product = products.find(p => p.barcode === value || p.sku === value);
+  if (product) {
+    addItemToSale({ 
+      ...product,
+      quantity: Math.min(1, product.quantity)
+    });
+    setBarcodeInput('');
+  }
+};
+
+const handleAddItem = useCallback((productId: number) => {
+  const product = products.find(p => p.id === productId);
+  if (product) addItemToSale(product, 1); 
+}, [products, addItemToSale]);
+
+  const handleShowDetail = useCallback((productId: number) => {
+    const product = products.find(p => p.id === productId);
+    setSelectedProduct(product ?? null);
+  }, [products]);
 
 
   if (productsLoading || categoriesLoading) return <div className="p-4">Loading...</div>;
@@ -86,23 +99,23 @@ export function ProductSelectionPanel() {
           <ProductCard
             key={product.id}
             product={product}
-            onAdd={() => addItemToSale({ ...product, quantity: 1 })}
-            onShowDetail={() => setSelectedProduct(product)}
+            onAdd={handleAddItem}
+            onShowDetail={handleShowDetail}
           />
         ))}
       </div>
 
       {/* Product Detail Panel */}
       {selectedProduct && (
-        <ProductDetailPanel
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onAdd={(product) => {
-            addItemToSale({ ...product, quantity: 1 });
-            setSelectedProduct(null);
-          }}
-        />
-      )}
-    </div>
+      <ProductDetailPanel
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAdd={(product, quantity) => { 
+          addItemToSale(product, quantity); 
+          setSelectedProduct(null);
+        }}
+      />
+    )}
+</div>
   );
 }

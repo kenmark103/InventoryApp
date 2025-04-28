@@ -11,6 +11,7 @@ namespace Backend.Controllers;
 using System.Text.Json;
 using Backend.Models;
 
+
 [ApiController]
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
@@ -111,6 +112,30 @@ public class UsersController : ControllerBase
             return Ok(user);
 
         return Unauthorized();
+    }
+
+        [Authorize]
+    [HttpGet("me")]
+    public async Task<ActionResult> GetCurrentUser()
+    {
+        // Get current user's email from the token
+        var userEmail = User.FindFirstValue(ClaimTypes.Email);
+        
+        // Find user in database
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == userEmail);
+        
+        if (user == null)
+            return NotFound();
+
+        return Ok(new {
+            user.Id,
+            user.Email,
+            user.Role,
+            user.FirstName,
+            user.LastName,
+            user.Username
+        });
     }
 
     //update user 

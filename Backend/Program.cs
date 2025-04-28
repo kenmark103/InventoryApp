@@ -8,7 +8,6 @@ using System.Security.Claims;
 using Serilog;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -76,10 +75,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173") // Allow React frontend
+            policy.WithOrigins("http://localhost:5173")
                   .AllowAnyHeader()
                   .AllowAnyMethod()
-                  .AllowCredentials(); // Allow cookies, authentication headers, etc.
+                  .AllowCredentials(); 
         });
 });
 
@@ -88,6 +87,8 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
+
+builder.Services.AddScoped<IAccountingService, AccountingService>();
 
 var app = builder.Build();
 

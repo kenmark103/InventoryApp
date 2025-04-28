@@ -1,14 +1,20 @@
+/* eslint-disable no-console */
 // contexts/sales-context.tsx
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import saleService from '@/services/saleService';
-import { Sale, SaleCreateDto, SaleResponseDto } from '@/data/saleSchema';
+import { Customer } from "@/features/customers/data/customerSchema";
+import { Product } from "@/features/products/data/products-schema";
+import { Sale, SaleItem, SaleCreateDto, SaleResponseDto } from '../data/sales-schema';
 import { mapSaleToSaleCreateDto } from '../utils/saleMappers';
 import { 
   PaymentMethod, 
   PaymentDetails,
   ProcessCardPayment,
-  ProcessMpesaPayment
+  ProcessMpesaPayment,
+  CardPaymentDetails,
+  MpesaPaymentDetails
 } from '../data/payments'
+import { toast } from 'sonner';
 
 type SalesDialogType = 'add' | 'edit' | 'delete' | 'view' | null;
 
@@ -24,10 +30,10 @@ interface SalesContextType {
   completeSale: (details: PaymentDetails) => Promise<void>;
   currentSale: Sale | null;
   paymentError: string | null;
-  setPaymentError: string | null;
+  setPaymentError: React.Dispatch<React.SetStateAction<string | null>>;
   isProcessingPayment: boolean;
-  handleCardPayment: ProcessCardPayment;
-  handleMpesaPayment: ProcessMpesaPayment;
+  handleCardPayment: (saleId: number, details: CardPaymentDetails) => Promise<void>;
+  handleMpesaPayment: (saleId: number, details: MpesaPaymentDetails) => Promise<void>;
   paymentDetails: PaymentDetails | null;
   saveDraft: () => Promise<void>;
   holdSale: () => void;
@@ -67,7 +73,7 @@ export function SalesProvider({ children }: { children: React.ReactNode }) {
     } catch (err) {
       if (!abortControllerRef.current.signal.aborted) {
         setError('Failed to fetch sales');
-        console.error('Sales fetch error:', err);
+        toast.error('Sales fetch error:', err);
       }
     } finally {
       if (!abortControllerRef.current.signal.aborted) {
@@ -126,42 +132,31 @@ export function SalesProvider({ children }: { children: React.ReactNode }) {
 
   // Payment handling with cleanup
   const completeSale = useCallback(async (details: PaymentDetails) => {
-  if (!currentSale) return;
+    if (!currentSale) return;
 
-  console.log(`[SalesContext] completeSale called for saleId=${currentSale.id}`, details);
-
-  const controller = new AbortController();
-  setIsProcessingPayment(true);
-  setPaymentError(null);
-
-  try {
-    let saleId = currentSale.id;
-
-    if (!saleId) {
-      const draftDto = mapSaleToSaleCreateDto(currentSale);
-      const draft = await saleService.createSale(draftDto, { signal: controller.signal });
-      saleId = draft.id;
-      setCurrentSale(prev => ({ ...prev, id: saleId }));
-      setSales(prev => [draft, ...prev]);
-    }
-
-    await handlePaymentMethod(saleId, details, controller.signal);
-
-    const updatedSale = await saleService.completeSale(
-      saleId,
-      details,
-      { signal: controller.signal }
-    );
-
-    setSales(prev =>
-      prev.map(sale => (sale.id === updatedSale.id ? updatedSale : sale))
-    );
-
-    await refreshSales();
-    setCurrentSale(null);
-    toast.success('Payment processed successfully');
-
-  } catch (error: any) {
+    const controller = new AbortController();
+    setIsProcessingPayment(true);
+    setPaymentError(null);
+  
+    try {
+      const saleDto = mapSaleToSaleCreateDto(currentSale);
+      
+     
+      const saleToProcess = currentSale.id 
+        ? await saleService.updateSale(currentSale.id, saleDto)
+        : await saleService.createSale(saleDto);
+  
+      await handlePaymentMethod(saleToProcess.id, details, controller.signal);
+      const finalizedSale = await saleService.completeSale(
+        saleToProcess.id,
+        details,
+        { signal: controller.signal }
+      );
+  
+      setSales(prev => prev.map(s => s.id === finalizedSale.id ? finalizedSale : s));
+      setCurrentSale(null);
+      toast.success('Payment processed successfully');
+  } catch (error) {
     if (error.name === 'CanceledError' || error.message === 'Payment was aborted') {
       console.log('Payment was aborted by user');
     } else {
@@ -172,7 +167,6 @@ export function SalesProvider({ children }: { children: React.ReactNode }) {
     setIsProcessingPayment(false);
   }
 }, [currentSale, refreshSales]);
-
 
 
 const handlePaymentMethod = async (
@@ -202,6 +196,9 @@ const handlePaymentMethod = async (
   }
 };
 
+
+
+
     const handleCashPayment = async (
       saleId: number,
       details: PaymentDetails,
@@ -213,12 +210,15 @@ const handlePaymentMethod = async (
       }, { signal });
     };
 
+    // In payment handling functions
     const handleCardPayment = async (
       saleId: number,
-      details: PaymentDetails,
+      details: CardPaymentDetails,
       signal?: AbortSignal
     ) => {
-      const paymentResult = await processCardPayment(details, { signal });
+      if (details.method !== PaymentMethod.CREDIT_CARD) return;
+      
+      const paymentResult = await ProcessCardPayment(details);
       await saleService.completeSale(saleId, {
         ...details,
         transactionId: paymentResult.transactionId
@@ -227,21 +227,16 @@ const handlePaymentMethod = async (
 
     const handleMpesaPayment = async (
       saleId: number,
-      details: PaymentDetails,
+      details: MpesaPaymentDetails,
       signal?: AbortSignal
     ) => {
-      if (!details.mpesaPhone) {
-        throw new Error('MPESA phone number is required');
-      }
-
-      // Use our mock implementation
+      if (details.method !== PaymentMethod.MPESA) return;
+      
       const paymentResult = await ProcessMpesaPayment(
         details.mpesaPhone,
-        details.amountTendered,
-        { signal }
+        details.amountTendered
       );
-
-      // Forward to your backend
+      
       await saleService.completeSale(saleId, {
         ...details,
         transactionId: paymentResult.transactionId
@@ -249,31 +244,30 @@ const handlePaymentMethod = async (
     };
 
 
-  const addItemToSale = useCallback((product: Product) => {
-    setCurrentSale(prev => {
-    
-    if (product.stock <= 0) {
+  const addItemToSale = useCallback((product: Product, quantity: number) => {
+  setCurrentSale(prev => {
+    if (product.quantity <= 0) {
       toast.error(`${product.name} is out of stock`);
       return prev || null;
     }
 
     const newItem = {
-      id: product.id,
+      productId: product.id,
       name: product.name,
       sku: product.sku,
       price: product.sellingPrice,
       costPrice: product.buyingPrice,
       taxRate: product.taxRate,
-      quantity: 1,
+      quantity: quantity,
       imageUrl: product.imageUrl,
-      stock: product.stock, // Capture current stock
-      barcode: product.barcode
+      stock: product.quantity,
+      barcode: product.sku
     };
 
+    // If no current sale exists, create a new one
     if (!prev) {
       const subtotal = newItem.price * newItem.quantity;
       const taxAmount = subtotal * newItem.taxRate;
-      
       return {
         items: [newItem],
         status: 'DRAFT',
@@ -284,10 +278,9 @@ const handlePaymentMethod = async (
         createdAt: new Date(),
         updatedAt: new Date(),
         paymentDetails: null,
-        discounts: [],
-        notes: '',
-        shippingInfo: null,
-        // Financial breakdown
+        userId: 0,
+        invoiceNumber: '',
+        paymentMethod: PaymentMethod.CASH,
         totals: {
           subTotal: subtotal,
           totalTax: taxAmount,
@@ -297,29 +290,27 @@ const handlePaymentMethod = async (
       };
     }
 
-    const existingItemIndex = prev.items.findIndex(item => item.id === product.id);
-    const newItems = [...prev.items];
+    // Ensure items array exists, otherwise default to an empty array
+    const currentItems = Array.isArray(prev.items) ? prev.items : [];
+
+    const existingItemIndex = currentItems.findIndex(item => item.productId === product.id);
+    let newItems = [...currentItems];
 
     if (existingItemIndex >= 0) {
-     
+      // Update quantity with a simple check for stock
       const updatedItem = { 
         ...newItems[existingItemIndex],
         quantity: newItems[existingItemIndex].quantity + 1
       };
-      
-    
       if (updatedItem.quantity > updatedItem.stock) {
         toast.error(`Only ${updatedItem.stock} units available for ${product.name}`);
         return prev;
       }
-      
       newItems[existingItemIndex] = updatedItem;
     } else {
-      
       newItems.push(newItem);
     }
 
- 
     const subtotal = newItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const taxAmount = newItems.reduce((acc, item) => acc + (item.price * item.quantity * item.taxRate), 0);
     const totalCost = newItems.reduce((acc, item) => acc + (item.costPrice * item.quantity), 0);
@@ -339,25 +330,55 @@ const handlePaymentMethod = async (
       }
     };
   });
-  }, []);
+}, []);
 
-  const updateItem = useCallback((itemId: number, update: Partial<SaleItem>) => {
-    setCurrentSale(prev => {
+
+const updateItem = useCallback((productId: number, update: Partial<SaleItem>) => {
+  setCurrentSale(prev => {
     if (!prev) return prev;
+    
+    const newItems = prev.items.map(item => 
+      item.productId === productId ? {...item, ...update} : item
+    );
+    
+    const subtotal = newItems.reduce(
+      (sum, item) => sum + ((item.price * item.quantity) - (item.discount || 0)),
+      0
+    );
+    
+  const taxAmount = newItems.reduce(
+  (sum, item) => sum + (
+    (item.price * item.quantity - (item.discount || 0)) * item.taxRate
+  ),
+  0
+);
+
+    const totalCost = newItems.reduce(
+      (sum, item) => sum + (item.costPrice * item.quantity),
+      0
+    );
+
     return {
       ...prev,
-      items: prev.items.map(item => 
-        item.id === itemId ? {...item, ...update} : item
-      )
+      items: newItems,
+      subtotal,
+      taxAmount,
+      total: subtotal + taxAmount - (prev.discount || 0),
+      totals: {
+        subTotal: subtotal,
+        totalTax: taxAmount,
+        grandTotal: subtotal + taxAmount - (prev.discount || 0),
+        totalCost
+      }
     };
   });
-  }, []);
+}, []);
 
   const removeItem = useCallback((id: number) => {
     setCurrentSale(prev => {
     if (!prev) return prev;
     
-    const newItems = prev.items.filter(item => item.id !== id);
+    const newItems = prev.items.filter(item => item.productId !== id);
     
     // Recalculate totals
     const subtotal = newItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -387,14 +408,14 @@ const handlePaymentMethod = async (
     setCurrentSale,
     refreshSales,
     open,
-    setOpen,
+    setOpen: (type: SalesDialogType) => setOpen(type),
     createSale,
     loading,
     error,
     addItemToSale,
     completeSale,
     paymentError,
-    setPaymentError,
+    setPaymentError: setPaymentError,
     isProcessingPayment,
     paymentDetails,
     saveDraft,
@@ -403,8 +424,12 @@ const handlePaymentMethod = async (
     heldSales,
     updateItem,
     removeItem,
-    handleCardPayment,
-    handleMpesaPayment
+    handleCardPayment: async (saleId: number, details: PaymentDetails) => {
+      return handleCardPayment(saleId, details);
+    },
+    handleMpesaPayment: async (saleId: number, details: PaymentDetails) => {
+      return handleMpesaPayment(saleId, details);
+    }
   }), [
     sales,
     currentSale,
@@ -412,6 +437,7 @@ const handlePaymentMethod = async (
     loading,
     error,
     paymentError,
+    setPaymentError,
     isProcessingPayment,
     paymentDetails,
     heldSales,

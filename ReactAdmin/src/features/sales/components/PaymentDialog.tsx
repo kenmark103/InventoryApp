@@ -20,49 +20,92 @@ import {
 import { toast } from 'sonner';
 import { PaymentMethod, PaymentDetails } from '../data/payments';
 
+interface PaymentDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
 
-export function PaymentDialog({ open, onOpenChange }) {
-
-  const { currentSale, completeSale, isProcessingPayment, paymentError } = useSales();
+export function PaymentDialog({ open, onOpenChange }: PaymentDialogProps) {
+  const { currentSale, completeSale, setCurrentSale, isProcessingPayment, paymentError, setPaymentError } = useSales();
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
-  const totalDue = isMounted 
-    ? currentSale?.items?.reduce(
-        (sum, item) => sum + (item.sellingPrice * item.quantity), 
-        0
-      ) || 0
-    : 0;
+  const totalDue = currentSale?.totals?.grandTotal || 0;
 
 
-    const [paymentState, setPaymentState] = useState<PaymentDetails>({
+  const [paymentState, setPaymentState] = useState<PaymentDetails>({
     method: PaymentMethod.CASH,
     amountTendered: totalDue,
     changeDue: 0,
-    mpesaPhone: ''
   });
- 
-   useEffect(() => {
-    setPaymentState(prev => ({
-      ...prev,
-      amountTendered: totalDue,
-      changeDue: Math.max(prev.amountTendered - totalDue, 0)
-    }));
-  }, [totalDue]);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (currentSale?.totals) {
+      setPaymentState(prev => ({
+        ...prev,
+        amountTendered: currentSale.totals.grandTotal,
+        changeDue: 0
+      }));
+    }
+  }, [currentSale]);
 
   
+  useEffect(() => {
+    if (isMounted && currentSale?.totals) {
+      setPaymentState(prev => ({
+        ...prev,
+        amountTendered: currentSale.totals.grandTotal,
+        changeDue: Math.max(prev.amountTendered - currentSale.totals.grandTotal, 0)
+      }));
+    }
+  }, [currentSale?.totals?.grandTotal, isMounted]);
 
-  const handleSubmit = async () => {
-    if (paymentState.method === PaymentMethod.MPESA && !paymentState.mpesaPhone) {
-      setPaymentError('MPESA phone number required');
-      return;
+  const handleMethodChange = (method: PaymentMethod) => {
+    setPaymentError(null);
+
+    if (currentSale) {
+      setCurrentSale({
+        ...currentSale,
+        paymentMethod: method,
+      });
+    } 
+
+    const baseState = {
+      method,
+      amountTendered: totalDue,
+      changeDue: 0,
+    };
+
+    if (method === PaymentMethod.MPESA) {
+      setPaymentState({
+        ...baseState,
+        mpesaPhone: ''
+      });
+    } else {
+      setPaymentState(baseState);
     }
 
-    await completeSale(paymentState);
-    onOpenChange(false);
+  };
+
+  const handleSubmit = async () => {
+    if (paymentState.method === PaymentMethod.MPESA) {
+      if (!('mpesaPhone' in paymentState)) {
+        setPaymentError('MPESA phone number required');
+        return;
+      }
+      if (!paymentState.mpesaPhone?.startsWith('07')) {
+        setPaymentError('Invalid MPESA phone number');
+        return;
+      }
+    }
+
+    try {
+      await completeSale(paymentState);
+      onOpenChange(false);
+    } catch (error) {
+      toast.error('Payment processing failed');
+    }
   };
 
   return (
@@ -98,10 +141,7 @@ export function PaymentDialog({ open, onOpenChange }) {
               <Label>Payment Method</Label>
               <Select
                 value={paymentState.method}
-                onValueChange={v => setPaymentState(p => ({
-                  ...p,
-                  method: v as PaymentMethod
-                }))}
+                onValueChange={(val) => handleMethodChange(val as PaymentMethod)}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select method" />
@@ -114,13 +154,12 @@ export function PaymentDialog({ open, onOpenChange }) {
               </Select>
             </div>
 
-            {/* MPESA Phone Input */}
             {paymentState.method === PaymentMethod.MPESA && (
               <div className="col-span-2 space-y-2">
                 <Label>MPESA Phone Number</Label>
                 <Input
                   placeholder="07XXXXXXXX"
-                  value={paymentState.mpesaPhone || ''}
+                  value={paymentState.method === PaymentMethod.MPESA ? paymentState.mpesaPhone : ''}
                   onChange={e => setPaymentState(p => ({
                     ...p,
                     mpesaPhone: e.target.value
@@ -134,8 +173,8 @@ export function PaymentDialog({ open, onOpenChange }) {
               <NumericFormat
                 customInput={Input}
                 value={paymentState.amountTendered}
-                onValueChange={values => {
-                  const amount = values.floatValue || 0;
+                onValueChange={({ floatValue }) => {
+                  const amount = floatValue || 0;
                   setPaymentState(p => ({
                     ...p,
                     amountTendered: amount,

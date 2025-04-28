@@ -9,6 +9,7 @@ import { ProductsDialogs } from './components/products-dialogs';
 import { ProductsPrimaryButtons } from './components/products-primary-buttons';
 import { ProductsTable } from './components/products-table';
 import {ProductsProvider} from './context/products-context';
+import { Link } from '@tanstack/react-router'
 
 export default function Products() {
   return (
@@ -26,7 +27,9 @@ export default function Products() {
             <h2 className="text-2xl font-bold tracking-tight">Products List</h2>
             <p className="text-muted-foreground">Manage your products here.</p>
           </div>
+          <Link to="/products/add">
           <ProductsPrimaryButtons />
+        </Link>
         </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
           <ProductsTable columns={columns} />

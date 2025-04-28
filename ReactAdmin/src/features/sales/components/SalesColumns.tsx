@@ -1,74 +1,100 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { SaleItem } from "../data/saleSchema"; 
-import { useSales } from '../context/sales-context';
 
-const columns: ColumnDef<SaleItem>[] = [
+import { ColumnDef } from "@tanstack/react-table";
+import { SaleItem } from "../data/sales-schema";
+import { TrashIcon } from "lucide-react";
+import { NumericFormat } from "react-number-format";
+import { getImageUrl } from '@/utils/apiHelpers';
+import { QuantityStepper } from "./QuantityStepper";
+import { DiscountInput } from "./DiscountInput";
+import { getCurrencySymbol, formatCurrency } from '../utils/formatting';
+
+export const createSalesColumns = (
+  updateItem: (productId: number, update: Partial<SaleItem>) => void,
+  removeItem: (productId: number) => void,
+  handleStartEdit: (productId: number) => void,
+  editingId: number | null
+): ColumnDef<SaleItem>[] => [
   {
     accessorKey: "imageUrl",
     header: "Image",
-    size: 100,
-    cell: ({ row }) => (
-      <img 
-        src={row.original.imageUrl} 
-        alt={row.original.name}
-        className="h-10 w-10 object-cover rounded"
-      />
-    ),
+    size: 70,
+    cell: ({ row }) => {
+      const imageUrl = row.original.imageUrl 
+        ? getImageUrl(row.original.imageUrl)
+        : '/images/placeholder.png';
+        
+      return (
+        <img 
+          src={imageUrl}
+          alt={row.original.name}
+          className="h-10 w-10 object-cover rounded"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = '/images/placeholder.png';
+          }}
+        />
+      );
+    },
   },
   {
     accessorKey: "name",
-    header: "Product Name",
-    size: 200,
+    header: "Product",
+    cell: ({ row }) => (
+      <div className="flex flex-col">
+        <span className="font-medium">{row.original.name}</span>
+        <span className="text-xs text-gray-500">{row.original.sku}</span>
+      </div>
+    ),
   },
   {
     accessorKey: "quantity",
-    header: "Quantity",
-    size: 120,
+    header: "Qty",
     cell: ({ row }) => (
-      <input
-        type="number"
-        value={row.original.quantity}
-        onChange={(e) => {
-          const newQuantity = parseInt(e.target.value);
-          if (!isNaN(newQuantity)) {
-            useSales().updateItem(row.original.id, { quantity: newQuantity });
-          }
-        }}
-        className="w-20 px-2 py-1 border rounded"
+      <QuantityStepper
+        item={row.original}
+        onUpdate={(newQty) => updateItem(row.original.productId, { quantity: newQty })}
       />
     ),
   },
   {
-    accessorKey: "taxRate",
-    header: "Tax Rate",
-    size: 120,
-    cell: ({ row }) => `${(row.original.taxRate * 100).toFixed(0)}%`,
+    accessorKey: "price",
+    header: "Unit Price",
+    cell: ({ row }) => (
+      <NumericFormat
+        value={row.original.price}
+        displayType="text"
+        thousandSeparator
+        prefix={getCurrencySymbol('KES')}
+        decimalScale={2}
+      />
+    ),
   },
   {
     accessorKey: "discount",
     header: "Discount",
-    size: 120,
     cell: ({ row }) => (
-      <input
-        type="number"
+      <DiscountInput
         value={row.original.discount || 0}
-        onChange={(e) => {
-          const newDiscount = parseFloat(e.target.value);
-          if (!isNaN(newDiscount)) {
-            useSales().updateItem(row.original.id, { discount: newDiscount });
-          }
-        }}
-        className="w-20 px-2 py-1 border rounded"
+        onChange={(value) => updateItem(row.original.productId, { discount: value })}
       />
     ),
   },
   {
+    id: "total",
+    header: "Total",
+    cell: ({ row }) => {
+      const item = row.original;
+      const subtotal = (item.price * item.quantity) - (item.discount || 0);
+      const total = subtotal * (1 + item.taxRate);
+      
+      return formatCurrency(total, 'KES');
+    },
+  },
+  {
     id: "actions",
     header: "Actions",
-    size: 100,
     cell: ({ row }) => (
       <button
-        onClick={() => useSales().removeItem(row.original.id)}
+        onClick={() => removeItem(row.original.productId)}
         className="text-red-500 hover:text-red-700"
       >
         <TrashIcon className="h-5 w-5" />

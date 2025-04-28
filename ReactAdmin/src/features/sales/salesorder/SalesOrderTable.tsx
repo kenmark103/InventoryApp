@@ -29,6 +29,10 @@ import { Button } from '@/components/ui/button';
 import { ArrowUpRight } from 'lucide-react';
 import { Loader2 } from 'lucide-react';
 import { useNavigate } from '@tanstack/react-router';
+import { statusColors } from '../data/sales-constants'
+
+
+
 
 export const columns: ColumnDef<SaleResponseDto>[] = [
   {
@@ -56,7 +60,7 @@ export const columns: ColumnDef<SaleResponseDto>[] = [
   accessorKey: 'status',
   header: 'Status',
   cell: ({ row }) => {
-    const status = row.getValue('status').toLowerCase();
+    const status = row.getValue('status');
     return (
       <Badge 
         variant={
@@ -64,7 +68,9 @@ export const columns: ColumnDef<SaleResponseDto>[] = [
           status === 'draft' ? 'secondary' : 
           'outline'
         }
-        className="capitalize"
+        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                      statusColors[status] || 'bg-gray-100 text-gray-800'
+                    }`}
       >
         {status}
       </Badge>
@@ -95,25 +101,29 @@ export const columns: ColumnDef<SaleResponseDto>[] = [
     ),
   },
   {
-    id: 'actions',
-    cell: ({ row }) => {
-      const navigate = useNavigate();
-      
-      return (
-        <Button 
-          variant="ghost" 
+  id: 'actions',
+  cell: ({ row }) => {
+    const navigate = useNavigate();
+    const status = row.original.status;
+    
+    return (
+      <div className="flex items-center gap-2">
+        <Button
+          variant="ghost"
           size="sm"
-          className="hover:bg-gray-100"
+          className="h-8 w-8 rounded-full p-0 hover:bg-gray-100"
           onClick={() => navigate({
-            to: '/sales-orders/$id',
+            to: '/sales/$id',
             params: { id: row.original.id.toString() }
           })}
         >
           <ArrowUpRight className="h-4 w-4" />
+          <span className="sr-only">View Details</span>
         </Button>
-      );
-    },
+      </div>
+    );
   },
+},
 ];
 
 export function SalesOrderTable() {

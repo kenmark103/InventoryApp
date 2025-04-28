@@ -20,8 +20,6 @@ interface ProductsRowActionsProps<TData> {
 }
 
 export function ProductsRowActions<TData>({ row }: ProductsRowActionsProps<TData>) {
-  // Parse the row as a Product using your product schema.
-  //const product = productSchema.parse(row.original);
   
   const result = productSchema.safeParse(row.original);
 if (!result.success) {

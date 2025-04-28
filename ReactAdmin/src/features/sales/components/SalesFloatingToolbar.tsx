@@ -1,24 +1,33 @@
+// components/sales/SalesFloatingToolbar.tsx
 
 import { useSales } from '../context/sales-context';
 import { Button } from '@/components/ui/button';
+import { HTMLAttributes } from 'react';
 
-export function SalesFloatingToolbar() {
+interface SalesFloatingToolbarProps extends HTMLAttributes<HTMLDivElement> {}
+
+export function SalesFloatingToolbar({ className = '', ...props }: SalesFloatingToolbarProps) {
   const { currentSale, saveDraft, holdSale } = useSales();
+  const hasSale = Boolean(currentSale);
 
   return (
-    <div className="fixed bottom-4 right-4 p-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border rounded-lg shadow-lg flex gap-3">
+    <div
+      {...props}
+      className={`flex items-center space-x-3 ${className}`}
+    >
       <Button
         variant="secondary"
         onClick={saveDraft}
-        className="px-6 py-3 shadow-sm hover:shadow-md transition-shadow"
+        disabled={!hasSale}
+        className="px-4 py-2 text-sm shadow-sm hover:shadow-md transition-shadow"
       >
         💾 Save Draft
       </Button>
-      
       <Button
         variant="secondary"
         onClick={holdSale}
-        className="px-6 py-3 shadow-sm hover:shadow-md transition-shadow bg-amber-100 hover:bg-amber-200 text-amber-900"
+        disabled={!hasSale}
+        className="px-4 py-2 text-sm shadow-sm hover:shadow-md transition-shadow bg-amber-100 hover:bg-amber-200 text-amber-900"
       >
         ⏸️ Hold Sale
       </Button>

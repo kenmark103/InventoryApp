@@ -93,7 +93,7 @@ export const sidebarData: SidebarData = {
               icon: Box,  // Represents physical stock
             },
             {
-              title: 'Purchase Order',
+              title: 'Purchases',
               url: '/purchase',
               icon: Box,  // Represents physical stock
             },
@@ -110,7 +110,7 @@ export const sidebarData: SidebarData = {
             },
             {
               title: 'Approve Expenses',
-              url: '/expenses',
+              url: '/expenses/approve',
               icon: CheckCircle,  // Approval action
             },
           ],
@@ -161,14 +161,24 @@ export const sidebarData: SidebarData = {
           icon: IconReport,
           items: [
             {
+              title: 'Accounting',
+              icon: IconGraph,
+              url: "/reports",
+            },
+            {
               title: 'Sales',
               icon: IconGraph,
-              url: "/reports/sales",
+              url: "/reports/sales-report",
             },
             {
               title: 'Inventory',
-              icon: LayoutGrid,  // Grid visualization
+              icon: LayoutGrid, 
               url: "/reports/inventory",
+            },
+            {
+              title: 'Expenses',
+              icon: FileText,  
+              url: "/reports/expenses",
             },
           ],
         },

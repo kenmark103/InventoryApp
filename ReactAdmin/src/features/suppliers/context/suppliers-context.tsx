@@ -20,6 +20,7 @@ export default function SuppliersProvider({ children }: { children: React.ReactN
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [open, setOpen] = useState<SuppliersDialogType>(null);
   const [currentSupplier, setCurrentSupplier] = useState<Supplier | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const refreshSuppliers = async () => {
     try {
@@ -42,6 +43,7 @@ export default function SuppliersProvider({ children }: { children: React.ReactN
     setOpen,
     currentSupplier,
     setCurrentSupplier,
+    isLoading
   };
 
   return (

@@ -9,10 +9,6 @@ export function ProductsDialogs() {
 
   return (
     <>
-      <AddProduct
-        open={open === 'add'}
-        onOpenChange={() => setOpen('add')}
-      />
 
       {currentProduct && (
         <>

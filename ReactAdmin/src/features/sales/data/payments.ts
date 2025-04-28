@@ -6,39 +6,40 @@ export enum PaymentMethod {
   MPESA = "MPESA"
 }
 
-export interface PaymentDetails {
+interface BasePaymentDetails {
   method: PaymentMethod;
-  transactionId?: string;
   amountTendered: number;
   changeDue: number;
-  mpesaPhone?: string;
 }
 
-export interface PaymentProcessorOptions {
-  signal?: AbortSignal;
+export interface CashPaymentDetails extends BasePaymentDetails {
+  method: PaymentMethod.CASH;
 }
 
-export type ProcessCardPayment = (
-  details: PaymentDetails,
-  options?: PaymentProcessorOptions
-) => Promise<{ transactionId: string }>;
+export interface CardPaymentDetails extends BasePaymentDetails {
+  method: PaymentMethod.CREDIT_CARD;
+  cardNumber: string;
+  expirationDate: string;
+  cvv: string;
+  processor: 'visa' | 'mastercard' | 'amex';
+}
 
-export type fakeProcessMpesaPayment = (
-  phone: string,
-  amount: number,
-  options?: PaymentProcessorOptions
-) => Promise<{ transactionId: string }>;
+export interface MpesaPaymentDetails extends BasePaymentDetails {
+  method: PaymentMethod.MPESA;
+  mpesaPhone: string;
+}
 
+export type PaymentDetails = CashPaymentDetails | CardPaymentDetails | MpesaPaymentDetails;
 
+// Mock Processors
+export const ProcessCardPayment = async (details: CardPaymentDetails) => {
+  toast.info(`[Mock] Processing ${details.processor} card ${details.cardNumber.slice(-4)}`);
+  await new Promise(resolve => setTimeout(resolve, 500));
+  return { transactionId: `MOCK-CARD-${Date.now()}` };
+};
 
-export const ProcessMpesaPayment: ProcessMpesaPayment = async (
-  phone,
-  amount,
-  options
-) => {
-  toast.info(`[MockMpesa] Simulating payment for ${phone}, amount=${amount}`);
-  await new Promise((res) => setTimeout(res, 500));
-  return {
-    transactionId: `MOCK-MPESA-${Date.now()}`
-  };
+export const ProcessMpesaPayment = async (phone: string, amount: number) => {
+  toast.info(`[Mock] M-Pesa payment to ${phone} for $${amount}`);
+  await new Promise(resolve => setTimeout(resolve, 500));
+  return { transactionId: `MOCK-MPESA-${Date.now()}` };
 };

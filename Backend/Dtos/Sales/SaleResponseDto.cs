@@ -26,4 +26,6 @@ public class SaleResponseDto
 
     public CompletedSaleDto? CompletedSale { get; set; } 
 
+    public decimal TaxPercentage { get; set; }
+
 }

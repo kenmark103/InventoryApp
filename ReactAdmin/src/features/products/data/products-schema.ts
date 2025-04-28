@@ -1,34 +1,26 @@
+// src/data/product-schema.ts
 import { z } from "zod";
-
-
 
 export const productSchema = z.object({
   id: z.number(),
-  name: z.string().min(1),
-  sku: z.string().min(1),
-  buyingPrice: z.number(),
-  sellingPrice: z.number(),
-  taxRate: z.number(),
-  isService: z.boolean(),
-  quantity: z.number().transform(val => val),
-  supplierId: z.number(),
-  supplierName: z.string(),
-  categoryId: z.number(),
-  categoryName: z.string(), 
-  inventoryManager: z.string(), 
-  imageUrl: z.string().nullable().optional(),
+  name: z.string().min(1, "Product name is required"),
+  sku: z.string().min(1, "SKU is required"),
+  buyingPrice: z.number().min(0, "Must be ≥ 0"),
+  sellingPrice: z.number().min(0, "Must be ≥ 0"),
+  taxRate: z.number().min(0).max(100, "Max 100%"),
+  isService: z.boolean().default(false),
+  quantity: z.number().int().min(0),
+  supplierId: z.number().positive(),
+  supplierName: z.string().min(1),
+  categoryId: z.number().positive(),
+  categoryName: z.string().min(1),
+  inventoryManager: z.string().min(1),
+  imageUrl: z.string().url().nullable().optional(),
   description: z.string().nullable().optional(),
   size: z.string().nullable().optional(),
-  weight: z.number().nullable().optional(),
-  galleryImages: z.array(z.string()), 
-  createdAt:  z.preprocess((arg) => {
-    if (typeof arg === "string" || arg instanceof Date) {
-      return new Date(arg);
-    }
-    return arg;
-  }, z.date().optional()),
+  weight: z.number().positive().nullable().optional(),
+  galleryImages: z.array(z.string().url()).default([]),
+  createdAt: z.coerce.date().default(() => new Date())
 });
-
-
 
 export type Product = z.infer<typeof productSchema>;

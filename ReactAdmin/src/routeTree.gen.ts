@@ -21,7 +21,15 @@ import { Route as auth500Import } from './routes/(auth)/500'
 import { Route as AuthenticatedSuppliersSupplierIdImport } from './routes/_authenticated/suppliers/$supplierId'
 import { Route as AuthenticatedSalesSalesordersImport } from './routes/_authenticated/sales/salesorders'
 import { Route as AuthenticatedSalesIdImport } from './routes/_authenticated/sales/$id'
+import { Route as AuthenticatedReportsSalesReportImport } from './routes/_authenticated/reports/sales-report'
+import { Route as AuthenticatedReportsProfitLossImport } from './routes/_authenticated/reports/profit-loss'
+import { Route as AuthenticatedReportsInventoryImport } from './routes/_authenticated/reports/inventory'
+import { Route as AuthenticatedReportsExpensesImport } from './routes/_authenticated/reports/expenses'
+import { Route as AuthenticatedReportsCashFlowImport } from './routes/_authenticated/reports/cash-flow'
+import { Route as AuthenticatedReportsBalanceSheetImport } from './routes/_authenticated/reports/balance-sheet'
+import { Route as AuthenticatedReportsAccountingImport } from './routes/_authenticated/reports/accounting'
 import { Route as AuthenticatedProductsStockManagementImport } from './routes/_authenticated/products/stock-management'
+import { Route as AuthenticatedProductsAddImport } from './routes/_authenticated/products/add'
 import { Route as AuthenticatedCustomersCustomerIdImport } from './routes/_authenticated/customers/$customerId'
 
 // Create Virtual Routes
@@ -50,6 +58,9 @@ const AuthenticatedSettingsIndexLazyImport = createFileRoute(
 )()
 const AuthenticatedSalesIndexLazyImport = createFileRoute(
   '/_authenticated/sales/',
+)()
+const AuthenticatedReportsIndexLazyImport = createFileRoute(
+  '/_authenticated/reports/',
 )()
 const AuthenticatedPurchaseIndexLazyImport = createFileRoute(
   '/_authenticated/purchase/',
@@ -86,6 +97,9 @@ const AuthenticatedSettingsAppearanceLazyImport = createFileRoute(
 )()
 const AuthenticatedSettingsAccountLazyImport = createFileRoute(
   '/_authenticated/settings/account',
+)()
+const AuthenticatedExpensesApproveIndexLazyImport = createFileRoute(
+  '/_authenticated/expenses/approve/',
 )()
 
 // Create/Update Routes
@@ -230,6 +244,15 @@ const AuthenticatedSalesIndexLazyRoute =
     import('./routes/_authenticated/sales/index.lazy').then((d) => d.Route),
   )
 
+const AuthenticatedReportsIndexLazyRoute =
+  AuthenticatedReportsIndexLazyImport.update({
+    id: '/reports/',
+    path: '/reports/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/reports/index.lazy').then((d) => d.Route),
+  )
+
 const AuthenticatedPurchaseIndexLazyRoute =
   AuthenticatedPurchaseIndexLazyImport.update({
     id: '/purchase/',
@@ -371,6 +394,55 @@ const AuthenticatedSalesIdRoute = AuthenticatedSalesIdImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
+const AuthenticatedReportsSalesReportRoute =
+  AuthenticatedReportsSalesReportImport.update({
+    id: '/reports/sales-report',
+    path: '/reports/sales-report',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedReportsProfitLossRoute =
+  AuthenticatedReportsProfitLossImport.update({
+    id: '/reports/profit-loss',
+    path: '/reports/profit-loss',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedReportsInventoryRoute =
+  AuthenticatedReportsInventoryImport.update({
+    id: '/reports/inventory',
+    path: '/reports/inventory',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedReportsExpensesRoute =
+  AuthenticatedReportsExpensesImport.update({
+    id: '/reports/expenses',
+    path: '/reports/expenses',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedReportsCashFlowRoute =
+  AuthenticatedReportsCashFlowImport.update({
+    id: '/reports/cash-flow',
+    path: '/reports/cash-flow',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedReportsBalanceSheetRoute =
+  AuthenticatedReportsBalanceSheetImport.update({
+    id: '/reports/balance-sheet',
+    path: '/reports/balance-sheet',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedReportsAccountingRoute =
+  AuthenticatedReportsAccountingImport.update({
+    id: '/reports/accounting',
+    path: '/reports/accounting',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 const AuthenticatedProductsStockManagementRoute =
   AuthenticatedProductsStockManagementImport.update({
     id: '/products/stock-management',
@@ -378,12 +450,29 @@ const AuthenticatedProductsStockManagementRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
+const AuthenticatedProductsAddRoute = AuthenticatedProductsAddImport.update({
+  id: '/products/add',
+  path: '/products/add',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
 const AuthenticatedCustomersCustomerIdRoute =
   AuthenticatedCustomersCustomerIdImport.update({
     id: '/customers/$customerId',
     path: '/customers/$customerId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+
+const AuthenticatedExpensesApproveIndexLazyRoute =
+  AuthenticatedExpensesApproveIndexLazyImport.update({
+    id: '/expenses/approve/',
+    path: '/expenses/approve/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/expenses/approve/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 // Populate the FileRoutesByPath interface
 
@@ -494,11 +583,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCustomersCustomerIdImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/products/add': {
+      id: '/_authenticated/products/add'
+      path: '/products/add'
+      fullPath: '/products/add'
+      preLoaderRoute: typeof AuthenticatedProductsAddImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/products/stock-management': {
       id: '/_authenticated/products/stock-management'
       path: '/products/stock-management'
       fullPath: '/products/stock-management'
       preLoaderRoute: typeof AuthenticatedProductsStockManagementImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/accounting': {
+      id: '/_authenticated/reports/accounting'
+      path: '/reports/accounting'
+      fullPath: '/reports/accounting'
+      preLoaderRoute: typeof AuthenticatedReportsAccountingImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/balance-sheet': {
+      id: '/_authenticated/reports/balance-sheet'
+      path: '/reports/balance-sheet'
+      fullPath: '/reports/balance-sheet'
+      preLoaderRoute: typeof AuthenticatedReportsBalanceSheetImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/cash-flow': {
+      id: '/_authenticated/reports/cash-flow'
+      path: '/reports/cash-flow'
+      fullPath: '/reports/cash-flow'
+      preLoaderRoute: typeof AuthenticatedReportsCashFlowImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/expenses': {
+      id: '/_authenticated/reports/expenses'
+      path: '/reports/expenses'
+      fullPath: '/reports/expenses'
+      preLoaderRoute: typeof AuthenticatedReportsExpensesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/inventory': {
+      id: '/_authenticated/reports/inventory'
+      path: '/reports/inventory'
+      fullPath: '/reports/inventory'
+      preLoaderRoute: typeof AuthenticatedReportsInventoryImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/profit-loss': {
+      id: '/_authenticated/reports/profit-loss'
+      path: '/reports/profit-loss'
+      fullPath: '/reports/profit-loss'
+      preLoaderRoute: typeof AuthenticatedReportsProfitLossImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/sales-report': {
+      id: '/_authenticated/reports/sales-report'
+      path: '/reports/sales-report'
+      fullPath: '/reports/sales-report'
+      preLoaderRoute: typeof AuthenticatedReportsSalesReportImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/sales/$id': {
@@ -606,6 +751,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPurchaseIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/reports/': {
+      id: '/_authenticated/reports/'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/sales/': {
       id: '/_authenticated/sales/'
       path: '/sales'
@@ -632,6 +784,13 @@ declare module '@tanstack/react-router' {
       path: '/users'
       fullPath: '/users'
       preLoaderRoute: typeof AuthenticatedUsersIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/expenses/approve/': {
+      id: '/_authenticated/expenses/approve/'
+      path: '/expenses/approve'
+      fullPath: '/expenses/approve'
+      preLoaderRoute: typeof AuthenticatedExpensesApproveIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
   }
@@ -669,7 +828,15 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedCustomersCustomerIdRoute: typeof AuthenticatedCustomersCustomerIdRoute
+  AuthenticatedProductsAddRoute: typeof AuthenticatedProductsAddRoute
   AuthenticatedProductsStockManagementRoute: typeof AuthenticatedProductsStockManagementRoute
+  AuthenticatedReportsAccountingRoute: typeof AuthenticatedReportsAccountingRoute
+  AuthenticatedReportsBalanceSheetRoute: typeof AuthenticatedReportsBalanceSheetRoute
+  AuthenticatedReportsCashFlowRoute: typeof AuthenticatedReportsCashFlowRoute
+  AuthenticatedReportsExpensesRoute: typeof AuthenticatedReportsExpensesRoute
+  AuthenticatedReportsInventoryRoute: typeof AuthenticatedReportsInventoryRoute
+  AuthenticatedReportsProfitLossRoute: typeof AuthenticatedReportsProfitLossRoute
+  AuthenticatedReportsSalesReportRoute: typeof AuthenticatedReportsSalesReportRoute
   AuthenticatedSalesIdRoute: typeof AuthenticatedSalesIdRoute
   AuthenticatedSalesSalesordersRoute: typeof AuthenticatedSalesSalesordersRoute
   AuthenticatedSuppliersSupplierIdRoute: typeof AuthenticatedSuppliersSupplierIdRoute
@@ -681,9 +848,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedProductsIndexLazyRoute: typeof AuthenticatedProductsIndexLazyRoute
   AuthenticatedPurchaseIndexLazyRoute: typeof AuthenticatedPurchaseIndexLazyRoute
+  AuthenticatedReportsIndexLazyRoute: typeof AuthenticatedReportsIndexLazyRoute
   AuthenticatedSalesIndexLazyRoute: typeof AuthenticatedSalesIndexLazyRoute
   AuthenticatedSuppliersIndexLazyRoute: typeof AuthenticatedSuppliersIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
+  AuthenticatedExpensesApproveIndexLazyRoute: typeof AuthenticatedExpensesApproveIndexLazyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -691,8 +860,16 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedSettingsRouteLazyRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedCustomersCustomerIdRoute: AuthenticatedCustomersCustomerIdRoute,
+  AuthenticatedProductsAddRoute: AuthenticatedProductsAddRoute,
   AuthenticatedProductsStockManagementRoute:
     AuthenticatedProductsStockManagementRoute,
+  AuthenticatedReportsAccountingRoute: AuthenticatedReportsAccountingRoute,
+  AuthenticatedReportsBalanceSheetRoute: AuthenticatedReportsBalanceSheetRoute,
+  AuthenticatedReportsCashFlowRoute: AuthenticatedReportsCashFlowRoute,
+  AuthenticatedReportsExpensesRoute: AuthenticatedReportsExpensesRoute,
+  AuthenticatedReportsInventoryRoute: AuthenticatedReportsInventoryRoute,
+  AuthenticatedReportsProfitLossRoute: AuthenticatedReportsProfitLossRoute,
+  AuthenticatedReportsSalesReportRoute: AuthenticatedReportsSalesReportRoute,
   AuthenticatedSalesIdRoute: AuthenticatedSalesIdRoute,
   AuthenticatedSalesSalesordersRoute: AuthenticatedSalesSalesordersRoute,
   AuthenticatedSuppliersSupplierIdRoute: AuthenticatedSuppliersSupplierIdRoute,
@@ -704,9 +881,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedProductsIndexLazyRoute: AuthenticatedProductsIndexLazyRoute,
   AuthenticatedPurchaseIndexLazyRoute: AuthenticatedPurchaseIndexLazyRoute,
+  AuthenticatedReportsIndexLazyRoute: AuthenticatedReportsIndexLazyRoute,
   AuthenticatedSalesIndexLazyRoute: AuthenticatedSalesIndexLazyRoute,
   AuthenticatedSuppliersIndexLazyRoute: AuthenticatedSuppliersIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
+  AuthenticatedExpensesApproveIndexLazyRoute:
+    AuthenticatedExpensesApproveIndexLazyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -727,7 +907,15 @@ export interface FileRoutesByFullPath {
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
   '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
+  '/products/add': typeof AuthenticatedProductsAddRoute
   '/products/stock-management': typeof AuthenticatedProductsStockManagementRoute
+  '/reports/accounting': typeof AuthenticatedReportsAccountingRoute
+  '/reports/balance-sheet': typeof AuthenticatedReportsBalanceSheetRoute
+  '/reports/cash-flow': typeof AuthenticatedReportsCashFlowRoute
+  '/reports/expenses': typeof AuthenticatedReportsExpensesRoute
+  '/reports/inventory': typeof AuthenticatedReportsInventoryRoute
+  '/reports/profit-loss': typeof AuthenticatedReportsProfitLossRoute
+  '/reports/sales-report': typeof AuthenticatedReportsSalesReportRoute
   '/sales/$id': typeof AuthenticatedSalesIdRoute
   '/sales/salesorders': typeof AuthenticatedSalesSalesordersRoute
   '/suppliers/$supplierId': typeof AuthenticatedSuppliersSupplierIdRoute
@@ -743,10 +931,12 @@ export interface FileRoutesByFullPath {
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/products': typeof AuthenticatedProductsIndexLazyRoute
   '/purchase': typeof AuthenticatedPurchaseIndexLazyRoute
+  '/reports': typeof AuthenticatedReportsIndexLazyRoute
   '/sales': typeof AuthenticatedSalesIndexLazyRoute
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/suppliers': typeof AuthenticatedSuppliersIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/expenses/approve': typeof AuthenticatedExpensesApproveIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -762,7 +952,15 @@ export interface FileRoutesByTo {
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
   '/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
+  '/products/add': typeof AuthenticatedProductsAddRoute
   '/products/stock-management': typeof AuthenticatedProductsStockManagementRoute
+  '/reports/accounting': typeof AuthenticatedReportsAccountingRoute
+  '/reports/balance-sheet': typeof AuthenticatedReportsBalanceSheetRoute
+  '/reports/cash-flow': typeof AuthenticatedReportsCashFlowRoute
+  '/reports/expenses': typeof AuthenticatedReportsExpensesRoute
+  '/reports/inventory': typeof AuthenticatedReportsInventoryRoute
+  '/reports/profit-loss': typeof AuthenticatedReportsProfitLossRoute
+  '/reports/sales-report': typeof AuthenticatedReportsSalesReportRoute
   '/sales/$id': typeof AuthenticatedSalesIdRoute
   '/sales/salesorders': typeof AuthenticatedSalesSalesordersRoute
   '/suppliers/$supplierId': typeof AuthenticatedSuppliersSupplierIdRoute
@@ -778,10 +976,12 @@ export interface FileRoutesByTo {
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/products': typeof AuthenticatedProductsIndexLazyRoute
   '/purchase': typeof AuthenticatedPurchaseIndexLazyRoute
+  '/reports': typeof AuthenticatedReportsIndexLazyRoute
   '/sales': typeof AuthenticatedSalesIndexLazyRoute
   '/settings': typeof AuthenticatedSettingsIndexLazyRoute
   '/suppliers': typeof AuthenticatedSuppliersIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/expenses/approve': typeof AuthenticatedExpensesApproveIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -801,7 +1001,15 @@ export interface FileRoutesById {
   '/(errors)/503': typeof errors503LazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/customers/$customerId': typeof AuthenticatedCustomersCustomerIdRoute
+  '/_authenticated/products/add': typeof AuthenticatedProductsAddRoute
   '/_authenticated/products/stock-management': typeof AuthenticatedProductsStockManagementRoute
+  '/_authenticated/reports/accounting': typeof AuthenticatedReportsAccountingRoute
+  '/_authenticated/reports/balance-sheet': typeof AuthenticatedReportsBalanceSheetRoute
+  '/_authenticated/reports/cash-flow': typeof AuthenticatedReportsCashFlowRoute
+  '/_authenticated/reports/expenses': typeof AuthenticatedReportsExpensesRoute
+  '/_authenticated/reports/inventory': typeof AuthenticatedReportsInventoryRoute
+  '/_authenticated/reports/profit-loss': typeof AuthenticatedReportsProfitLossRoute
+  '/_authenticated/reports/sales-report': typeof AuthenticatedReportsSalesReportRoute
   '/_authenticated/sales/$id': typeof AuthenticatedSalesIdRoute
   '/_authenticated/sales/salesorders': typeof AuthenticatedSalesSalesordersRoute
   '/_authenticated/suppliers/$supplierId': typeof AuthenticatedSuppliersSupplierIdRoute
@@ -817,10 +1025,12 @@ export interface FileRoutesById {
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/_authenticated/products/': typeof AuthenticatedProductsIndexLazyRoute
   '/_authenticated/purchase/': typeof AuthenticatedPurchaseIndexLazyRoute
+  '/_authenticated/reports/': typeof AuthenticatedReportsIndexLazyRoute
   '/_authenticated/sales/': typeof AuthenticatedSalesIndexLazyRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/_authenticated/suppliers/': typeof AuthenticatedSuppliersIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
+  '/_authenticated/expenses/approve/': typeof AuthenticatedExpensesApproveIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -840,7 +1050,15 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/customers/$customerId'
+    | '/products/add'
     | '/products/stock-management'
+    | '/reports/accounting'
+    | '/reports/balance-sheet'
+    | '/reports/cash-flow'
+    | '/reports/expenses'
+    | '/reports/inventory'
+    | '/reports/profit-loss'
+    | '/reports/sales-report'
     | '/sales/$id'
     | '/sales/salesorders'
     | '/suppliers/$supplierId'
@@ -856,10 +1074,12 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/products'
     | '/purchase'
+    | '/reports'
     | '/sales'
     | '/settings/'
     | '/suppliers'
     | '/users'
+    | '/expenses/approve'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/500'
@@ -874,7 +1094,15 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/customers/$customerId'
+    | '/products/add'
     | '/products/stock-management'
+    | '/reports/accounting'
+    | '/reports/balance-sheet'
+    | '/reports/cash-flow'
+    | '/reports/expenses'
+    | '/reports/inventory'
+    | '/reports/profit-loss'
+    | '/reports/sales-report'
     | '/sales/$id'
     | '/sales/salesorders'
     | '/suppliers/$supplierId'
@@ -890,10 +1118,12 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/products'
     | '/purchase'
+    | '/reports'
     | '/sales'
     | '/settings'
     | '/suppliers'
     | '/users'
+    | '/expenses/approve'
   id:
     | '__root__'
     | '/_authenticated'
@@ -911,7 +1141,15 @@ export interface FileRouteTypes {
     | '/(errors)/503'
     | '/_authenticated/'
     | '/_authenticated/customers/$customerId'
+    | '/_authenticated/products/add'
     | '/_authenticated/products/stock-management'
+    | '/_authenticated/reports/accounting'
+    | '/_authenticated/reports/balance-sheet'
+    | '/_authenticated/reports/cash-flow'
+    | '/_authenticated/reports/expenses'
+    | '/_authenticated/reports/inventory'
+    | '/_authenticated/reports/profit-loss'
+    | '/_authenticated/reports/sales-report'
     | '/_authenticated/sales/$id'
     | '/_authenticated/sales/salesorders'
     | '/_authenticated/suppliers/$supplierId'
@@ -927,10 +1165,12 @@ export interface FileRouteTypes {
     | '/_authenticated/help-center/'
     | '/_authenticated/products/'
     | '/_authenticated/purchase/'
+    | '/_authenticated/reports/'
     | '/_authenticated/sales/'
     | '/_authenticated/settings/'
     | '/_authenticated/suppliers/'
     | '/_authenticated/users/'
+    | '/_authenticated/expenses/approve/'
   fileRoutesById: FileRoutesById
 }
 
@@ -994,7 +1234,15 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/",
         "/_authenticated/customers/$customerId",
+        "/_authenticated/products/add",
         "/_authenticated/products/stock-management",
+        "/_authenticated/reports/accounting",
+        "/_authenticated/reports/balance-sheet",
+        "/_authenticated/reports/cash-flow",
+        "/_authenticated/reports/expenses",
+        "/_authenticated/reports/inventory",
+        "/_authenticated/reports/profit-loss",
+        "/_authenticated/reports/sales-report",
         "/_authenticated/sales/$id",
         "/_authenticated/sales/salesorders",
         "/_authenticated/suppliers/$supplierId",
@@ -1006,9 +1254,11 @@ export const routeTree = rootRoute
         "/_authenticated/help-center/",
         "/_authenticated/products/",
         "/_authenticated/purchase/",
+        "/_authenticated/reports/",
         "/_authenticated/sales/",
         "/_authenticated/suppliers/",
-        "/_authenticated/users/"
+        "/_authenticated/users/",
+        "/_authenticated/expenses/approve/"
       ]
     },
     "/(auth)/500": {
@@ -1063,8 +1313,40 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/customers/$customerId.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/products/add": {
+      "filePath": "_authenticated/products/add.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/products/stock-management": {
       "filePath": "_authenticated/products/stock-management.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/accounting": {
+      "filePath": "_authenticated/reports/accounting.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/balance-sheet": {
+      "filePath": "_authenticated/reports/balance-sheet.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/cash-flow": {
+      "filePath": "_authenticated/reports/cash-flow.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/expenses": {
+      "filePath": "_authenticated/reports/expenses.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/inventory": {
+      "filePath": "_authenticated/reports/inventory.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/profit-loss": {
+      "filePath": "_authenticated/reports/profit-loss.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/sales-report": {
+      "filePath": "_authenticated/reports/sales-report.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/sales/$id": {
@@ -1127,6 +1409,10 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/purchase/index.lazy.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/reports/": {
+      "filePath": "_authenticated/reports/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/sales/": {
       "filePath": "_authenticated/sales/index.lazy.tsx",
       "parent": "/_authenticated"
@@ -1141,6 +1427,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/expenses/approve/": {
+      "filePath": "_authenticated/expenses/approve/index.lazy.tsx",
       "parent": "/_authenticated"
     }
   }

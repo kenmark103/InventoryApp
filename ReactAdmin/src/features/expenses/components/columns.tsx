@@ -5,6 +5,17 @@ import { expenseTypes, expensePriorities, expenseStatuses } from '../data/expens
 import { Expense } from '../data/expense-schema'; // Ensure Expense type is defined
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
+import { capitalize } from "@/utils/strings";
+import {
+  IconArrowDown,
+  IconArrowRight,
+  IconArrowUp,
+  IconCircle,
+  IconCircleCheck,
+  IconCircleX,
+  IconExclamationCircle,
+} from '@tabler/icons-react';
+
 
 export const columns: ColumnDef<Expense>[] = [
   {
@@ -34,66 +45,82 @@ export const columns: ColumnDef<Expense>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Expense" />
+      <DataTableColumnHeader column={column} title="ID" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
-    enableSorting: false,
-    enableHiding: false,
+    cell: ({ row }) => <div className="w-[80px]">#{row.getValue('id')}</div>,
   },
   {
-    accessorKey: 'title',
+    accessorKey: 'type',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Title" />
+      <DataTableColumnHeader column={column} title="Type" />
     ),
     cell: ({ row }) => {
-      const expenseType = expenseTypes.find((t) => t.value === row.original.label);
+      const type = expenseTypes.find(t => t.value === row.getValue('type'));
       return (
         <div className="flex space-x-2">
-          {expenseType && <Badge variant="outline">{expenseType.label}</Badge>}
-          <span className="max-w-32 truncate font-medium sm:max-w-72 md:max-w-[31rem]">
-            {row.getValue('title')}
-          </span>
+          {type && <Badge variant="outline">{type.label}</Badge>}
         </div>
       );
     },
+  },
+  {
+    accessorKey: 'amount',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Amount" />
+    ),
+    cell: ({ row }) => (
+      <div className="font-medium">
+        Kes{row.original.amount.toFixed(2)}
+        <span className="text-muted-foreground ml-2 text-sm">
+          (Tax: Kes{row.original.taxAmount.toFixed(2)})
+        </span>
+      </div>
+    ),
+  },
+  {
+    accessorKey: 'date',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Date" />
+    ),
+    cell: ({ row }) => (
+      new Date(row.getValue('date')).toLocaleDateString()
+    ),
   },
   {
     accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
-    cell: ({ row }) => {
-      const status = expenseStatuses.find((s) => s.value === row.getValue('status'));
-      if (!status) {
-        return null;
-      }
+
+  cell: ({ row }) => {
+    try {
+      const statusValue = capitalize(row.getValue('status')?.toString() || '');
+
+      const status = expenseStatuses.find(s => s.value === statusValue) || {
+        label: 'Unknown',
+        icon: IconCircle,
+        color: 'text-muted-foreground'
+      };
+
       return (
-        <div className="flex w-[100px] items-center">
-          {status.icon && <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-          <span>{status.label}</span>
+        <div className={`flex items-center gap-2 ${status.color || 'text-foreground'}`}>
+          <status.icon className="h-4 w-4" />
+          <span className="font-medium">{status.label}</span>
         </div>
       );
-    },
-    filterFn: (row, id, value) => value.includes(row.getValue(id)),
+    } catch (error) {
+      console.error('Error rendering status:', error);
+      return <span className="text-red-500">Error</span>;
+    }
   },
+},
+
   {
-    accessorKey: 'priority',
+    accessorKey: 'submittedBy',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Priority" />
+      <DataTableColumnHeader column={column} title="Submitted By" />
     ),
-    cell: ({ row }) => {
-      const priority = expensePriorities.find((p) => p.value === row.getValue('priority'));
-      if (!priority) {
-        return null;
-      }
-      return (
-        <div className="flex items-center">
-          {priority.icon && <priority.icon className="mr-2 h-4 w-4 text-muted-foreground" />}
-          <span>{priority.label}</span>
-        </div>
-      );
-    },
-    filterFn: (row, id, value) => value.includes(row.getValue(id)),
+    cell: ({ row }) => <span>{row.getValue('submittedBy')}</span>,
   },
   {
     id: 'actions',

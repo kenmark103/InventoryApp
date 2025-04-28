@@ -10,8 +10,6 @@ const saleService = {
   getSaleById: async (id: number): Promise<SaleResponseDto> =>
     api.get(`/sales/${id}`).then(res => res.data),
 
-  /* createSale: async (dto: SaleCreateDto): Promise<SaleResponseDto> =>
-    api.post('/sales', dto).then(res => res.data), */
 
     createSale: async (dto: SaleCreateDto): Promise<SaleResponseDto> => {
       console.log(dto);
@@ -72,6 +70,23 @@ const saleService = {
         'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
       }
     });
+  },
+
+
+  getReceipt: async (id: number): Promise<SaleReceiptDto> => {
+    try {
+      const res = await api.get(`/sales/${id}/receipt`);
+      return res.data;
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        console.error('Receipt fetch error:', {
+          status: error.response?.status,
+          data: error.response?.data
+        });
+        throw new Error(error.response?.data?.message || 'Failed to fetch receipt');
+      }
+      throw new Error('Unexpected error fetching receipt');
+    }
   },
 
 

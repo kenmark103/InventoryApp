@@ -1,30 +1,36 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { 
   PaymentMethod, 
   PaymentDetails,
-  ProcessCardPayment,
-  ProcessMpesaPayment
 } from './payments'
 
 
-export interface SaleItem {
-  id: number;
+export interface BaseSaleItem {
   productId: number;
-  name: string;
-  sku: string;
   quantity: number;
   price: number;
-  taxRate: number;
-  discount: number;
-  imageUrl?: string;
-  stock: number;
+  discount?: number;
 }
 
+export interface SaleItem extends BaseSaleItem {
+
+  id?: number;  
+  name: string;
+  sku: string;
+  taxRate: number;
+  imageUrl?: string;
+  stock: number;
+  costPrice: number;
+  barcode?: string; 
+}
+
+
 export interface Sale {
-  id: number;
+  id?: number;
+  status: SaleStatus;
   invoiceNumber: string;
   saleDate: Date;
   dueDate?: Date;
-  status: 'DRAFT' | 'COMPLETED' | 'HOLD' | 'PAID' | 'CANCELLED';
   paymentMethod: PaymentMethod;
   notes?: string;
   subtotal: number;
@@ -46,14 +52,16 @@ export interface Sale {
   };
 }
 
-export interface SaleCreateDto {
-  customerId: number;
-  notes?: string;
-  dueDate?: Date;
-  discount: number;
-  items: SaleItemDto[];
-  paymentDetails?: PaymentDetails;
-  paymentMethod?: PaymentMethod; 
+export interface SaleItemCreateDto extends BaseSaleItem {
+
+}
+
+export interface SaleItemResponseDto extends BaseSaleItem {
+
+  productName: string;
+  total: number;
+  taxAmount: number;
+  barcode?: string;
 }
 
 export interface SaleCreateDto {
@@ -61,10 +69,10 @@ export interface SaleCreateDto {
   notes?: string;
   dueDate?: Date;
   discount: number;
-  items: SaleItemDto[];
-  paymentMethod?: PaymentMethod;
+  items: SaleItemCreateDto[];
+  paymentMethod: PaymentMethod;
+  paymentDetails?: PaymentDetails | null;
 }
-
 export interface SaleResponseDto {
   id: number;
   invoiceNumber: string;
@@ -75,7 +83,7 @@ export interface SaleResponseDto {
   taxAmount: number;
   discount: number;
   total: number;
-  customerName: string;
+  customerName?: string;
   processedBy: string;
   items: SaleItemResponseDto[];
 }
@@ -83,18 +91,24 @@ export interface SaleResponseDto {
 export interface SaleItemResponseDto {
   productName: string;
   quantity: number;
-  unitPrice: number;
+  price: number;
   taxRate: number;
   total: number;
 }
 
 
-export interface Sale extends SaleResponseDto {
-  paymentDetails?: PaymentDetails;
-  status: 'DRAFT' | 'COMPLETED' | 'CANCELLED';
+export interface SaleReceiptDto extends SaleResponseDto {
+  receiptNumber: string;
+  paymentInfo: {
+    paymentMethod: PaymentMethod;
+    transactionId: string;
+    amountTendered: number;
+    changeDue: number;
+    paymentDate: Date;
+  };
+  terms?: string;
+  notes?: string;
 }
-
-
 
 export enum SaleStatus {
   DRAFT = "DRAFT",

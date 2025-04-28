@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
+using Backend.Helpers;
 
 namespace Backend.Controllers
 {
@@ -15,12 +16,15 @@ namespace Backend.Controllers
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
         private readonly ILogger<SalesController> _logger;
+        private readonly IAccountingService _acct;
 
-        public SalesController(AppDbContext context, IConfiguration config, ILogger<SalesController> logger)
+
+        public SalesController(AppDbContext context, IConfiguration config, ILogger<SalesController> logger, IAccountingService acct)
         {
             _context = context;
             _config = config;
             _logger = logger;
+            _acct = acct;
         }
 
         // POST: api/sales (Create a new sale with line items)
@@ -129,7 +133,8 @@ namespace Backend.Controllers
                 PaymentMethod = dto.PaymentDetails.Method,
                 TransactionId = transactionId,
                 AmountTendered = dto.PaymentDetails.AmountTendered,
-                ChangeDue = dto.PaymentDetails.ChangeDue
+                ChangeDue = dto.PaymentDetails.ChangeDue,
+                CompletedDate = DateTime.UtcNow 
             };
 
             // Update sale status
@@ -137,6 +142,22 @@ namespace Backend.Controllers
             sale.CompletedSale = completedSale;
 
             await _context.SaveChangesAsync();
+
+            await _acct.RecordAsync(new AccountTransaction {
+            Date = sale.SaleDate,
+            Description = $"Sale #{sale.Id}",
+            Debit = sale.Total,
+            Credit = 0,
+            Account = AccountType.Cash
+            });
+            await _acct.RecordAsync(new AccountTransaction {
+                Date = sale.SaleDate,
+                Description = $"Sale #{sale.Id}",
+                Debit = 0,
+                Credit = sale.Total,
+                Account = AccountType.SalesRevenue
+            });
+
             return Ok(MapToResponseDto(sale));
         }
 
@@ -189,41 +210,61 @@ namespace Backend.Controllers
         [HttpPut("{id}/status")]
         public async Task<IActionResult> UpdateSaleStatus(int id, [FromBody] SaleStatusUpdateDto dto)
         {
-            var sale = await _context.Sales
-                .Include(s => s.Items)
-                    .ThenInclude(i => i.Product)
-                .FirstOrDefaultAsync(s => s.Id == id);
-
-            if (sale == null)
-                return NotFound();
-
-            // Validate transition
-            if (!IsValidStatusTransition(sale.Status, dto.Status))
-                return BadRequest($"Invalid status transition: {sale.Status} → {dto.Status}");
-
-            // Restock products if refunding
-            if (dto.Status == SaleStatus.REFUNDED)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                foreach (var item in sale.Items)
+                var sale = await _context.Sales
+                    .Include(s => s.Items)
+                        .ThenInclude(i => i.Product)
+                    .FirstOrDefaultAsync(s => s.Id == id);
+                if (sale == null) return NotFound();
+
+                var originalStatus = sale.Status;
+
+                if (!IsValidStatusTransition(originalStatus, dto.Status))
+                    return BadRequest("Invalid status transition");
+
+                // Handle refunds
+                if (dto.Status == SaleStatus.REFUNDED)
                 {
-                    item.Product.StockQuantity += item.Quantity; // Restore stock
+                    foreach (var item in sale.Items.Where(i => !i.Product.IsService))
+                    {
+                        item.Product.StockQuantity += item.Quantity;
+                    }
                 }
+                // Revert if moving from refunded
+                else if (originalStatus == SaleStatus.REFUNDED && dto.Status != SaleStatus.REFUNDED)
+                {
+                    foreach (var item in sale.Items.Where(i => !i.Product.IsService))
+                    {
+                        if (item.Product.StockQuantity < item.Quantity)
+                            return BadRequest($"Insufficient stock to revert {item.Product.Name}");
+                        item.Product.StockQuantity -= item.Quantity;
+                    }
+                }
+
+                sale.Status = dto.Status;
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return NoContent();
             }
-
-            sale.Status = dto.Status;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         //Get receipt
         [HttpGet("{id}/receipt")]
-        [Authorize(Roles = "Accounting,Manager")]
+        [Authorize(Roles = "Accounting,Manager,Admin")]
         public async Task<ActionResult<SaleReceiptDto>> GetSaleReceipt(int id)
         {
             var sale = await _context.Sales
-                .Include(s => s.CompletedSale)  // Now pointing to the CompletedSale entity
+                .Include(s => s.CompletedSale) 
                 .Include(s => s.Customer)
+                .Include(s => s.User) 
                 .Include(s => s.Items)
                     .ThenInclude(i => i.Product)
                 .FirstOrDefaultAsync(s => s.Id == id);
@@ -235,30 +276,55 @@ namespace Backend.Controllers
         }
 
 
-            private SaleReceiptDto MapToReceiptDto(Sale sale)
+          private SaleReceiptDto MapToReceiptDto(Sale sale)
         {
-            var baseDto = MapToResponseDto(sale); // Reuse base mapping
+            if (sale is null)
+               throw new ArgumentNullException(nameof(sale));
+
+            var baseDto = MapToResponseDto(sale)
+                          ?? throw new InvalidOperationException("Base mapping returned null"); 
+
+            var completed = sale.CompletedSale;
             
+            var paymentInfo = completed is null
+                ? null
+                : new CompletedSaleDto
+                {
+                    PaymentMethod  = completed.PaymentMethod,
+                    TransactionId  = completed.TransactionId ?? "CASH",
+                    AmountTendered = completed.AmountTendered,
+                    ChangeDue      = completed.ChangeDue
+                    
+                };
+
             return new SaleReceiptDto
             {
-                // Base properties
                 Id = baseDto.Id,
                 InvoiceNumber = baseDto.InvoiceNumber,
+                SaleDate = baseDto.SaleDate,
                 Status = baseDto.Status,
-                // ... other inherited properties ...
-
+                CustomerName = baseDto.CustomerName,
+                Items = baseDto.Items,
+                Subtotal = baseDto.Subtotal,
+                TaxAmount = baseDto.TaxAmount,
+                Discount = baseDto.Discount,
+                Total = baseDto.Total,
+                
                 // Receipt-specific properties
-                PaymentInfo = new CompletedSaleDto
+                PaymentInfo = completed != null ? new CompletedSaleDto
                 {
-                    PaymentMethod = sale.CompletedSale.PaymentMethod,
-                    TransactionId = sale.CompletedSale.TransactionId ?? "CASH",
-                    AmountTendered = sale.CompletedSale.AmountTendered,
-                    ChangeDue = sale.CompletedSale.ChangeDue
-                },
-                ReceiptNumber = $"RCPT-{sale.InvoiceNumber}",
-                PaymentDate = sale.CompletedSale.CompletedDate // Add this field to CompletedSale
+                    PaymentMethod = completed.PaymentMethod,
+                    TransactionId = completed.TransactionId ?? "CASH",
+                    AmountTendered = completed.AmountTendered,
+                    ChangeDue = completed.ChangeDue,
+                    PaymentDate = completed.CompletedDate
+                } : null,
+                
+                ReceiptNumber = $"RCPT-{baseDto.InvoiceNumber}",
+                Notes = sale.Notes ?? "NA",
             };
         }
+
 
         // Helper: Map Sale to SaleResponseDto
         private SaleResponseDto MapToResponseDto(Sale sale)
@@ -274,6 +340,8 @@ namespace Backend.Controllers
                 TaxAmount = sale.TaxAmount,
                 Discount = sale.Discount,
                 Total = sale.Total,
+                TaxPercentage = sale.Subtotal > 0 ? 
+                (sale.TaxAmount / sale.Subtotal) * 100 : 0,
                 CustomerName = sale.Customer.Name,
                 ProcessedBy = sale.User.Email,
                 Items = sale.Items.Select(i => new SaleItemResponseDto

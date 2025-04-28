@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from '@/hooks/use-toast';
@@ -12,7 +13,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Sheet,
   SheetClose,
@@ -23,8 +23,26 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { SelectDropdown } from '@/components/select-dropdown';
-import { Expense } from '../data/expense-schema'; // Ensure Expense type exists
-import { expenseStatuses, expenseTypes, expensePriorities } from '../data/expenseConstants';
+import { Expense, expenseSchema } from '../data/expense-schema';
+import { expenseTypes } from '../data/expenseConstants';
+import { useExpenses } from '../context/expenses-context';
+import expenseService from "@/services/expenseService";
+import { useSuppliers } from '@/features/suppliers/context/suppliers-context';
+import { Textarea } from '@/components/ui/textarea';
+
+
+const formSchema = expenseSchema.omit({
+  id: true,
+  receiptUrl: true,
+}).extend({
+  receipt: z.instanceof(File).optional().nullable(),
+}).refine(data => data.description === null ? undefined : data.description, {
+  path: ['description'],
+}).refine(data => data.vendor === null ? undefined : data.vendor, {
+  path: ['vendor'],
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 interface Props {
   open: boolean;
@@ -32,40 +50,79 @@ interface Props {
   currentRow?: Expense;
 }
 
-const formSchema = z.object({
-  title: z.string().min(1, 'Title is required.'),
-  status: z.string().min(1, 'Please select a status.'),
-  type: z.string().min(1, 'Please select an expense type.'),
-  priority: z.string().min(1, 'Please choose a priority.'),
-});
-type ExpensesForm = z.infer<typeof formSchema>;
-
 export function ExpensesMutateDrawer({ open, onOpenChange, currentRow }: Props) {
-  const isUpdate = !!currentRow;
+  const { refreshExpenses } = useExpenses();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { suppliers } = useSuppliers();
+  const previousRowId = useRef<number | undefined>();
 
-  const form = useForm<ExpensesForm>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: currentRow ?? {
-      title: '',
-      status: '',
+    defaultValues: {
       type: '',
-      priority: '',
+      amount: 0,
+      description: '',
+      vendor: '',
+      receipt: undefined,
     },
   });
 
-  const onSubmit = (data: ExpensesForm) => {
-    // Handle the expense form data submission
-    // (Call your API to create or update an expense here)
-    onOpenChange(false);
-    form.reset();
-    toast({
-      title: 'Expense submitted',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  useEffect(() => {
+  if (currentRow?.id !== previousRowId.current) {
+    if (currentRow) {
+      form.reset({
+        type: currentRow.type,
+        amount: currentRow.amount,
+        description: currentRow.description || '', 
+        vendor: currentRow.vendor || '',
+        receipt: undefined,
+      });
+      previousRowId.current = currentRow.id;
+    } else {
+      form.reset({
+        type: '',
+        amount: 0,
+        description: '',
+        vendor: '',
+        receipt: undefined,
+      });
+      previousRowId.current = undefined;
+    }
+  }
+}, [currentRow?.id]);
+
+  const onSubmit = async (values: FormValues) => {
+    try {
+      setIsSubmitting(true);
+      const formData = new FormData();
+      
+      formData.append('Type', values.type);
+      formData.append('Amount', values.amount.toString());
+      formData.append('Description', values.description || '');
+      formData.append('Vendor', values.vendor || '');
+      
+      if (values.receipt) {
+        formData.append('Receipt', values.receipt);
+      }
+
+      if (currentRow) {
+        await expenseService.approveExpense(currentRow.id, formData);
+      } else {
+        await expenseService.createExpense(formData);
+      }
+
+      refreshExpenses();
+      onOpenChange(false);
+      toast({ title: `Expense ${currentRow ? 'updated' : 'created'} successfully` });
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: error instanceof Error ? error.message : 'An unknown error occurred',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,106 +130,148 @@ export function ExpensesMutateDrawer({ open, onOpenChange, currentRow }: Props) 
       open={open}
       onOpenChange={(v) => {
         onOpenChange(v);
-        form.reset();
+        if (!v) form.reset();
       }}
     >
       <SheetContent className="flex flex-col">
         <SheetHeader className="text-left">
-          <SheetTitle>{isUpdate ? 'Update' : 'Create'} Expense</SheetTitle>
+          <SheetTitle>{currentRow ? 'Update' : 'Create'} Expense</SheetTitle>
           <SheetDescription>
-            {isUpdate
-              ? 'Update the expense by providing necessary info.'
-              : 'Add a new expense by providing necessary info.'}{' '}
-            Click save when you&apos;re done.
+            {currentRow
+              ? 'Update the expense details below.'
+              : 'Add a new expense by filling in the required fields.'}
           </SheetDescription>
         </SheetHeader>
+        
         <Form {...form}>
-          <form id="expenses-form" onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-5">
+          <form 
+            id="expenses-form" 
+            onSubmit={form.handleSubmit(onSubmit)} 
+            className="flex-1 space-y-5 mt-4"
+          >
             <FormField
               control={form.control}
-              name="title"
+              name="type"
               render={({ field }) => (
                 <FormItem className="space-y-1">
-                  <FormLabel>Title</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Enter expense title" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem className="space-y-1">
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>Type</FormLabel>
                   <SelectDropdown
-                    defaultValue={field.value}
+                    items={expenseTypes}
                     onValueChange={field.onChange}
-                    placeholder="Select expense status"
-                    items={expenseStatuses.map((s) => ({ label: s.label, value: s.value }))}
+                    value={field.value}
+                    placeholder="Select expense type"
                   />
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
-              name="type"
+              name="amount"
               render={({ field }) => (
-                <FormItem className="relative space-y-3">
-                  <FormLabel>Expense Type</FormLabel>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1"
-                  >
-                    {expenseTypes.map((t) => (
-                      <FormItem key={t.value} className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value={t.value} />
-                        </FormControl>
-                        <FormLabel className="font-normal">{t.label}</FormLabel>
-                      </FormItem>
-                    ))}
-                  </RadioGroup>
+                <FormItem className="space-y-1">
+                  <FormLabel>Amount</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      {...field}
+                      onChange={e => field.onChange(parseFloat(e.target.value))}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem className="space-y-1">
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder="Enter expense description"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+            {/* Vendor Field */}
             <FormField
               control={form.control}
-              name="priority"
+              name="vendor"
               render={({ field }) => (
-                <FormItem className="relative space-y-3">
-                  <FormLabel>Priority</FormLabel>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col space-y-1"
-                  >
-                    {expensePriorities.map((p) => (
-                      <FormItem key={p.value} className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value={p.value} />
-                        </FormControl>
-                        <FormLabel className="font-normal">{p.label}</FormLabel>
-                      </FormItem>
-                    ))}
-                  </RadioGroup>
+                <FormItem className="space-y-1">
+                  <FormLabel>Vendor</FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        type="text"
+                        list="vendors-list"
+                        placeholder="Select or enter vendor"
+                        value={field.value || ''}
+                      />
+                      <datalist id="vendors-list">
+                        {suppliers.map((supplier) => (
+                          <option key={supplier.id} value={supplier.name} />
+                        ))}
+                      </datalist>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="receipt"
+              render={({ field }) => (
+                <FormItem className="space-y-1">
+                  <FormLabel>Receipt</FormLabel>
+                  {currentRow?.receiptUrl && (
+                    <div className="mb-2">
+                      <a
+                        href={currentRow.receiptUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline text-sm"
+                      >
+                        View current receipt
+                      </a>
+                    </div>
+                  )}
+                  <FormControl>
+                    <Input
+                      type="file"
+                      accept=".pdf,.jpg,.png"
+                      onChange={(e) => field.onChange(e.target.files?.[0])}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </form>
         </Form>
-        <SheetFooter className="gap-2">
+
+        <SheetFooter className="mt-6">
           <SheetClose asChild>
-            <Button variant="outline">Close</Button>
+            <Button variant="outline">Cancel</Button>
           </SheetClose>
-          <Button form="expenses-form" type="submit">
-            Save changes
+          <Button 
+            type="submit"
+            form="expenses-form"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Saving...' : 'Save changes'}
           </Button>
         </SheetFooter>
       </SheetContent>
